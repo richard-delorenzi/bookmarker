@@ -6,4 +6,5 @@ sudo -g docker docker \
   -e "HOME=/tmp" \
   -u $UID:$GID \
   -p 8000:8000 \
-  codesimple/elm:0.18
+  codesimple/elm:0.18 \
+  "$@"
