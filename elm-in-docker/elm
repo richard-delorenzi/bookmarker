@@ -1,10 +1,5 @@
 #!/bin/bash
 
-sudo -g docker docker \
-  run -it --rm \
-  -v "$(pwd):/code" -w "/code" \
-  -e "HOME=/tmp" \
-  -u $UID:$GID \
-  -p 8000:8000 \
-  codesimple/elm:0.18 \
-  "$@"
+my_dir="$(dirname $0)"
+
+sudo -g docker "${my_dir}/_elm" "$@"
