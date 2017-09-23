@@ -5,8 +5,21 @@ import sys
  
 data = json.load(sys.stdin)
 
-for element in data:
-    if "tagName" in element and element["tagName"] == "dl":
-        print (json.dumps(element, sort_keys=True, indent=4))
 
+def process_list (data):
+    for element in data:
+        if "tagName" in element and element["tagName"] == "dl":
+            process(element)
 
+def process_dict (data):
+    print (json.dumps(data, sort_keys=True, indent=4))
+
+def process(data):
+    if isinstance(data,list):
+        process_list(data)
+    if isinstance(data,dict):
+        process_dict(data)
+    else:
+        print (json.dumps(data, sort_keys=True, indent=4))
+
+process(data)
