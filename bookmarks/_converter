@@ -1,3 +1,8 @@
-#!/bin/bash
+#!/usr/bin/python3
 
-cat
+import json
+import sys
+ 
+data = json.load(sys.stdin)
+
+print (json.dumps(data, sort_keys=True, indent=4))
