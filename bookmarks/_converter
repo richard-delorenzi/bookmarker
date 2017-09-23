@@ -4,15 +4,72 @@ import json
 import sys
  
 data = json.load(sys.stdin)
+output=[]
 
+def is_type(data,t):
+    return (
+        "type" in data and
+        data["type"] == t )
+
+def has_children(data):
+    return "children" in data
+
+def is_element(data,e):
+    return (
+        is_type(data,"Element") and
+        has_children(data) and
+        "tagName" in data and
+        data["tagName"] == e )
+
+def is_dt(data):
+    return is_element(data,"dt")
+
+def is_text(data):
+    return is_type(data,"text")
 
 def process_list (data):
-    for element in data:
-        if "tagName" in element and element["tagName"] == "dl":
-            process(element)
+    for item in data:
+        process(item)
 
 def process_dict (data):
-    print (json.dumps(data, sort_keys=True, indent=4))
+    if is_dt(data):
+        process_dt(data["children"])
+    elif has_children(data):
+        process(data["children"])
+    else: pass
+
+def process_dt(data):
+    process_dt_list(data)
+
+def process_dt_list (data):
+    for item in data:
+        if is_element(item,"a"):
+            process_dt_dict(item)
+
+def process_dt_dict(data):
+    a=data["attributes"]
+    
+    date=a["ADD_DATE"]
+    url=a["HREF"]
+    is_private=a["PRIVATE"] != 0
+    tagstring=a["TAGS"]
+
+    tags= tagstring.split(",")
+
+    name=""
+    for i in data["children"]:
+        if is_type(i,"Text"):
+            name = " ".join( [name, i["content"]] )
+    name=name.strip()
+            
+    output.append({
+        "unix_data":date,
+        "url": url,
+        "private": is_private,
+        "tags":tags,
+        "name":name
+    })
+    
 
 def process(data):
     if isinstance(data,list):
@@ -20,6 +77,8 @@ def process(data):
     if isinstance(data,dict):
         process_dict(data)
     else:
-        print (json.dumps(data, sort_keys=True, indent=4))
+        pass
 
+        
 process(data)
+print (json.dumps(output, sort_keys=True, indent=4))
