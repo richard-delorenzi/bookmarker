@@ -5,4 +5,8 @@ import sys
  
 data = json.load(sys.stdin)
 
-print (json.dumps(data, sort_keys=True, indent=4))
+for element in data:
+    if "tagName" in element and element["tagName"] == "dl":
+        print (json.dumps(element, sort_keys=True, indent=4))
+
+

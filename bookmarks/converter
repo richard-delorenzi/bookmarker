@@ -4,5 +4,4 @@ script_name=$(readlink -f "$BASH_SOURCE")
 script_dir_name=$(dirname "$script_name")
 
  ~/+Files/workshops/3rd-party/himalaya/himalaya $1 |
-     "${script_dir_name}/_converter" |
-     json_pp
+     "${script_dir_name}/_converter"
