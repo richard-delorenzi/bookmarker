@@ -22,6 +22,7 @@ def http_put(data):
 
 for item in data:
     #curl -X PUT http://admin:password@127.0.0.1:5984/bookmarks/«hash» -d «item_as_json»
+    item["type"]="webmark"
     http_put(item)
    
     
