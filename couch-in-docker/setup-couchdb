@@ -1,7 +1,9 @@
 #!/bin/bash
 
 #add mycouchdb as alias of localhost
-augtool -b -s \
-  set '/files/etc/hosts/*[ipaddr="127.0.0.1"]/alias[.="mycouchdb"]' 'mycouchdb'
-  set '/files/etc/hosts/*[ipaddr="127.0.0.1"]/alias[.="bookmarkdb"]' 'bookmarkdb'
+augtool -b '
+  set /files/etc/hosts/*[ipaddr="127.0.0.1"]/alias[.="mycouchdb"] mycouchdb
+  set /files/etc/hosts/*[ipaddr="127.0.0.1"]/alias[.="bookmarkdb"] bookmarkdb
+  save
+'
 
