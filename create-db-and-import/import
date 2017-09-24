@@ -2,6 +2,26 @@
 
 import json
 import sys
+import requests
+import hashlib
  
 data = json.load(sys.stdin)
 
+def hashOf(msg): 
+    return hashlib.sha256(msg.encode("utf-8")).hexdigest()
+
+def as_json(data):
+    return json.dumps(data, sort_keys=True)
+
+def http_put(data):
+    data_as_json = as_json(data)
+    data_hash = hashOf(data_as_json)
+    url="http://admin:password@127.0.0.1:5984/bookmarks/"+data_hash
+    headers = {"content-type": "application/json" }
+    r = requests.put(url, data=data_as_json, headers=headers)
+
+for item in data:
+    #curl -X PUT http://admin:password@127.0.0.1:5984/bookmarks/«hash» -d «item_as_json»
+    http_put(item)
+   
+    
