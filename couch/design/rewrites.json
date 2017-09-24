@@ -1,0 +1,52 @@
+[
+    {
+	"from": "favicon.ico",
+	"to": "images/blackboard.png"
+    },
+    {
+	"from" : "script/*",
+	"to" : "script/*"
+    },
+    { 
+	"from" : "utils_script",
+	"to" :   "/_utils/script/*"
+    },
+    {
+	"from" : "style/*",
+	"to" : "style/*"
+    },
+    {
+	"from" : "vendor/*",
+	"to" : "vendor/*"
+    },
+    {   
+        "from": "server_lib/:~name",
+        "to": "_list/sub/design",
+        "query": {
+	    "~dir": "lib",	    
+	    "include_docs": "true"
+        }
+    },
+    { 
+	"from" : "index",
+	"to" : "_rewrite/doc/index"
+    },
+    {
+	"from" : "",
+	"to"   : "_rewrite/index" 
+    },
+    {
+	"from": "bookmarks",
+        "to": "_list/bookmarks/webmarks-by-date",
+	"query": {
+	    "template": "bookmarks",
+	    "reduce": "false",
+	    "title": "bookmarks",
+	    "include_docs": "true"
+	}	
+    },
+    {
+	"from": "db/*",
+	"to": "../../*"
+    }
+]
