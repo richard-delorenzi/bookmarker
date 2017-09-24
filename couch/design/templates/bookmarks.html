@@ -1,0 +1,29 @@
+<!DOCTYPE HTML >
+<html>
+  <head>
+    <meta charset="utf-8"> 
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="/style/site.css"/>
+    <link rel="stylesheet" type="text/css" href="/style/main_responsive.css"/>
+  </head>
+
+  <body>     
+    {{#ifdef_bookmarks}}
+    <h1>{{title}}</h1>  
+    <ul>
+      {{#bookmarks}}
+      <li>
+	{{name}} <a href="{{url}}">{{url}}</a>
+	tags: <ul>
+	  {{#tags}}
+	  <li>{{.}}</li>
+	  {{/tags}}
+	</ul>
+      </li>
+      {{/bookmarks}}
+    </ul>  
+    {{/ifdef_bookmarks}}
+    
+  </body> 
+
+</html>
