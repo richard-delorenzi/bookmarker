@@ -1,0 +1,7 @@
+#!/usr/bin/python3
+
+import json
+import sys
+ 
+data = json.load(sys.stdin)
+
