@@ -42,7 +42,8 @@
 	    "template": "bookmarks",
 	    "reduce": "false",
 	    "title": "bookmarks",
-	    "include_docs": "true"
+	    "include_docs": "true",
+	    "descending" : "true"
 	}	
     },
     {
