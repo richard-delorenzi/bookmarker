@@ -51,7 +51,9 @@ def process_dt_list (data):
             a = dt_a_data(item)
         if is_element(item,"dd"):
             dd = dt_dd_data(item)
-    output.append(merge_dictionaries(a,dd))
+    record=merge_dictionaries(a,dd)
+    record["user"]="ctrl_alt_delor@delisious"
+    output.append(record)
 
 def dt_a_data(data):
     attr=data["attributes"]
