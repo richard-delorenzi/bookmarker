@@ -70,7 +70,7 @@ def dt_a_data(data):
     name=name.strip()
 
     return {
-        "unix_data":date,
+        "unix_date":date,
         "url": url,
         "private": is_private,
         "tags":tags,
