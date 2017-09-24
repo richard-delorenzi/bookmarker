@@ -1,0 +1,12 @@
+syntax: glob
+
+#elm
+elm-exp/elm-stuff/
+elm-exp/elm-package.json
+elm-exp/index.html
+
+#couch
+couch-in-docker/data/
+
+#bookmarks
+bookmarks/delicious.2.html
