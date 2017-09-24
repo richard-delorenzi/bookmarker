@@ -3,6 +3,7 @@
 import json
 import sys
 import re
+from datetime import datetime
  
 data = json.load(sys.stdin)
 output=[]
@@ -59,7 +60,8 @@ def process_dt_list (data):
 def dt_a_data(data):
     attr=data["attributes"]
     
-    date=attr["ADD_DATE"]
+    unix_date=attr["ADD_DATE"]
+    date=datetime.fromtimestamp(unix_date).isoformat()
     url=attr["HREF"]
     is_private=attr["PRIVATE"] != 0
     tagstring=attr["TAGS"]
@@ -72,7 +74,7 @@ def dt_a_data(data):
     name=name.strip()
 
     return {
-        "unix_date":date,
+        "date":date,
         "url": url,
         "private": is_private,
         "tags":tags,

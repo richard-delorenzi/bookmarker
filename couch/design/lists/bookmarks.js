@@ -19,7 +19,7 @@ function (head, req) {
 		url : row.doc.url,
 		name: row.doc.name,
 		tags: row.doc.tags,
-		date: row.doc.unix_date
+		date: row.doc.date
 	    }
 	}
 	 
