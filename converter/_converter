@@ -6,6 +6,9 @@ import sys
 data = json.load(sys.stdin)
 output=[]
 
+def merge_dictionaries(a,b):
+    return {**a, **b}
+
 def is_type(data,t):
     return (
         "type" in data and
@@ -42,17 +45,21 @@ def process_dt(data):
     process_dt_list(data)
 
 def process_dt_list (data):
+    dd={}
     for item in data:
         if is_element(item,"a"):
-            process_dt_dict(item)
+            a = dt_a_data(item)
+        if is_element(item,"dd"):
+            dd = dt_dd_data(item)
+    output.append(merge_dictionaries(a,dd))
 
-def process_dt_dict(data):
-    a=data["attributes"]
+def dt_a_data(data):
+    attr=data["attributes"]
     
-    date=a["ADD_DATE"]
-    url=a["HREF"]
-    is_private=a["PRIVATE"] != 0
-    tagstring=a["TAGS"]
+    date=attr["ADD_DATE"]
+    url=attr["HREF"]
+    is_private=attr["PRIVATE"] != 0
+    tagstring=attr["TAGS"]
 
     tags= tagstring.split(",")
 
@@ -61,14 +68,23 @@ def process_dt_dict(data):
         if is_type(i,"Text"):
             name = " ".join( [name, i["content"]] )
     name=name.strip()
-            
-    output.append({
+
+    return {
         "unix_data":date,
         "url": url,
         "private": is_private,
         "tags":tags,
         "name":name
-    })
+    }
+
+def dt_dd_data(data):
+    description=""
+    children=data["children"]
+    for child in children:
+        assert is_type(child,"Text")
+        description += child["content"]
+        
+    return {"description": description}
     
 
 def process(data):
