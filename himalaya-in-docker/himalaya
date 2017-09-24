@@ -1,0 +1,12 @@
+#!/bin/bash
+
+script_name=$(readlink -f "$BASH_SOURCE")
+script_dir_name=$(dirname "$script_name")
+
+sudo -g docker docker \
+  run -it --rm \
+  -v "$(pwd):/code" -w "/code" \
+  -e "HOME=/tmp" \
+  -u $UID:$GID \
+  my/himalaya \
+  "$@"

@@ -1,0 +1,6 @@
+FROM node
+
+RUN npm install himalaya
+RUN npm install --global himalaya
+
+ENTRYPOINT [ "himalaya" ]
