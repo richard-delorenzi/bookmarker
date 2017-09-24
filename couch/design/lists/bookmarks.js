@@ -18,7 +18,8 @@ function (head, req) {
 	    return {
 		url : row.doc.url,
 		name: row.doc.name,
-		tags: row.doc.tags
+		tags: row.doc.tags,
+		date: row.doc.unix_date
 	    }
 	}
 	 
