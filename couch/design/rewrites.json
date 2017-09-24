@@ -29,7 +29,7 @@
     },
     { 
 	"from" : "index",
-	"to" : "_rewrite/…"
+	"to" : "static-pages/index.html"
     },
     {
 	"from" : "",
@@ -46,6 +46,17 @@
 	    "descending" : "true"
 	}	
     },
+    {
+	"from": "tags",
+        "to": "_list/tags/webmarks-by-tag",
+	"query": {
+	    "template": "tags",
+	    "group" : "true",
+	    "title": "tags",
+	    "include_docs": "true"
+	}	
+    },
+    
     {
 	"from": "db/*",
 	"to": "../../*"
