@@ -2,6 +2,7 @@
 
 import json
 import sys
+import re
  
 data = json.load(sys.stdin)
 output=[]
@@ -62,7 +63,7 @@ def dt_a_data(data):
     url=attr["HREF"]
     is_private=attr["PRIVATE"] != 0
     tagstring=attr["TAGS"]
-    tags=list(map(str.strip,tagstring.split(",")))
+    tags=list(map(str.strip,re.split( "\W+",  tagstring )))
 
     name=""
     for i in data["children"]:
