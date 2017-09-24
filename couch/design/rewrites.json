@@ -29,7 +29,7 @@
     },
     { 
 	"from" : "index",
-	"to" : "_rewrite/doc/index"
+	"to" : "_rewrite/…"
     },
     {
 	"from" : "",
