@@ -1,0 +1,329 @@
+@charset "UTF-8";
+/*css style sheet*/
+
+/*standards*/
+.standards,
+.standard,
+.tags {
+    font-style: italic;
+    color: green;
+}
+.standards:after,
+.bracketed:after{
+    content: " }";
+} 
+.bracketed:before{
+    content: "{ ";
+} 
+.standards:before{
+    content: "Standards: { ";
+}
+
+/*width height*/ 
+p, blockquote, li, dd, dt {
+   max-width:40em;
+} 
+.make-fit {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media print {
+    .print-readable {
+        column-count: 4;
+        column-width: 15em;
+        
+        -moz-column-count: 4;
+        -moz-column-width: 15em;
+    
+        -webkit-column-count: 4;
+        -webkit-column-width: 15em;
+    }
+}
+
+.readable {
+    column-count: 4;
+    column-width: 15em;
+
+    -moz-column-count: 4;
+    -moz-column-width: 15em;
+
+    -webkit-column-count: 4;
+    -webkit-column-width: 15em;
+}
+
+/*images*/
+img.preview {
+    max-width: 30em;
+    zzzzmax-height: 30em; /* broken ie */
+}
+
+img.thumb {
+
+}
+
+/*font*/
+body {
+    font-family: serif, "Arial Unicode MS"; /* broken ie6 */
+} 
+
+/*table*/
+table {
+    border-collapse:collapse;
+    font-family: "Arial Unicode MS"; /* fix ie6 but only for tables*/
+}
+
+tbody tr:nth-child(2n) {
+    background-color: #e0e0e0;
+}
+tbody tr:nth-child(2n+1) {
+    background-color: #c0c0c0;
+}
+tbody tr.removed:nth-child(2n)
+{ 
+  background-color: #e06060;
+}
+tbody tr.removed:nth-child(2n+1)
+{ 
+  background-color: #c06060;
+}
+
+td, th {
+    z-border:1px solid;
+    padding: 0.2em; 
+}
+table + table { /* >=ie7 or >=firefox2(maybe lower)*/
+    margin-top: 1em; 
+}
+table { /*for <=ie7 */
+    margin-top: 1em; 
+}
+* + table { /*for complient browser to undo ie hack */
+    margin-top: 0em; 
+}
+table.align-td-contents-top td {
+    vertical-align: top;
+} 
+
+input.very-narrow 
+{ 
+  max-width: 4em;
+}
+
+
+/****************************************************************/
+
+/*image caption*/
+img[title]:before {
+    displayzz: block;
+    contentzz:  attr(title);
+    text-alignzz: center;
+}
+
+/****************************************************************/
+/*headings*/
+h1 {
+    text-align: center;
+    font-variant:small-caps;
+}
+h1,h2,h3,h4,h5,h6 {
+    text-transform:capitalize;
+    font-family:sans-serif;
+}
+
+/****************************************************************/
+/*heading - numbers*/
+body, h1 {counter-reset: h2}
+h2 {counter-reset: h3}
+h3 {counter-reset: h4}
+h4 {counter-reset: h5}
+h5 {counter-reset: h6}
+
+h2:before {counter-increment: h2; content: counter(h2) ". "}
+h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
+h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ". "}
+h5:before {counter-increment: h5; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "}
+h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "}
+
+/****************************************************************/
+/*spacing*/
+h1,h2,h3,h4,h5,h6,p,ul,ol {
+    margin-bottom: 0.3em;
+    margin-top: 0.5em;
+}
+
+/****************************************************************/
+/*attachment*/
+.attachment {
+    background-image: url("images/paper.jpg");
+}
+
+/*attachment annotateion*/
+.attachment ins:before { content: '['; }
+.attachment ins:after  { content: ']'; }
+.attachment  ins {
+    text-decoration: inherit;
+    color:red;
+}
+.attachment  ins.annotate:before { content: ''; }
+.attachment  ins.annotate:after  { content: ''; }   
+}
+
+/****************************************************************/
+/*quotes*/
+q { font-style:italic;}
+
+q { quotes: '“' '”' "‘" "'"; }
+q:before { content: open-quote; }
+q:after  { content: close-quote; }
+/*downgrade for ie*/
+q:before { content: '“'; }
+q:after  { content: '”'; }
+/*end ie fix*/
+
+q.single:before { content: "‘"; }
+q.single:after  { content: "'"; }
+q.tech:before   { content: '«'; } 
+q.tech:after    { content: '»'; }
+q.name:before   { content: ''; }
+q.name:after    { content: ''; }
+
+
+/****************************************************************/
+/*LISTS*/
+/*new list types*/ /*ie7 and below make a mess of inline and comma*/
+/* plain: no bullets
+ * inline: inline list with
+ * comma: commas inbetween (use with inline)
+ * and: and between last 2 elements (use with comma)
+*/
+
+ul.cloud {
+    text-align: justify;
+    display: block;
+}
+
+ul.inline {
+    display: inline;
+}
+ul.inline li,
+ul.cloud li {
+    display: inline;
+}
+
+ul.inline,
+ul.cloud{
+    padding: 0; /*ie7.js fixes these list styles except padding*/
+}
+ul.plain > li{
+    list-style-type: none; 
+}
+
+/*put a comma after items*/
+ul.comma li:after  { content: ", "; }
+
+/*... expect last item*/
+ul li:last-child:after { content: ""; }
+/*... that gets a stop, if we want one*/
+ul.stop li:last-child:after { content: "."; }
+
+/*... and second to last item*/
+ul.and li:nth-last-child(2):after { content: ""; } 
+
+/*... because, put an 'and' between 2nd to last and last item*/
+ul.and * + li:last-child:before { content: " and "; }
+
+/****************************************************************/
+/*definition lists*/
+dt:after{
+    content: ":";
+    padding-right: 0.5em;
+}
+dl.inline dt{
+    zdisplay: inline; 
+    float: left;
+    clear: left;
+    clear: right;
+    zwidth: 100px;
+    text-align: right;
+    font-weight: bold;
+}
+
+/****************************************************************/
+/*menu list*/
+ul.menu
+{
+    list-style-type: none;
+    padding: 0;
+    padding-top: 0;
+    font-family: serif;
+}
+
+ul.menu .menu-name {
+    color:green;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+ul.menu .menu-name.subsection {
+}
+
+ul.menu .menu-name.section {
+    font-size: larger;
+}
+
+ul.menu > li {
+    padding-top: 1em;
+}
+
+ul.menu > li:first-child {
+    padding-top: 0;
+}
+
+ul.menu.items > li,
+ul.menu.subsections > li {
+    padding-top: 0;
+}
+
+li.subsection {
+    padding-top: 0;
+    z-background-color: red;
+    z-border-style: solid;
+}
+
+ul.menu.items li:nth-child(2n+1) {
+    z-webkit-filter:  hue-rotate(90deg);
+    z-moz-filter: hue-rotate(90deg);
+    background-color: LightGray;
+}
+
+
+/****************************************************************/
+/*links*/
+a { text-decoration: inherit;  }
+a:link, a.link { color:blue; }
+a:visited { color:navy; }
+a:hover   { color:teal; 
+            text-decoration: underline;}
+a img {
+  border: none;
+}
+
+*[onclick] {
+    cursor: pointer;
+}
+
+*:target { color : red }
+
+/****************************************************************/
+
+select option:disabled, select.disabledSelected
+{ 
+  color: red;
+} 
+
+/*reset color for options*/
+select option:not(:disabled) 
+{
+  color:initial;
+}

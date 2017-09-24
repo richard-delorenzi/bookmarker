@@ -1,0 +1,173 @@
+/*background colour*/
+header {
+    background-color: #ddd;
+    border: 1px solid #888; 
+}
+
+nav {
+    background-color: #eee;
+    border: 1px solid #888; 
+}
+
+#main,
+section {
+    background-color: #eee;
+    border: 1px solid #888; 
+}
+
+aside {
+    background-color: #eee;
+    border: 1px solid #888; 
+}
+
+footer {
+    background-color: #eee;
+    border: 1px solid #888;
+}
+
+/*layout*/
+
+footer {
+    clear: both;
+}
+
+header,
+footer {
+    padding: 0;
+    width: 100%;
+}
+
+header {
+    -position: fixed; 
+}
+
+nav,
+#main,
+section
+aside
+footer {
+    padding: 0;
+    margin: 0;
+}
+
+body,
+.group {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+iframe {
+    width : 100%;
+    border: 0;
+    display: block;
+}
+
+.group, nav, iframe, #main, aside  {
+   min-height: 20em; /*:kludge: we have some js that improves it, would be nice if it could override, then we could set this kludge higher*/
+}
+iframe {
+   zheight: 40em; /*:kludge: we have some js that improves it, sometimes*/
+}
+
+
+/*some common widths
+  320
+  640
+  768
+  800
+  1024
+  1280
+  1366
+  1400
+  1600
+  1920*
+  2048
+  2560
+  */
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+
+
+
+#main {
+    min-width: 30em;
+}
+aside, nav {
+    min-width: 10em;
+}
+
+/*default*/
+/*aside at bottom on non wide screen*/
+aside {
+    clear: both; 
+}
+
+/*if wide enough put menu on left side*/
+@media all and (min-width: 65em) and (max-width: 80em) {
+    nav {
+        width: 20%;
+        float: left;
+	z-background-color: yellow;
+    }
+
+    #main,
+    section {
+        width: 75%; 
+        float: left; 
+	z-background-color: yellow;
+    }
+}
+
+/*wide screen — all side by side*/
+@media all and (min-width: 80em) {
+
+    nav {
+        width: 17%;
+	max-width: 30em;
+	float: left;
+	z-background-color: red;
+    }
+
+    #main,
+    section {
+        width: 64%;
+	float: left;
+    }
+
+    aside {
+        width: 17%;
+	max-width: 30em;
+        clear: none;
+        float: left; 
+	z-background-color: red;
+    }
+}
+
+/*printing*/
+@media print {
+  aside,
+  header,
+  footer,
+  nav {
+      display: none;
+  }
+}
+
+
+
+
+
+
+
+
