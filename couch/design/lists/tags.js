@@ -30,7 +30,7 @@ function (head, req) {
         }
 	
         mainLoop();
-        return {bookmarks:the_stash, title:title};
+        return {tags:the_stash, title:title};
     }
 
 

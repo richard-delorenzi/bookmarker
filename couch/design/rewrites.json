@@ -65,7 +65,8 @@
 	"query": {
 	    "template": "tags",
 	    "group" : "true",
-	    "title": "tags"
+	    "title_part1": "all",
+	    "title_part2": "tags"
 	}	
     },
     
