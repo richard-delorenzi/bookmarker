@@ -8,29 +8,38 @@ function (head, req) {
 //-----------------------------------------------------------------------------------------
 
     template = req.query["template"];
-    key = req.query["key"]
+    key = req.query["key"];
+    title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
 
     function stash(){
 	var the_stash=[];
 
 	
         function row_info(row){
+	    processedTags=[];
+	    row.doc.tags.forEach( function (tag) {
+		processedTags.push({
+		    name: tag,
+		    url: "/tag/" + tag
+		});
+	    });
+	    
 	    return {
 		url : row.doc.url,
 		name: row.doc.name,
-		tags: row.doc.tags,
+		tags: processedTags,
 		date: row.doc.date
 	    }
 	}
 	 
 	function mainLoop(){
             while (row = getRow() ) {
-                the_stash.push(row_info(row));
+                 the_stash.push(row_info(row));
             }
         }
 	
         mainLoop();
-        return {bookmarks:the_stash, title:"Bookmarks"};
+        return {bookmarks:the_stash, title:title};
     }
 
 

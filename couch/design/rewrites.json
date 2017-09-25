@@ -41,9 +41,22 @@
 	"query": {
 	    "template": "bookmarks",
 	    "reduce": "false",
-	    "title": "bookmarks",
+	    "title_part1": "All",
+	    "title_part2": "bookmarks",
 	    "include_docs": "true",
 	    "descending" : "true"
+	}	
+    },
+    {
+	"from": "tag/:~tagname",
+        "to": "_list/bookmarks/webmarks-by-tag",
+	"query": {
+	    "template": "bookmarks",
+	    "reduce": "false",
+	    "title_part1": ":~tagname",
+	    "title_part2": "tags",
+	    "key": [":~tagname"],
+	    "include_docs": "true"
 	}	
     },
     {
