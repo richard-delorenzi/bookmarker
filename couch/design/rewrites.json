@@ -65,8 +65,7 @@
 	"query": {
 	    "template": "tags",
 	    "group" : "true",
-	    "title": "tags",
-	    "include_docs": "true"
+	    "title": "tags"
 	}	
     },
     
