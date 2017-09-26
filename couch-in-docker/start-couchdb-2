@@ -3,7 +3,7 @@ function start-couchdb {
     data_on_host="${host_base_dir}/data"
     data_in_docker="/opt/couchdb/data"
     config_on_host="${host_base_dir}/config"
-    config_in_docker="/opt/couchdb/etc/local.d/"
+    config_in_docker="/opt/couchdb/etc/local.d"
     sudo --group docker \
         docker run --rm --name my-couchdb \
 	    -p 5984:5984 \
@@ -13,4 +13,4 @@ function start-couchdb {
 	    my/couchdb:2.0.0 
 }
 
-start-couchdb 
+start-couchdb
