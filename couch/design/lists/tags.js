@@ -50,7 +50,6 @@ function (head, req) {
 	function calcTagSizes( list, maxCount ) {
 	    list.forEach( function( element, index, array) {
 		element["fontSize"]=fontSize(element.count, maxCount);
-		element["max"]= maxCount;
 	    });
 	}
 
