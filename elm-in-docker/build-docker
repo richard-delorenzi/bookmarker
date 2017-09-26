@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo -g docker docker build -t my/elm:0.18 docker
