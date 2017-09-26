@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo -g docker docker build -t my/couchdb:2.0.0 docker-build-couchdb-2.0.0
