@@ -1,4 +1,4 @@
-FROM node:8.5.0-stretch
+FROM node:8.5.0
 
 #Based on
 #MAINTAINER Michael Porter <mike@codesimple.net>
