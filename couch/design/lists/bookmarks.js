@@ -30,19 +30,19 @@ function (head, req) {
         function row_info(row){
 	    const date = row.doc.date.split("T")[0];
 	    
-	    return {
+	    return [{
 		url : row.doc.url,
 		name: row.doc.name,
 		tags: processedTags(row.doc.tags),
 		date: date,
 		description: row.doc.description
-	    };
+	    }];
 	}
 	 
 	function mainLoop(){
 	    var row;
             while (row = getRow() ) {
-                 the_stash.push(row_info(row));
+                 the_stash = the_stash.concat(row_info(row));
             }
         }
 	
