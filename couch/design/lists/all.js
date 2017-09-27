@@ -1,9 +1,10 @@
+"use strict";
 function  (head, req) {
-    template = req.query["template"];
+    const template = req.query["template"];
 
-    var ddoc = this;
-    var Mustache = require("lib/mustache");
-    var myLib = require("lib/myLib");
+    const ddoc = this;
+    const Mustache = require("lib/mustache");
+    const myLib = require("lib/myLib");
 
     function stash(){
 
@@ -13,6 +14,7 @@ function  (head, req) {
 	}
 
 	function mainLoop(){
+	    var row;
 	    while (row = getRow() ) {
 		process(row);
 	    }
