@@ -1,3 +1,4 @@
+"use strict";
 function(doc) {
     // !code  lib/fragments/isDesignDoc.js
     
