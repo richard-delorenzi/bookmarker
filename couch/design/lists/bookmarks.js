@@ -29,14 +29,16 @@ function (head, req) {
 	var prevDate=null;
         function row_info(row){
 	    const date = row.doc.date.split("T")[0];
-	    
-	    return [{
+
+	    const data ={
 		url : row.doc.url,
 		name: row.doc.name,
 		tags: processedTags(row.doc.tags),
 		date: date,
 		description: row.doc.description
-	    }];
+	    };
+
+	    return [data];
 	}
 	 
 	function mainLoop(){
