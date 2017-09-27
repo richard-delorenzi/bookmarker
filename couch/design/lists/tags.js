@@ -1,9 +1,10 @@
+"use strict";
 function (head, req) {
-    var ddoc = this;
-    var Mustache = require("lib/mustache");
-    var List = require("vendor/couchapp/lib/list");
-    var path = require("vendor/couchapp/lib/path").init(req);
-    var myLib = require("lib/myLib");
+    const ddoc = this;
+    const Mustache = require("lib/mustache");
+    const List = require("vendor/couchapp/lib/list");
+    const path = require("vendor/couchapp/lib/path").init(req);
+    const myLib = require("lib/myLib");
 
     //-----------------------------------------------------------------------------------------
 
@@ -77,6 +78,7 @@ function (head, req) {
 	}
 	
 	function mainLoop(){
+	    var row;
             while (row = getRow() ) {
                 process(row);
             }

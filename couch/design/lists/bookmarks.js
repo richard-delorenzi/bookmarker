@@ -1,16 +1,16 @@
 "use strict";
 function (head, req) {
-    var ddoc = this;
-    var Mustache = require("lib/mustache");
-    var List = require("vendor/couchapp/lib/list");
-    var path = require("vendor/couchapp/lib/path").init(req);
-    var myLib = require("lib/myLib");
+    const ddoc = this;
+    const Mustache = require("lib/mustache");
+    const List = require("vendor/couchapp/lib/list");
+    const path = require("vendor/couchapp/lib/path").init(req);
+    const myLib = require("lib/myLib");
 
 //-----------------------------------------------------------------------------------------
 
-    var template = req.query["template"];
-    var key = req.query["key"];
-    var title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
+    const template = req.query["template"];
+    const key = req.query["key"];
+    const title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
 
     function stash(){
 	var the_stash=[];
