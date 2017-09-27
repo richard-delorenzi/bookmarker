@@ -14,12 +14,15 @@
       {{#bookmarks}}
       <li>
 	<h3>{{date}} {{name}}</h3>
-	<a href="{{url}}">{{url}}</a><br/>
-	tags: <ul class="inline comma">
-	  {{#tags}}
-	  <li><a style="color:green" href="{{url}}">{{name}}</a></li>
-	  {{/tags}}
-	</ul>
+	  {{#ifdef_description}}	
+	  <div>{{description}}</div>
+	  {{/ifdef_description}}
+	  <a href="{{url}}">{{url}}</a><br/>
+	  tags: <ul class="inline comma">
+	    {{#tags}}
+	    <li><a style="color:green" href="{{url}}">{{name}}</a></li>
+	    {{/tags}}
+	  </ul>
       </li>
       {{/bookmarks}}
     </ul>  

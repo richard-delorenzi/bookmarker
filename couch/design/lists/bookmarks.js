@@ -32,7 +32,8 @@ function (head, req) {
 		url : row.doc.url,
 		name: row.doc.name,
 		tags: processedTags(row.doc.tags),
-		date: row.doc.date
+		date: row.doc.date,
+		description: row.doc.description
 	    }
 	}
 	 
