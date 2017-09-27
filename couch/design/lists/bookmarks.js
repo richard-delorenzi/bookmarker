@@ -1,3 +1,4 @@
+"use strict";
 function (head, req) {
     var ddoc = this;
     var Mustache = require("lib/mustache");
@@ -7,32 +8,36 @@ function (head, req) {
 
 //-----------------------------------------------------------------------------------------
 
-    template = req.query["template"];
-    key = req.query["key"];
-    title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
+    var template = req.query["template"];
+    var key = req.query["key"];
+    var title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
 
     function stash(){
 	var the_stash=[];
 
-	
-        function row_info(row){
-	    processedTags=[];
-	    row.doc.tags.forEach( function (tag) {
-		processedTags.push({
+	function processedTags(tags){
+	    var out=[];
+	    tags.forEach( function (tag) {
+		out.push({
 		    name: tag,
 		    url: "/tag/" + tag
 		});
 	    });
+	    return out;
+	}
+	
+        function row_info(row){
 	    
 	    return {
 		url : row.doc.url,
 		name: row.doc.name,
-		tags: processedTags,
+		tags: processedTags(row.doc.tags),
 		date: row.doc.date
 	    }
 	}
 	 
 	function mainLoop(){
+	    var row;
             while (row = getRow() ) {
                  the_stash.push(row_info(row));
             }
