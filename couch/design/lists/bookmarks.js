@@ -25,16 +25,18 @@ function (head, req) {
 	    });
 	    return out;
 	}
-	
+
+	var prevDate=null;
         function row_info(row){
+	    const date = row.doc.date.split("T")[0];
 	    
 	    return {
 		url : row.doc.url,
 		name: row.doc.name,
 		tags: processedTags(row.doc.tags),
-		date: row.doc.date,
+		date: date,
 		description: row.doc.description
-	    }
+	    };
 	}
 	 
 	function mainLoop(){
