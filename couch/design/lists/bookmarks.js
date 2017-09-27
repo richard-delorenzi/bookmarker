@@ -29,16 +29,23 @@ function (head, req) {
 	var prevDate=null;
         function row_info(row){
 	    const date = row.doc.date.split("T")[0];
+	    const date_stash = {date: date};
 
-	    const data ={
-		url : row.doc.url,
-		name: row.doc.name,
-		tags: processedTags(row.doc.tags),
-		date: date,
-		description: row.doc.description
+	    const main_stash ={
+		main:{
+		    url : row.doc.url,
+		    name: row.doc.name,
+		    tags: processedTags(row.doc.tags),
+		    description: row.doc.description
+		}
 	    };
 
-	    return [data];
+	    const Result= ( date != prevDate )?
+		  [date_stash,main_stash]:
+		  [main_stash];
+	    
+	    prevDate=date;
+	    return Result;
 	}
 	 
 	function mainLoop(){

@@ -9,25 +9,29 @@
 
   <body>     
     {{#ifdef_bookmarks}}
-    <h1>{{title}}</h1>  
-    <ul>
-      {{#bookmarks}}
-      <li>
-	<h3>{{date}} {{name}}</h3>
-	  {{#ifdef_description}}	
-	  <div>{{description}}</div>
-	  {{/ifdef_description}}
-	  <a href="{{url}}">{{url}}</a><br/>
-	  tags: <ul class="inline comma">
-	    {{#tags}}
-	    <li><a style="color:green" href="{{url}}">{{name}}</a></li>
-	    {{/tags}}
-	  </ul>
-      </li>
-      {{/bookmarks}}
-    </ul>  
+      <h1>{{title}}</h1>  
+      <ul>
+        {{#bookmarks}}
+          {{#ifdef_date}}
+            <h2>{{date}}</h2>
+          {{/ifdef_date}}
+          {{#main}}
+            <li>
+	      <h3>{{name}}</h3>
+	      {{#ifdef_description}}	
+	        <div>{{description}}</div>
+	      {{/ifdef_description}}
+	      <a href="{{url}}">{{url}}</a><br/>
+	      tags: <ul class="inline comma">
+	        {{#tags}}
+	          <li><a style="color:green" href="{{url}}">{{name}}</a></li>
+	        {{/tags}}
+	      </ul>
+            </li>
+          {{/main}}
+        {{/bookmarks}}
+      </ul>  
     {{/ifdef_bookmarks}}
     
   </body> 
-
 </html>
