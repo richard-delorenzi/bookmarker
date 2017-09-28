@@ -233,6 +233,11 @@ ul.and li:nth-last-child(2):after { content: ""; }
 /*... because, put an 'and' between 2nd to last and last item*/
 ul.and * + li:last-child:before { content: " and "; }
 
+/*easy read*/
+ul.boxed li {
+    background-color: #f0f0f0;
+}
+
 /****************************************************************/
 /*definition lists*/
 dt:after{
