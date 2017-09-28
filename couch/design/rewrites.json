@@ -36,6 +36,16 @@
 	"to"   : "_rewrite/index" 
     },
     {
+	"from" : "add",
+	"to":    "_list/add-bookmark/webmarks-by-tag",
+	"query": {
+	    "template": "add-bookmark",
+	    "group": "true",
+	    "title_part1": "add",
+	    "title_part2": "bookmark"
+	}
+    },
+    {
 	"from": "bookmarks",
         "to": "_list/bookmarks/webmarks-by-date",
 	"query": {

@@ -1,0 +1,105 @@
+{{!table types, as used in tableDescriptions — definition of ui view}}
+{{!uses knockout.js}}
+
+{{!parameters: 
+row: the row from the table,
+col: the column from the tableDescription
+}}
+
+<script type="text/html" id="type-template">
+  <!-- ko if: col.type != 'rev' -->
+    <!-- ko template: { name:col.type+'-template', data: { value: row.value[col.dbName] } } --><!-- /ko -->
+  <!-- /ko -->
+  <!-- ko  if: col.type == 'rev' -->
+    <!-- ko template: { name:col.type+'-template', data: { value: row.rev } } --><!-- /ko -->
+  <!-- /ko -->
+</script>
+
+
+{{! for all below
+parameters: as above
+return: value (an observale string)
+}}
+<script type="text/html" id="text-template">
+  <input type="text" data-bind="value: value, attr: { readonly: col.readOnly?'readonly':null }" />
+</script>
+
+<script type="text/html" id="removed-template">
+  <input type="text" data-bind="value: value" readonly="readonly" />
+</script>
+
+<script type="text/html" id="guid-template">
+  <input type="text" data-bind="value: value" readonly="readonly" />
+</script>
+
+<script type="text/html" id="rev-template">
+  <input type="text" data-bind="value: value" readonly="readonly" class="very-narrow"/>
+</script>
+
+<script type="text/html" id="percentage-template">
+  <input type="range" data-bind="value: value" min="0" max="100" />
+  <input type="text"  data-bind="value: value" class="very-narrow"/>
+</script>
+
+<script type="text/html" id="color-template">
+  <input type="color" data-bind="value: value" />
+</script>
+
+<script type="text/html" id="description-template"> {{! :todo: text for now}}
+  <input type="text" data-bind="value: value" />
+</script>
+
+<script type="text/html" id="quantity-template"> {{! :todo: needs unlimited }}
+  <input type="number" data-bind="value: value" min="0" />
+</script>
+
+{{! additional params: ftype (to lookup) }}
+<script type="text/html" id="fkeyByName-template"> {{! :todo: }}
+  <select data-bind="optionsCaption: 'Choose…',
+		     optionsText:  function(item){ return item.value.name;},
+		     optionsValue: function(item){ return item.id;},
+		     valueAllowUnset: false, 
+		     options: (function(){return $root.foreignKeys.values(col.ftype);})(),
+		     value: value,
+		     optionsAfterRender:function(option,item){ $root.setOptionDisable(option,item,value,$element,$data); }
+		     ">
+  </select>
+  {{! <p data-bind="text: value"></p> }}
+</script>
+
+<script type="text/javascript">
+  model.setOptionDisable = function (option, item, value, select, data) {
+    if (item) {
+      ko.applyBindingsToNode(option, {disable: item.value.removed}, item);
+      if (value == item.id) {
+        ko.applyBindingsToNode( select,{css: {disabledSelected: item.value.removed}}, data); 
+      }
+      select.onchange = function() { 
+        ko.applyBindingsToNode( select,{css: {disabledSelected: false}}, data); 
+      };
+    } 
+  }
+</script>
+
+{{! additional params: items:[{name, id},… ] }}
+<script type="text/html" id="static-select-template"> 
+  <select data-bind="optionsCaption: 'Choose…',
+		     optionsText: 'name',
+		     optionsValue: 'id',
+		     valueAllowUnset: false, 
+		     options: (function(){return col.items;})(),
+		     value: value
+		     ">
+  </select>
+</script>
+
+
+<script type="text/html" id="bool-template">
+  <input type="checkbox" data-bind="value: value, attr: { readonly: col.readOnly?'readonly':null }" />
+</script>
+
+<script type="text/html" id="duration-template">
+  <input type="number" min="0" data-bind="value: value, attr: { readonly: col.readOnly?'readonly':null }" />
+</script>
+
+  
