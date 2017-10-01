@@ -7,7 +7,50 @@
   <body>
     <h1>{{title}}</h1>
     <form>
-      
+      <select data-bind="
+        options: tickets,
+        optionsCaption: 'choose...',
+        optionsText: 'name',
+        value: chosenTicket">
+      </select>
+
+      <p data-bind="with: chosenTicket">
+        your tag is <b data-bind="text:name"></b>,
+        with value <span data-bind="text: value"></span>.
+      </p>
+
+      <button data-bind=
+	      "enable": "chosenTicket",
+	      "click: clear"
+	      >clear</button>
     </form>
   </body>
+  <script>
+
+function addBookmarkModel(){
+    self=this;
+    self.tickets= [
+	{"name": "tag1", "value": 1 },
+	{"name": "tag2", "value": 2 }
+    ];
+    self.chosenTicket=ko.observable();
+    self.clear= function() { self.chosenTicket(null);}
+}
+ko.applyBindings(new addBookmarkModel());
+
+    
+if (false) {
+var model = new KnockoutModelSynchronizedToCouchdb();
+
+function revert() {
+    model.revertFromUndo();
+}
+
+function save() {
+    model.save();
+}
+}
+
+  </script>
+  {{<types-ko-templates}}
 </html>

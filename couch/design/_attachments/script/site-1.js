@@ -1,14 +1,4 @@
 
-//class not used
-function autoUpdateModel(data) {
-    if (viewModel == null){
-        viewModel = ko.mapping.fromJS(data);
-        ko.applyBindings(viewModel);
-    }else{
-        ko.mapping.fromJS(data,viewModel);
-    }
-}
-
 //----------------------------------------------------------------
 //class KnockoutModelSynchronizedToCouchdb
 
