@@ -16,8 +16,7 @@
       url: <input
 	 type="text",
 	 data-bind="
-         value: url,
-         text: 'hello'
+         value: url
 	 ">
       </input>
       description: <input
@@ -55,7 +54,7 @@ function addBookmarkModel(){
         "tag2": 2
     };
     self.title=ko.observable();
-    self.url=ko.observable();
+    self.url=ko.observable("default url");
     self.description=ko.observable();
     self.all=ko.observable();
     self.clear= function() {
