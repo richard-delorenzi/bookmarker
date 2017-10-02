@@ -7,22 +7,25 @@
   <body>
     <h1>{{title}}</h1>
     <form>
-      Title: <input
+      Title:
+      <input
 	 type="text",
 	 data-bind="
-         value: title
+	 value: title
 	 ">
       </input>
-      url: <input
+      url:
+      <input
 	 type="text",
 	 data-bind="
-         value: url
+	 value: url
 	 ">
       </input>
-      description: <input
+      description:
+      <input
 	 type="text",
 	 data-bind="
-         value: description
+	 value: description
 	 ">
       </input>
 
@@ -47,6 +50,12 @@
   </body>
   <script>
 
+function htmlDecoded(str){
+    var temp=document.createElement("pre");
+    temp.innerHTML=str;
+    return temp.firstChild.nodeValue;
+}
+
 function addBookmarkModel(){
     self=this;
     self.tags= {
@@ -54,7 +63,7 @@ function addBookmarkModel(){
         "tag2": 2
     };
     self.title=ko.observable();
-    self.url=ko.observable("default url");
+    self.url=ko.observable(htmlDecoded("{{referer}}"));
     self.description=ko.observable();
     self.all=ko.observable();
     self.clear= function() {
