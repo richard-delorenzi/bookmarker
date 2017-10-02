@@ -7,35 +7,64 @@
   <body>
     <h1>{{title}}</h1>
     <form>
-      <select data-bind="
-        options: tickets,
-        optionsCaption: 'choose...',
-        optionsText: 'name',
-        value: chosenTicket">
-      </select>
+      Title: <input
+	 type="text",
+	 data-bind="
+         value: title
+	 ">
+      </input>
+      url: <input
+	 type="text",
+	 data-bind="
+         value: url
+	 ">
+      </input>
+      description: <input
+	 type="text",
+	 data-bind="
+         value: description
+	 ">
+      </input>
 
-      <p data-bind="with: chosenTicket">
-        your tag is <b data-bind="text:name"></b>,
-        with value <span data-bind="text: value"></span>.
+      <p>
+        your entry is <b data-bind="text:all"></b>
       </p>
 
-      <button data-bind=
-	      "enable": "chosenTicket",
-	      "click: clear"
-	      >clear</button>
+      <button data-bind="
+	      enable: true,
+	      click: clear
+	      ">
+	clear
+      </button>
+      <button data-bind="
+	      enable: true,
+	      click: save
+	      ">
+	save
+      </button>
+      
     </form>
   </body>
   <script>
 
 function addBookmarkModel(){
     self=this;
-    self.tickets= [
-	{"name": "tag1", "value": 1 },
-	{"name": "tag2", "value": 2 }
-    ];
-    self.chosenTicket=ko.observable();
-    self.clear= function() { self.chosenTicket(null);}
+    self.tags= {
+	"tag1": 1,
+        "tag2": 2
+    };
+    self.title=ko.observable();
+    self.url=ko.observable();
+    self.description=ko.observable();
+    self.all=ko.observable();
+    self.clear= function() {
+        self.name(null);
+    }
+    self.save= function() {
+	self.all( self.title()+ ", " +self.url()+ ", " +self.description() );
+    }
 }
+
 ko.applyBindings(new addBookmarkModel());
 
     
