@@ -8,15 +8,16 @@ function (head, req) {
 
 //-----------------------------------------------------------------------------------------
 
-    const referer= req.headers.Referer;
+    const bm_url= req.query["url"];
+    const bm_title= req.query["title"];
     const template = req.query["template"];
     //const key = req.query["key"];
     const title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
 
     function stash(){
         return {
-	    title:title,
-	    referer:referer
+	    bm_title:bm_title,
+	    bm_url:bm_url
 	};
     }
 

@@ -8,6 +8,16 @@
       <li><a href="bookmarks">bookmarks in date order</a></li>
       <li><a href="tags">tags</a></li>
       <li><a href="add">add bookmark</a></li>
+      <li>
+	<a href=
+	   "javascript: location.href='http://bookmarkdb/add'+
+	    '?url='   +encodeURIComponent(location.href)+
+	    '&title=' +encodeURIComponent(document.title);
+	    "
+	   >
+	  bookmarklet
+	</a>
+      </li>
     </ul>
   </body>
 </html>
