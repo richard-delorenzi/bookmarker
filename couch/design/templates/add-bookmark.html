@@ -62,10 +62,23 @@ function addBookmarkModel(){
     self.title=ko.observable(htmlDecoded("{{bm_title}}"));
     self.url=ko.observable(htmlDecoded("{{bm_url}}"));
     self.description=ko.observable(htmlDecoded("{{bm_description}}"));
-    self.all=ko.observable();
    
     self.save= function() {
-	self.all( self.title()+ ", " +self.url()+ ", " +self.description() );
+	const data={
+	    title: self.title(),
+	    url: self.url(),
+	    description: self.description()
+	};
+	
+	const js_data=JSON.stringify(data);
+
+	$.ajax({
+	    url: "http://bookmarkdb/db/0000",
+	    type: "PUT",
+	    data: js_data,
+	    success: function(responce){
+	    }
+	});
     }
 }
 
