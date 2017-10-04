@@ -9,6 +9,8 @@ elm-exp/index.html
 couch-in-docker/data/
 couch-in-docker/config/upstream.ini
 couch-in-docker/config/docker.ini
+couch-in-docker/data1/
+couch-in-docker/config1/
 
 #bookmarks
 converter/delicious.2.html
