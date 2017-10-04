@@ -334,8 +334,8 @@ select option:not(:disabled)
 }
 
 /****************************************************************/
-/*flex form*/
-form.flex div
+/*flex*/
+.flex div
 {
     display: flex;
 }
