@@ -29,7 +29,10 @@
     },
     { 
 	"from" : "index",
-	"to" : "static-pages/index.html"
+	"to" : "_list/mustache-only/none",
+	"query": {
+	    "template":"index"
+	}
     },
     {
 	"from" : "",
