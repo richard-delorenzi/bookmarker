@@ -64,7 +64,7 @@ function addBookmarkModel(){
     };
     self.title=ko.observable(htmlDecoded("{{bm_title}}"));
     self.url=ko.observable(htmlDecoded("{{bm_url}}"));
-    self.description=ko.observable();
+    self.description=ko.observable(htmlDecoded("{{bm_description}}"));
     self.all=ko.observable();
     self.clear= function() {
         self.name(null);

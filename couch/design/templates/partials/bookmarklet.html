@@ -7,14 +7,18 @@ function selectedText(){
 	     document.selection.createRange &&
 	     document.selection.createRange().text));
     }
-    catch(e){ // access denied on https sites
-	t = "";
+    catch(e){ /* access denied on https sites*/
+	t = '';
     }
     return t;
 }
-	    
 
-location.href='http://bookmarkdb/add'+
-    '?url='   +encodeURIComponent(location.href)+
-    '&title=' +encodeURIComponent(document.title);
-"
+function link() {
+    return 'http://bookmarkdb/add'+
+	'?url='   +encodeURIComponent(location.href)+
+	'&title=' +encodeURIComponent(document.title)+
+	'&description=' +encodeURIComponent(selectedText());
+}
+	    
+location.href=link();
+
