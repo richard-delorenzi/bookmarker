@@ -61,7 +61,7 @@
 function htmlDecoded(str){
     var temp=document.createElement("pre");
     temp.innerHTML=str;
-    return temp.firstChild.nodeValue;
+    return (str=="") ? "" : temp.firstChild.nodeValue;
 }
 
 function addBookmarkModel(){
