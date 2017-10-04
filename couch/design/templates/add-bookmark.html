@@ -37,22 +37,13 @@
 	   ">
         </input>
       </div>
-      <p>
-        your entry is <b data-bind="text:all"></b>
-      </p>
 
-      <button data-bind="
-	      enable: true,
-	      click: clear
-	      ">
-	clear
-      </button>
       <button data-bind="
 	      enable: true,
 	      click: save
 	      ">
 	save
-      </button>
+      </button> ← currently not working
       
     </form>
   </body>
@@ -67,17 +58,12 @@ function htmlDecoded(str){
 
 function addBookmarkModel(){
     self=this;
-    self.tags= {
-	"tag1": 1,
-        "tag2": 2
-    };
+
     self.title=ko.observable(htmlDecoded("{{bm_title}}"));
     self.url=ko.observable(htmlDecoded("{{bm_url}}"));
     self.description=ko.observable(htmlDecoded("{{bm_description}}"));
     self.all=ko.observable();
-    self.clear= function() {
-        self.name(null);
-    }
+   
     self.save= function() {
 	self.all( self.title()+ ", " +self.url()+ ", " +self.description() );
     }
