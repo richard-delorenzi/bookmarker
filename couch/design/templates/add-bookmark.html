@@ -6,29 +6,37 @@
   </head>
   <body>
     <h1>{{title}}</h1>
-    <form>
-      Title:
-      <input
-	 type="text",
-	 data-bind="
-	 value: title
-	 ">
-      </input><br/>
-      url:
-      <input
-	 type="text",
-	 data-bind="
-	 value: url
-	 ">
-      </input><br/>
-      description:
-      <input
-	 type="text",
-	 data-bind="
-	 value: description
-	 ">
-      </input>
-
+    <form class="flex">
+      <div>
+	Title:
+	<input
+	   class="stretch",
+	   type="text",
+	   data-bind="
+	   value: title
+	   ">
+        </input>
+      </div>
+      <div>
+	url:
+	<input
+	   class="stretch",
+	   type="text",
+	   data-bind="
+	   value: url
+	   ">
+        </input>
+      </div>
+      <div>
+	description:
+	<input
+	   class="stretch",
+	   type="text",
+	   data-bind="
+	   value: description
+	   ">
+        </input>
+      </div>
       <p>
         your entry is <b data-bind="text:all"></b>
       </p>

@@ -332,3 +332,15 @@ select option:not(:disabled)
 {
   color:initial;
 }
+
+/****************************************************************/
+/*flex form*/
+form.flex div
+{
+    display: flex;
+}
+
+form.flex div *.stretch
+{
+    flex: auto;
+}
