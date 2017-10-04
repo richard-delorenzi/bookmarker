@@ -340,7 +340,7 @@ select option:not(:disabled)
     display: flex;
 }
 
-form.flex div *.stretch
+.flex div *.stretch
 {
     flex: auto;
 }
