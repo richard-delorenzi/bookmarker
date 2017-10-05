@@ -75,6 +75,18 @@
 	      ">
 	save
       </button> ← currently not working
+
+      <div>
+	json data:
+	<input
+	   readonly="readonly",
+	   class="stretch",
+	   type="text",
+	   data-bind="
+	   value: js_data
+	   ">
+        </input>
+      </div>
       
     </form>
   </body>
@@ -95,11 +107,11 @@ function addBookmarkModel(){
     self.url=ko.observable(htmlDecoded("{{bm_url}}"));
     self.description=ko.observable(htmlDecoded("{{bm_description}}"));
     self.user=ko.observable("ctrl_alt_delor@home");
-    self.date=ko.observable(now);
     self.is_private=ko.observable(false);
-   
-    self.save= function() {
-	const data={
+    self.date=ko.observable(now);
+
+    function data() {
+	return {
 	    name: self.title(),
 	    url: self.url(),
 	    description: self.description(),
@@ -109,9 +121,18 @@ function addBookmarkModel(){
 	    tags: [],
 	    type: "webmark"
 	};
-	
-	const js_data=JSON.stringify(data);
+    }
 
+    function js_data() {
+	return JSON.stringify(data());
+    }
+    
+    self.js_data=ko.computed(function(){
+	return js_data();
+    },self);
+   
+    self.save= function() {
+	js_data=JSON.stringify(data(self));
 	$.ajax({
 	    url: "http://bookmarkdb/db/0000",
 	    type: "PUT",
