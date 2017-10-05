@@ -146,14 +146,14 @@ function addBookmarkModel(){
     },self);
     
     self.json_data = function() {
-	return JSON.stringify(data());
+	return JSON.stringify(self.data());
     };
     
     self.save= function() {
 	$.ajax({
 	    url: "http://bookmarkdb/db/0000",
 	    type: "PUT",
-	    data: json_data(),
+	    data: self.json_data(),
 	    success: function(responce){
 	    }
 	});
