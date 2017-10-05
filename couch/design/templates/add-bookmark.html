@@ -78,14 +78,13 @@
 
       <div>
 	json data:
-	<input
+	<textarea
 	   readonly="readonly",
 	   class="stretch",
-	   type="text",
 	   data-bind="
 	   value: js_data
 	   ">
-        </input>
+        </textarea>
       </div>
       
     </form>
@@ -128,15 +127,14 @@ function addBookmarkModel(){
     }
     
     self.js_data=ko.computed(function(){
-	return js_data();
+	return JSON.stringify(data(self),null,4);
     },self);
    
     self.save= function() {
-	js_data=JSON.stringify(data(self));
 	$.ajax({
 	    url: "http://bookmarkdb/db/0000",
 	    type: "PUT",
-	    data: js_data,
+	    data: js_data(),
 	    success: function(responce){
 	    }
 	});
