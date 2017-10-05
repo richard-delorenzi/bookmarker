@@ -38,6 +38,16 @@
         </input>
       </div>
       <div>
+	Tags:
+	<input
+	   class="stretch",
+	   type="text",
+	   data-bind="
+	   value: tags_astext
+	   ">
+        </input>
+      </div>
+      <div>
 	user:
 	<input
 	   readonly="readonly",
@@ -108,6 +118,8 @@ function addBookmarkModel(){
     self.user=ko.observable("ctrl_alt_delor@home");
     self.is_private=ko.observable(false);
     self.date=ko.observable(now);
+    self.tags_astext=ko.observable("");
+    self.tags=ko.observable([]);
 
     function data() {
 	return {
@@ -117,7 +129,7 @@ function addBookmarkModel(){
 	    date: self.date(),
 	    "private" : self.is_private(),
 	    user: self.user(),
-	    tags: [],
+	    tags: self.tags(),
 	    type: "webmark"
 	};
     }
