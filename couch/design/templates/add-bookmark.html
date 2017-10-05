@@ -119,9 +119,16 @@ function addBookmarkModel(){
     self.is_private=ko.observable(false);
     self.date=ko.observable(now);
     self.tags_astext=ko.observable("");
-    self.tags=ko.observable([]);
+    
+    self.js_data=ko.computed(function(){
+	return JSON.stringify(self.data(),null,4);
+    },self);
+    
+    self.tags=ko.computed(function(){
+	return tags_astext();
+    },self);
 
-    function data() {
+    self.data = function() {
 	return {
 	    name: self.title(),
 	    url: self.url(),
@@ -132,15 +139,12 @@ function addBookmarkModel(){
 	    tags: self.tags(),
 	    type: "webmark"
 	};
-    }
+    };
 
-    function js_data() {
+    self.js_data = function() {
 	return JSON.stringify(data());
-    }
+    };
     
-    self.js_data=ko.computed(function(){
-	return JSON.stringify(data(self),null,4);
-    },self);
    
     self.save= function() {
 	$.ajax({
@@ -150,7 +154,7 @@ function addBookmarkModel(){
 	    success: function(responce){
 	    }
 	});
-    }
+    };
 }
 
 ko.applyBindings(new addBookmarkModel());
