@@ -13,7 +13,7 @@
 	   class="stretch",
 	   type="text",
 	   data-bind="
-	   value: title
+	   value: ko_title
 	   ">
         </input>
       </div>
@@ -23,7 +23,7 @@
 	   class="stretch",
 	   type="text",
 	   data-bind="
-	   value: url
+	   value: ko_url
 	   ">
         </input>
       </div>
@@ -33,7 +33,7 @@
 	   class="stretch",
 	   type="text",
 	   data-bind="
-	   value: description
+	   value: ko_description
 	   ">
         </input>
       </div>
@@ -43,7 +43,7 @@
 	   class="stretch",
 	   type="text",
 	   data-bind="
-	   value: tags_astext
+	   value: ko_tags_astext
 	   ">
         </input>
       </div>
@@ -54,7 +54,7 @@
 	   class="stretch",
 	   type="text",
 	   data-bind="
-	   value: user
+	   value: ko_user
 	   ">
         </input>
       </div>
@@ -65,7 +65,7 @@
 	   class="stretch",
 	   type="text",
 	   data-bind="
-	   value: date
+	   value: ko_date
 	   ">
         </input>
       </div>
@@ -74,7 +74,7 @@
 	<input
 	   type="checkbox",
 	   data-bind="
-	   value: is_private
+	   value: ko_is_private
 	   ">
         </input>
       </div>
@@ -92,7 +92,7 @@
 	   readonly="readonly",
 	   class="stretch",
 	   data-bind="
-	   value: show_json_data
+	   value: ko_json_data
 	   ">
         </textarea>
       </div>
@@ -112,32 +112,32 @@ function addBookmarkModel(){
     const self=this;
     const now=new Date().toJSON();
 
-    self.title=ko.observable(htmlDecoded("{{bm_title}}"));
-    self.url=ko.observable(htmlDecoded("{{bm_url}}"));
-    self.description=ko.observable(htmlDecoded("{{bm_description}}"));
-    self.user=ko.observable("ctrl_alt_delor@home");
-    self.is_private=ko.observable(false);
-    self.date=ko.observable(now);
-    self.tags_astext=ko.observable("");
+    self.ko_title=ko.observable(htmlDecoded("{{bm_title}}"));
+    self.ko_url=ko.observable(htmlDecoded("{{bm_url}}"));
+    self.ko_description=ko.observable(htmlDecoded("{{bm_description}}"));
+    self.ko_user=ko.observable("ctrl_alt_delor@home");
+    self.ko_is_private=ko.observable(false);
+    self.ko_date=ko.observable(now);
+    self.ko_tags_astext=ko.observable("");
 
-    self.tags=ko.computed(function(){
-	return self.tags_astext();
+    self.ko_tags=ko.computed(function(){
+	return self.ko_tags_astext();
     },self);
     
     self.data = function() {
 	return {
-	    name: self.title(),
-	    url: self.url(),
-	    description: self.description(),
-	    date: self.date(),
-	    "private" : self.is_private(),
-	    user: self.user(),
-	    tags: self.tags(),
+	    name: self.ko_title(),
+	    url: self.ko_url(),
+	    description: self.ko_description(),
+	    date: self.ko_date(),
+	    "private" : self.ko_is_private(),
+	    user: self.ko_user(),
+	    tags: self.ko_tags(),
 	    type: "webmark"
 	};
     };
     
-    self.show_json_data=ko.computed(function(){	
+    self.ko_json_data=ko.computed(function(){	
 	return JSON.stringify(self.data(),null,4);
     },self);
     
