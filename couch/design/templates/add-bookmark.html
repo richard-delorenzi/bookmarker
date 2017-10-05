@@ -112,45 +112,40 @@ function addBookmarkModel(){
     const self=this;
     const now=new Date().toJSON();
 
-    this.title=ko.observable(htmlDecoded("{{bm_title}}"));
-    this.url=ko.observable(htmlDecoded("{{bm_url}}"));
-    this.description=ko.observable(htmlDecoded("{{bm_description}}"));
-    this.user=ko.observable("ctrl_alt_delor@home");
-    this.is_private=ko.observable(false);
-    this.date=ko.observable(now);
-    this.tags_astext=ko.observable("");
+    self.title=ko.observable(htmlDecoded("{{bm_title}}"));
+    self.url=ko.observable(htmlDecoded("{{bm_url}}"));
+    self.description=ko.observable(htmlDecoded("{{bm_description}}"));
+    self.user=ko.observable("ctrl_alt_delor@home");
+    self.is_private=ko.observable(false);
+    self.date=ko.observable(now);
+    self.tags_astext=ko.observable("");
 
-    this.tags=ko.computed(function(){
-	return this.tags_astext();
-    },this);
+    self.tags=ko.computed(function(){
+	return self.tags_astext();
+    },self);
     
-    this.data = function() {
+    self.data = function() {
 	return {
-	    name: this.title(),
-	    url: this.url(),
-	    description: this.description(),
-	    date: this.date(),
-	    "private" : this.is_private(),
-	    user: this.user(),
-	    tags: this.tags(),
+	    name: self.title(),
+	    url: self.url(),
+	    description: self.description(),
+	    date: self.date(),
+	    "private" : self.is_private(),
+	    user: self.user(),
+	    tags: self.tags(),
 	    type: "webmark"
 	};
     };
     
-    this.show_json_data=ko.computed(function(){	
-	return JSON.stringify(this.data(),null,4);
-    },this);
+    self.show_json_data=ko.computed(function(){	
+	return JSON.stringify(self.data(),null,4);
+    },self);
     
-
-
-
-
-    this.json_data = function() {
+    self.json_data = function() {
 	return JSON.stringify(data());
     };
     
-   
-    this.save= function() {
+    self.save= function() {
 	$.ajax({
 	    url: "http://bookmarkdb/db/0000",
 	    type: "PUT",
