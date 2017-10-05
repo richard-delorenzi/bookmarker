@@ -121,7 +121,10 @@ function addBookmarkModel(){
     self.ko_tags_astext=ko.observable("");
 
     self.ko_tags=ko.computed(function(){
-	return self.ko_tags_astext();
+	const input=self.ko_tags_astext();
+	return input==""?
+	    []:
+	    input.split(" ");
     },self);
     
     self.data = function() {
