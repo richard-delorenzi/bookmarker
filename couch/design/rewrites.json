@@ -1,7 +1,7 @@
 [
     {
 	"from": "favicon.ico",
-	"to": "images/blackboard.png"
+	"to": "images/stars.png"
     },
     {
 	"from" : "script/*",
@@ -14,6 +14,10 @@
     {
 	"from" : "style/*",
 	"to" : "style/*"
+    },
+    {
+	"from" : "images/*",
+	"to" : "images/*"
     },
     {
 	"from" : "vendor/*",
