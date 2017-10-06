@@ -165,11 +165,18 @@ GuidMaker.prototype.Guid= function(callback){
         self.ajax.shift();
     }
 
+    function sleep (time) {
+	return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    sleep(3000).then(() => {
+    
     $.when(self.ajax[0]).then(
         function() {
             callback(self._nextGuid());
         }
     );
+    });
 };
 
 function addBookmarkModel(){
@@ -214,7 +221,8 @@ function addBookmarkModel(){
 	    "private" : self.ko_is_private(),
 	    user: self.ko_user(),
 	    tags: self.ko_tags(),
-	    type: "webmark"
+	    type: "webmark",
+	    uuid: self.ko_uuid()
 	};
     };
     
