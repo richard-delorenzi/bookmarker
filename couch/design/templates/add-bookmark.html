@@ -80,7 +80,7 @@
       </div>
       
       <button data-bind="
-	enable: true,
+	enable: ko_is_uuidReady,
 	click: save
 	">
 	save
@@ -193,6 +193,10 @@ function addBookmarkModel(){
     self.is_uuidReady= function() {
         return  self.ko_uuid() != "";
     };
+
+    self.ko_is_uuidReady= ko.computed( function() {
+        return  self.ko_uuid() != "";
+    },self);
     
     self.ko_tags=ko.computed(function(){
 	const input=self.ko_tags_astext();
