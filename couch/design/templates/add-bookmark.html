@@ -4,101 +4,102 @@
     <title>{{title}}</title>
     {{>scripts}}
   </head>
-  <body>
+  <body>   
     <h1>{{title}}</h1>
     <form class="flex">
       <div>
 	Title:
 	<input
-	   class="stretch",
-	   type="text",
-	   data-bind="
-	   value: ko_title
-	   ">
+	class="stretch",
+	type="text",
+	data-bind="
+	value: ko_title
+	">
         </input>
       </div>
       <div>
 	url:
 	<input
-	   class="stretch",
-	   type="text",
-	   data-bind="
-	   value: ko_url
-	   ">
+	class="stretch",
+	type="text",
+	data-bind="
+	value: ko_url
+	">
         </input>
       </div>
       <div>
 	description:
 	<input
-	   class="stretch",
-	   type="text",
-	   data-bind="
-	   value: ko_description
-	   ">
+	class="stretch",
+	type="text",
+	data-bind="
+	value: ko_description
+	">
         </input>
       </div>
       <div>
 	Tags:
 	<input
-	   class="stretch",
-	   type="text",
-	   data-bind="
-	   value: ko_tags_astext
-	   ">
+	class="stretch",
+	type="text",
+	data-bind="
+	value: ko_tags_astext
+	">
         </input>
       </div>
       <div>
 	user:
 	<input
-	   readonly="readonly",
-	   class="stretch",
-	   type="text",
-	   data-bind="
-	   value: ko_user
-	   ">
+	readonly="readonly",
+	class="stretch",
+	type="text",
+	data-bind="
+	value: ko_user
+	">
         </input>
       </div>
       <div>
 	date:
 	<input
-	   readonly="readonly",
-	   class="stretch",
-	   type="text",
-	   data-bind="
-	   value: ko_date
-	   ">
+	readonly="readonly",
+	class="stretch",
+	type="text",
+	data-bind="
+	value: ko_date
+	">
         </input>
       </div>
       <div>
 	private:
 	<input
-	   type="checkbox",
-	   data-bind="
-	   checked: ko_is_private
-	   ">
+	type="checkbox",
+	data-bind="
+	checked: ko_is_private
+	">
         </input>
       </div>
-    
+      
       <button data-bind="
-	      enable: true,
-	      click: save
-	      ">
+	enable: true,
+	click: save
+	">
 	save
       </button> ← currently not working
 
       <div>
 	json data:
 	<textarea
-	   rows="12",
-	   readonly="readonly",
-	   class="stretch",
-	   data-bind="
-	   value: ko_json_data
-	   ">
+	  rows="12",
+	  readonly="readonly",
+	  class="stretch",
+	  data-bind="
+	  value: ko_json_data
+	  ">
         </textarea>
       </div>
       
     </form>
+    
   </body>
   <script>
 
@@ -108,6 +109,68 @@ function htmlDecoded(str){
     temp.innerHTML=str;
     return (str=="") ? "" : temp.firstChild.nodeValue;
 }
+
+//----------------------------------------------------------------
+//class GuidMaker
+
+function GuidMaker(){
+    var self=this;
+    self.emptyThreshold=5;
+    self.fetchQuantity=16;
+
+    self.url="/_uuids?count="+self.fetchQuantity;
+
+    self.requests1= -self.fetchQuantity;
+    self.requests2= -self.fetchQuantity;
+    self.guids=[];
+    self.ajax=new Array();
+    self._getSomeGuids();
+};
+
+GuidMaker.prototype._getSomeGuids= function(){
+    var self=this;
+
+    r=$.ajax({
+        dataType: "json",
+        url: self.url,
+        cache: false,
+        success: function( data ) {
+            self.guids=$.merge(self.guids, data.uuids);
+        }
+    });
+    self.ajax.push(r);
+};
+
+GuidMaker.prototype._nextGuid= function(){
+    var self=this;
+    var result= self.guids.pop();
+    return result;
+};
+
+GuidMaker.prototype.Guid= function(callback){
+    var self=this;
+
+    self.requests1 += 1;
+    self.requests2 += 1;
+
+    if ( self.requests1 > -self.emptyThreshold )
+    {
+        self.requests1 -= self.fetchQuantity;
+        self._getSomeGuids();
+    }
+
+    if ( self.requests2 > 0 )
+    {
+        self.requests2 -= self.fetchQuantity;
+        self.ajax.shift();
+    }
+
+    $.when(self.ajax[0]).then(
+        function() {
+            callback(self._nextGuid());
+        }
+    );
+};
 
 function addBookmarkModel(){
     const self=this;
@@ -120,7 +183,17 @@ function addBookmarkModel(){
     self.ko_is_private=ko.observable(false);
     self.ko_date=ko.observable(now);
     self.ko_tags_astext=ko.observable("");
+    self.ko_uuid=ko.observable("");
 
+    self.guidMaker = new GuidMaker();
+    self.guidMaker.Guid( function(guid) {
+        self.ko_uuid(guid);
+    });
+
+    self.is_uuidReady= function() {
+        return  self.ko_uuid() != "";
+    };
+    
     self.ko_tags=ko.computed(function(){
 	const input=self.ko_tags_astext();
 	return input==""?
@@ -150,13 +223,19 @@ function addBookmarkModel(){
     };
     
     self.save= function() {
-	$.ajax({
-	    url: "http://bookmarkdb/db/0000",
-	    type: "PUT",
-	    data: self.json_data(),
-	    success: function(responce){
-	    }
-	});
+	if (self.is_uuidReady()){
+	    $.ajax({
+		url: "http://bookmarkdb/db/"+self.ko_uuid(),
+		type: "PUT",
+		data: self.json_data(),
+		success: function(responce){
+		    $("body form")
+			.replaceWith(
+			    "<h2>All Done</h2>"
+			);
+		}
+	    });
+	}
     };
 }
 
