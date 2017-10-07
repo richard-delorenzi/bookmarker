@@ -6,7 +6,7 @@ function start-couchdb {
     config_in_docker="/usr/local/etc/couchdb/local.d"
     sudo --group docker \
         docker run --rm --name my-couchdb1 \
-	    -p 127.0.0.1:80:5984 \
+	    -p 127.0.0.3:80:5984 \
 	    -v "${data_on_host}":"${data_in_docker}" \
 	    -v "${config_on_host}":"${config_in_docker}" \
 	    -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password \
