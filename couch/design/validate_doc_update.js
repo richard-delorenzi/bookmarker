@@ -22,7 +22,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
     //checks
 
     // admins or owner can always delete
-    //if (v.isAdmin()) return true;
+    if (v.isAdmin()) return true;
 
     v.require("type");
     v.unchanged("type");
