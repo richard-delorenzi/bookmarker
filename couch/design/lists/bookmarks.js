@@ -28,7 +28,7 @@ function (head, req) {
 
 	var prevDate=null;
         function row_info(row){
-	    const date = row.doc.date.split("T")[0];
+	    const date = row.doc.created_at.split("T")[0];
 	    const date_stash = {date: date};
 
 	    const main_stash ={
