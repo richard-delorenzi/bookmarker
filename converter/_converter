@@ -54,7 +54,7 @@ def process_dt_list (data):
         if is_element(item,"dd"):
             dd = dt_dd_data(item)
     record=merge_dictionaries(a,dd)
-    record["user"]="ctrl_alt_delor@delisious"
+    record["author"]="ctrl_alt_delor@delisious"
     output.append(record)
 
 def dt_a_data(data):
@@ -74,9 +74,9 @@ def dt_a_data(data):
     name=name.strip()
 
     return {
-        "date":date,
+        "created_at":date,
         "url": url,
-        "private": is_private,
+        "is_private": is_private,
         "tags":tags,
         "name":name
     }

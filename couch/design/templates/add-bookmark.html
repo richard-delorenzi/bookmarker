@@ -210,9 +210,9 @@ function addBookmarkModel(){
 	    name: self.ko_title(),
 	    url: self.ko_url(),
 	    description: self.ko_description(),
-	    date: self.ko_date(),
-	    "private" : self.ko_is_private(),
-	    user: self.ko_user(),
+	    created_at: self.ko_date(),
+	    "is_private" : self.ko_is_private(),
+	    author: self.ko_user(),
 	    tags: self.ko_tags(),
 	    type: "webmark"
 	};

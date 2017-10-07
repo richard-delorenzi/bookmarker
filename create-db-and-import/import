@@ -16,12 +16,11 @@ def as_json(data):
 def http_put(data):
     data_as_json = as_json(data)
     data_hash = hashOf(data_as_json)
-    url="http://admin:password@127.0.0.1:5984/bookmarks/"+data_hash
+    url="http://admin:password@bookmarkdb/db/"+data_hash
     headers = {"content-type": "application/json" }
     r = requests.put(url, data=data_as_json, headers=headers)
 
 for item in data:
-    #curl -X PUT http://admin:password@127.0.0.1:5984/bookmarks/«hash» -d «item_as_json»
     item["type"]="webmark"
     http_put(item)
    
