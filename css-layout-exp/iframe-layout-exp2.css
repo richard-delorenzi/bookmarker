@@ -1,0 +1,11 @@
+.wrapper {
+    display:flex;
+}
+
+.sidebar {
+    flex: 2 0 15em;
+}
+
+.content {
+    flex: 2 2 80%;
+}
