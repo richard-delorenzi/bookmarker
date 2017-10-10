@@ -1,11 +1,11 @@
 
-.sidebar  {grid-area: sidebar; }
-.sidebar2 {grid-area: sidebar2;}
-.content  {grid-area: content;}
-.header   {grid-area: header;}
-.footer   {grid-area: footer;}
+nav      {grid-area: sidebar; }
+aside    {grid-area: sidebar2;}
+main     {grid-area: content;}
+header   {grid-area: header;}
+footer   {grid-area: footer;}
 
-html, body, .wrapper{
+html, body, .wrapper, main{
     margin: 0;
     padding: 0;
 }
@@ -25,6 +25,10 @@ html, body, .wrapper{
 	"sidebar footer footer";
 }
 
+main {
+    display:grid;
+}
+
 
 .box {
   border-radius: 5px;
@@ -32,10 +36,10 @@ html, body, .wrapper{
   font-size: 150%;
 }
 
-.header, .footer {
+header, footer {
   background-color: #999;
 }
 
-.sidebar2, .sidebar {
+nav, aside {
   background-color: #ccc;
 }
