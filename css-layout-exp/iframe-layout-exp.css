@@ -1,19 +1,24 @@
+/*****************************************************************/
+/*Layout*/
 
+/*map html to css-grid*/
 nav      {grid-area: sidebar; }
 aside    {grid-area: sidebar2;}
 main     {grid-area: content;}
 header   {grid-area: header;}
 footer   {grid-area: footer;}
 
+/*use exactly 100% of screen*/
 html, body, .wrapper, main{
     margin: 0;
     padding: 0;
 }
-
 .wrapper {
-  height: 100vh;
+    height: 100vh;
+    width: 100%;
 }
 
+/*Define the grid*/
 .wrapper {
     display: grid;
     grid-gap: 10px;
@@ -25,10 +30,13 @@ html, body, .wrapper, main{
 	"sidebar footer footer";
 }
 
+/*Main keep out of the way. Use grid as it behaves well*/
 main {
     display:grid;
 }
 
+/*****************************************************************/
+/*style*/
 
 .box {
   border-radius: 5px;
