@@ -7,3 +7,4 @@ Version-1 is now usable.
  - make it detect when adding an already existing bookmark
  - add tag hierarchy
  - add filters (to hide tags, and bookmarks with these tags)
+ - bugfix: link to ? tag
