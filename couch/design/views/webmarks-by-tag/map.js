@@ -5,7 +5,7 @@ function(doc) {
     if (!is_Design() && doc.type == "webmark"){
 	const tags = doc.tags;
 	tags.forEach ( function (tag) {
-	    emit([tag],{count:1});
+	    emit([tag.toLowerCase()],{count:1});
 	});
     }
 }

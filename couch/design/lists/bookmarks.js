@@ -20,7 +20,7 @@ function (head, req) {
 	    tags.forEach( function (tag) {
 		out.push({
 		    name: tag,
-		    url: "/tag/" + tag
+		    url: "/tag/" + tag.toLowerCase()
 		});
 	    });
 	    return out;
