@@ -3,7 +3,7 @@ Version-1 is now usable.
 #TODO
  - ✓ bookmarklet should open a popup/other-tab
  - ✓ make tags case insensative
- - make it so I can edit existing bookmark
+ - ✓ make it so I can edit existing bookmark
  - make it detect when adding an already existing bookmark
  - add tag hierarchy
  - add filters (to hide tags, and bookmarks with these tags)

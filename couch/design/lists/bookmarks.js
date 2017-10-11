@@ -30,13 +30,15 @@ function (head, req) {
         function row_info(row){
 	    const date = row.doc.created_at.split("T")[0];
 	    const date_stash = {date: date};
+	    const edit_url= "/edit/"+row.id;
 
 	    const main_stash ={
 		main:{
 		    url : row.doc.url,
 		    name: row.doc.name,
 		    tags: processedTags(row.doc.tags),
-		    description: row.doc.description
+		    description: row.doc.description,
+		    edit_url: edit_url
 		}
 	    };
 

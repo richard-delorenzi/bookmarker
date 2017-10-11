@@ -44,11 +44,19 @@
     },
     {
 	"from" : "add",
-	"to":    "_list/add-bookmark/webmarks-by-tag",
+	"to":    "_show/add-bookmark",
 	"query": {
 	    "template": "add-bookmark",
-	    "group": "true",
-	    "title_part1": "add",
+	    "title_part1": "Add",
+	    "title_part2": "bookmark"
+	}
+    },
+    {
+	"from" : "edit/:~id",
+	"to":    "_show/add-bookmark/:~id",
+	"query": {
+	    "template": "add-bookmark",
+	    "title_part1": "Edit",
 	    "title_part2": "bookmark"
 	}
     },
