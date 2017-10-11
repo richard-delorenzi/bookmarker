@@ -79,6 +79,17 @@
         </input>
       </div>
       <div>
+	id:
+	<input
+	  readonly="readonly",
+	  class="stretch",
+          type="text",
+	  data-bind="
+	  value: ko_uuid
+	  ">
+        </textarea>
+      </div>
+      <div>
 	revision:
 	<input
 	  readonly="readonly",
@@ -195,17 +206,18 @@ function addBookmarkModel(){
     self.ko_date=ko.observable(now);
     self.ko_is_private=ko.observable({{bm_is_private}});
     self.ko_revision=ko.observable("{{bm_rev}}");
- 
-    self.ko_uuid=ko.observable("");
-
-    self.guidMaker = new GuidMaker();
-    self.guidMaker.Guid( function(guid) {
-        self.ko_uuid(guid);
-    });
+    self.ko_uuid=ko.observable("{{docId}}");
 
     self.is_uuidReady= function() {
         return  self.ko_uuid() != "";
     };
+    
+    if ( !self.is_uuidReady ){
+	self.guidMaker = new GuidMaker();
+	self.guidMaker.Guid( function(guid) {
+            self.ko_uuid(guid);
+	});
+    }
 
     self.ko_is_uuidReady= ko.computed( function() {
         return  self.ko_uuid() != "";
