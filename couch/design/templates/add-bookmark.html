@@ -182,7 +182,7 @@ function addBookmarkModel(){
     self.ko_user=ko.observable("{{bm_author}}");
     self.ko_is_private=ko.observable({{bm_is_private}});
     self.ko_date=ko.observable(now);
-    self.ko_tags_astext=ko.observable("");
+    self.ko_tags_astext=ko.observable("{{bm_tags_asText}}");
     self.ko_uuid=ko.observable("");
 
     self.guidMaker = new GuidMaker();
@@ -211,7 +211,7 @@ function addBookmarkModel(){
 	    url: self.ko_url(),
 	    description: self.ko_description(),
 	    created_at: self.ko_date(),
-	    "is_private" : self.ko_is_private(),
+	    is_private : self.ko_is_private(),
 	    author: self.ko_user(),
 	    tags: self.ko_tags(),
 	    type: "webmark"
