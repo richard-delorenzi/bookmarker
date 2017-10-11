@@ -44,7 +44,7 @@
     },
     {
 	"from" : "add",
-	"to":    "_list/add-bookmark/none",
+	"to":    "_show/add-bookmark",
 	"query": {
 	    "template": "add-bookmark",
 	    "title_part1": "Add",
@@ -52,8 +52,8 @@
 	}
     },
     {
-	"from" : "edit/*",
-	"to":    "_list/add-bookmark/none",
+	"from" : "edit/:~id",
+	"to":    "_show/add-bookmark/:~id",
 	"query": {
 	    "template": "add-bookmark",
 	    "title_part1": "Edit",
