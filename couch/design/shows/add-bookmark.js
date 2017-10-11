@@ -37,7 +37,8 @@ function (doc, req) {
 	    stash.bm_tags=doc["tags"];
 	    stash.bm_tags_asText=doc["tags"].join(" ");
 	    stash.bm_url=doc["url"];
-	    stash.bm_description=doc["description"];    
+	    stash.bm_description=doc["description"];
+	    stash.bm_rev=doc._rev;
 	}
 	return stash;
     }

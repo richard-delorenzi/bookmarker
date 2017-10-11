@@ -78,6 +78,17 @@
 	">
         </input>
       </div>
+      <div>
+	revision:
+	<input
+	  readonly="readonly",
+	  class="stretch",
+          type="text",
+	  data-bind="
+	  value: ko_revision
+	  ">
+        </textarea>
+      </div>
       
       <button data-bind="
 	enable: ko_is_uuidReady,
@@ -179,10 +190,12 @@ function addBookmarkModel(){
     self.ko_title=ko.observable(htmlDecoded("{{bm_name}}"));
     self.ko_url=ko.observable(htmlDecoded("{{bm_url}}"));
     self.ko_description=ko.observable(htmlDecoded("{{bm_description}}"));
-    self.ko_user=ko.observable("{{bm_author}}");
-    self.ko_is_private=ko.observable({{bm_is_private}});
-    self.ko_date=ko.observable(now);
     self.ko_tags_astext=ko.observable("{{bm_tags_asText}}");
+    self.ko_user=ko.observable("{{bm_author}}");
+    self.ko_date=ko.observable(now);
+    self.ko_is_private=ko.observable({{bm_is_private}});
+    self.ko_revision=ko.observable("{{bm_rev}}");
+ 
     self.ko_uuid=ko.observable("");
 
     self.guidMaker = new GuidMaker();
@@ -214,7 +227,8 @@ function addBookmarkModel(){
 	    is_private : self.ko_is_private(),
 	    author: self.ko_user(),
 	    tags: self.ko_tags(),
-	    type: "webmark"
+	    type: "webmark",
+            rev: self.ko_revision()
 	};
     };
     
