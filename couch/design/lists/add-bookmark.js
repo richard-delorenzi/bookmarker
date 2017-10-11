@@ -13,10 +13,11 @@ function (head, req) {
     const bm_description= req.query["description"];
     const template = req.query["template"];
     //const key = req.query["key"];
-    const title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
+    const page_title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
 
     function stash(){
         return {
+	    page_title:page_title,
 	    bm_title:bm_title,
 	    bm_url:bm_url,
 	    bm_description:bm_description
