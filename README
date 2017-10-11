@@ -8,3 +8,4 @@ Version-1 is now usable.
  - add tag hierarchy
  - add filters (to hide tags, and bookmarks with these tags)
  - bugfix: link to ? tag
+ - add tag suggestions
