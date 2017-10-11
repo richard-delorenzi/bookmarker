@@ -19,15 +19,20 @@ function (doc, req) {
  
 
     function stash(){
-        var stash= {
-	    bm_title: req.query["title"],
-	    bm_url: req.query["url"],
-	    bm_description:req.query["description"]
+	var stash={
+	    page_title:page_title,
+	    docId:docId
 	};
 
-	stash.page_title=page_title;
-	stash.docId=docId;
-
+	if (docId == null){
+	    stash.bm_title= req.query["title"];
+	    stash.bm_url=req.query["url"];
+	    stash.bm_description=req.query["description"];
+	}else{
+	    stash.bm_title= req.query["title"];
+	    stash.bm_url=req.query["url"];
+	    stash.bm_description=req.query["description"];
+	}
 	return stash;
     }
 
