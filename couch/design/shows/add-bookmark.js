@@ -29,6 +29,7 @@ function (doc, req) {
 	    stash.bm_url=req.query["url"];
 	    stash.bm_description=req.query["description"];
 	    stash.bm_author="ctrl_alt_delor@home";
+	    stash.bm_is_private=false;
 	}else{
 	    stash.bm_author=doc["author"];
 	    stash.bm_created_at=doc["created_at"];

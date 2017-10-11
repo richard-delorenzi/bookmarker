@@ -232,7 +232,7 @@ function addBookmarkModel(){
     },self);
     
     self.data = function() {
-        return {
+        data= {
             name: self.ko_title(),
             url: self.ko_url(),
             description: self.ko_description(),
@@ -240,9 +240,11 @@ function addBookmarkModel(){
             is_private : self.ko_is_private(),
             author: self.ko_user(),
             tags: self.ko_tags(),
-            type: "webmark",
-            _rev: self.ko_revision()
-        };
+            type: "webmark"
+	};
+    
+        data._rev= self.ko_revision() || undefined;
+	return data;
     };
     
     self.ko_json_data=ko.computed(function(){
