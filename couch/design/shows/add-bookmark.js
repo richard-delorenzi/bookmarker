@@ -8,24 +8,27 @@ function (doc, req) {
 
 //-----------------------------------------------------------------------------------------
 
-    const bm_url= req.query["url"];
-    const bm_title= req.query["title"];
-    const bm_description= req.query["description"];
-    const template = req.query["template"];
-    //const key = req.query["key"];
     const page_title = (
 	( req.query["title_part1"] || "" ) +
 	    (" ") +
 	    (req.query["title_part2"] || "" )
     );
+    const docId= (doc!=null)? doc._id : null;
+    const template = req.query["template"];
+    
+ 
 
     function stash(){
-        return {
+        stash= {
 	    page_title:page_title,
-	    bm_title:bm_title,
-	    bm_url:bm_url,
-	    bm_description:bm_description
+	    
+	    bm_title: req.query["title"],
+	    bm_url: req.query["url"],
+	    bm_description:req.query["description"],
+	    docId:docId
 	};
+
+	return stash;
     }
 
 
