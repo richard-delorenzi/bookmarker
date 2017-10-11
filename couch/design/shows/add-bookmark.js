@@ -19,14 +19,14 @@ function (doc, req) {
  
 
     function stash(){
-        stash= {
-	    page_title:page_title,
-	    
+        var stash= {
 	    bm_title: req.query["title"],
 	    bm_url: req.query["url"],
-	    bm_description:req.query["description"],
-	    docId:docId
+	    bm_description:req.query["description"]
 	};
+
+	stash.page_title=page_title;
+	stash.docId=docId;
 
 	return stash;
     }
