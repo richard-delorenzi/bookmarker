@@ -8,13 +8,16 @@
   </head>
 
   <body>     
+    <h1>{{title}}</h1>
+    
     {{#ifdef_bookmarks}}
-      <h1>{{title}}</h1>  
       <ul class="boxed">
         {{#bookmarks}}
+          
           {{#ifdef_date}}
             <h2>{{date}}</h2>
           {{/ifdef_date}}
+          
           {{#main}}
             <li>
 	      <h3>{{name}}</h3>
@@ -22,13 +25,20 @@
 	        <div>{{description}}</div>
 	      {{/ifdef_description}}
 	      <a href="{{url}}">{{url}}</a><br/>
-	      tags: <ul class="inline comma">
+	      tags:
+              <ul class="inline comma">
 	        {{#tags}}
-	          <li><a style="color:green" href="{{url}}">{{name}}</a></li>
+	        <li><a style="color:green" href="{{url}}">
+		    {{name}}
+		</a></li>
 	        {{/tags}}
 	      </ul>
+              <a href="{{edit_url}}">
+                <button>Edit</button>
+              </a>
             </li>
           {{/main}}
+          
         {{/bookmarks}}
       </ul>  
     {{/ifdef_bookmarks}}
