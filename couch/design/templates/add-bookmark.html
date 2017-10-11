@@ -8,115 +8,115 @@
     <h1>{{page_title}}</h1>
     <form class="flex">
       <div>
-	Title:
-	<input
-	class="stretch",
-	type="text",
-	data-bind="
-	value: ko_title
-	">
+        Title:
+        <input
+        class="stretch",
+        type="text",
+        data-bind="
+        value: ko_title
+        ">
         </input>
       </div>
       <div>
-	url:
-	<input
-	class="stretch",
-	type="text",
-	data-bind="
-	value: ko_url
-	">
+        url:
+        <input
+        class="stretch",
+        type="text",
+        data-bind="
+        value: ko_url
+        ">
         </input>
       </div>
       <div>
-	description:
-	<input
-	class="stretch",
-	type="text",
-	data-bind="
-	value: ko_description
-	">
+        description:
+        <input
+        class="stretch",
+        type="text",
+        data-bind="
+        value: ko_description
+        ">
         </input>
       </div>
       <div>
-	Tags:
-	<input
-	class="stretch",
-	type="text",
-	data-bind="
-	value: ko_tags_astext
-	">
+        Tags:
+        <input
+        class="stretch",
+        type="text",
+        data-bind="
+        value: ko_tags_astext
+        ">
         </input>
       </div>
       <div>
-	user:
-	<input
-	readonly="readonly",
-	class="stretch",
-	type="text",
-	data-bind="
-	value: ko_user
-	">
+        user:
+        <input
+        readonly="readonly",
+        class="stretch",
+        type="text",
+        data-bind="
+        value: ko_user
+        ">
         </input>
       </div>
       <div>
-	date:
-	<input
-	readonly="readonly",
-	class="stretch",
-	type="text",
-	data-bind="
-	value: ko_date
-	">
+        date:
+        <input
+        readonly="readonly",
+        class="stretch",
+        type="text",
+        data-bind="
+        value: ko_date
+        ">
         </input>
       </div>
       <div>
-	private:
-	<input
-	type="checkbox",
-	data-bind="
-	checked: ko_is_private
-	">
+        private:
+        <input
+        type="checkbox",
+        data-bind="
+        checked: ko_is_private
+        ">
         </input>
       </div>
       <div>
-	id:
-	<input
-	  readonly="readonly",
-	  class="stretch",
+        id:
+        <input
+          readonly="readonly",
+          class="stretch",
           type="text",
-	  data-bind="
-	  value: ko_uuid
-	  ">
+          data-bind="
+          value: ko_uuid
+          ">
         </textarea>
       </div>
       <div>
-	revision:
-	<input
-	  readonly="readonly",
-	  class="stretch",
+        revision:
+        <input
+          readonly="readonly",
+          class="stretch",
           type="text",
-	  data-bind="
-	  value: ko_revision
-	  ">
+          data-bind="
+          value: ko_revision
+          ">
         </textarea>
       </div>
       
       <button data-bind="
-	enable: ko_is_uuidReady,
-	click: save
-	">
-	save
+        enable: ko_is_uuidReady,
+        click: save
+        ">
+        save
       </button>
 
       <div>
-	json data:
-	<textarea
-	  rows="12",
-	  readonly="readonly",
-	  class="stretch",
-	  data-bind="
-	  value: ko_json_data
-	  ">
+        json data:
+        <textarea
+          rows="12",
+          readonly="readonly",
+          class="stretch",
+          data-bind="
+          value: ko_json_data
+          ">
         </textarea>
       </div>
       
@@ -213,11 +213,11 @@ function addBookmarkModel(){
         return  self.ko_uuid() != "";
     };
     
-    if ( !self.is_uuidReady ){
-	self.guidMaker = new GuidMaker();
-	self.guidMaker.Guid( function(guid) {
+    if ( !self.is_uuidReady() ){
+        self.guidMaker = new GuidMaker();
+        self.guidMaker.Guid( function(guid) {
             self.ko_uuid(guid);
-	});
+        });
     }
 
     self.ko_is_uuidReady= ko.computed( function() {
@@ -225,48 +225,52 @@ function addBookmarkModel(){
     },self);
     
     self.ko_tags=ko.computed(function(){
-	const input=self.ko_tags_astext();
-	return input==""?
-	    []:
-	    input.split(" ");
+        const input=self.ko_tags_astext();
+        return input==""?
+            []:
+            input.split(" ");
     },self);
     
     self.data = function() {
-	return {
-	    name: self.ko_title(),
-	    url: self.ko_url(),
-	    description: self.ko_description(),
-	    created_at: self.ko_date(),
-	    is_private : self.ko_is_private(),
-	    author: self.ko_user(),
-	    tags: self.ko_tags(),
-	    type: "webmark",
+        return {
+            name: self.ko_title(),
+            url: self.ko_url(),
+            description: self.ko_description(),
+            created_at: self.ko_date(),
+            is_private : self.ko_is_private(),
+            author: self.ko_user(),
+            tags: self.ko_tags(),
+            type: "webmark",
             _rev: self.ko_revision()
-	};
+        };
     };
     
     self.ko_json_data=ko.computed(function(){
-	return JSON.stringify(self.data(),null,4);
+        const data={
+            id:self.ko_uuid(),
+            data:self.data()
+        };
+        return JSON.stringify(data,null,4);
     },self);
     
     self.json_data = function() {
-	return JSON.stringify(self.data());
+        return JSON.stringify(self.data());
     };
     
     self.save= function() {
-	if (self.is_uuidReady()){
-	    $.ajax({
-		url: "http://bookmarkdb/db/"+self.ko_uuid(),
-		type: "PUT",
-		data: self.json_data(),
-		success: function(responce){
-		    $("body form")
-			.replaceWith(
-			    "<h2>All Done</h2>"
-			);
-		}
-	    });
-	}
+        if (self.is_uuidReady()){
+            $.ajax({
+                url: "http://bookmarkdb/db/"+self.ko_uuid(),
+                type: "PUT",
+                data: self.json_data(),
+                success: function(responce){
+                    $("body form")
+                        .replaceWith(
+                            "<h2>All Done</h2>"
+                        );
+                }
+            });
+        }
     };
 }
 
