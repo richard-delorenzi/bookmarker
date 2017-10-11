@@ -176,11 +176,11 @@ function addBookmarkModel(){
     const self=this;
     const now=new Date().toJSON();
 
-    self.ko_title=ko.observable(htmlDecoded("{{bm_title}}"));
+    self.ko_title=ko.observable(htmlDecoded("{{bm_name}}"));
     self.ko_url=ko.observable(htmlDecoded("{{bm_url}}"));
     self.ko_description=ko.observable(htmlDecoded("{{bm_description}}"));
-    self.ko_user=ko.observable("ctrl_alt_delor@home");
-    self.ko_is_private=ko.observable(false);
+    self.ko_user=ko.observable("{{bm_author}}");
+    self.ko_is_private=ko.observable({{bm_is_private}});
     self.ko_date=ko.observable(now);
     self.ko_tags_astext=ko.observable("");
     self.ko_uuid=ko.observable("");

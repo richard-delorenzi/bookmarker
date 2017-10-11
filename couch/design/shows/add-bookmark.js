@@ -25,13 +25,17 @@ function (doc, req) {
 	};
 
 	if (docId == null){
-	    stash.bm_title= req.query["title"];
+	    stash.bm_name= req.query["title"];
 	    stash.bm_url=req.query["url"];
 	    stash.bm_description=req.query["description"];
 	}else{
-	    stash.bm_title= req.query["title"];
-	    stash.bm_url=req.query["url"];
-	    stash.bm_description=req.query["description"];
+	    stash.bm_author=doc["author"];
+	    stash.bm_created_at=doc["created_at"];
+	    stash.bm_is_private=doc["is_private"];
+	    stash.bm_name= doc["name"];
+	    stash.bm_tags=doc["tags"];
+	    stash.bm_url=doc["url"];
+	    stash.bm_description=doc["description"];    
 	}
 	return stash;
     }
