@@ -16,7 +16,20 @@ function (doc, req) {
     const docId= (doc!=null)? doc._id : null;
     const template = req.query["template"];
     
- 
+    function trailingAndLeadingWhitespaceStriped(obj){
+	if (false){
+	    //doh: can't import
+	    return $.map( obj, function (value, index){
+		if ($.type(obj) === "string"){
+		    return value.trim();
+		}else{
+		    return obj;
+		}	
+	    });
+	}else{
+	    return obj;
+	}
+    }
 
     function stash(){
 	var stash={
@@ -41,7 +54,7 @@ function (doc, req) {
 	    stash.bm_description=doc["description"];
 	    stash.bm_rev=doc._rev;
 	}
-	return stash;
+	return trailingAndLeadingWhitespaceStriped(stash);
     }
 
 
