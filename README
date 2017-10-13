@@ -1,11 +1,13 @@
 Version-1 is now usable.
 
 #TODO
- - ✓ bookmarklet should open a popup/other-tab
- - ✓ make tags case insensative
- - ✓ make it so I can edit existing bookmark
- - make it detect when adding an already existing bookmark
- - add tag hierarchy
- - add filters (to hide tags, and bookmarks with these tags)
- - bugfix: link to ? tag
- - add tag suggestions
+  - ✓ bookmarklet should open a popup/other-tab
+  - ✓ make tags case insensative
+  - ✓ make it so I can edit existing bookmark
+  - make it detect when adding an already existing bookmark
+  - add tag hierarchy
+  - bugfix: link to ? tag
+  - add tag suggestions
+  - add filters (to hide tags, and bookmarks with these tags)
+    - obsolete tag: hides bookmark, does not count tags.
+    - obsolete tags list: causes tags to not appear in tag cloud (implementation note: emit tag with count of -∞, then don't display any tag with count ≤ 0.
