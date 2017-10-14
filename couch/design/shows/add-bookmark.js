@@ -16,19 +16,27 @@ function (doc, req) {
     const docId= (doc!=null)? doc._id : null;
     const template = req.query["template"];
     
-    function trailingAndLeadingWhitespaceStriped(obj){
-	if (false){
-	    //doh: can't import
-	    return $.map( obj, function (value, index){
-		if ($.type(obj) === "string"){
-		    return value.trim();
-		}else{
-		    return obj;
-		}	
+    function is_string(m) {
+	return (typeof m === 'string' || m instanceof String);
+    }
+
+    function trailingAndLeadingWhitespaceStriped(input){
+	const a = Object.keys(input).map(function(key) {
+	    const data = input[key];
+	    const out_data = is_string(data)?data.trim():data;
+	    
+	    return [key, out_data];
+	});
+	
+	const output = function() {
+	    var o = {}
+	    a.forEach(function(data){
+		o[data[0]] = data[1]
 	    });
-	}else{
-	    return obj;
-	}
+	    return o;
+	}();
+	
+	return output;
     }
 
     function stash(){
