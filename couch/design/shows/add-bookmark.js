@@ -31,7 +31,7 @@ function (doc, req) {
 	const output = function() {
 	    var o = {}
 	    a.forEach(function(data){
-		o[data[0]] = data[1]
+		o[data[0]] = data[1];
 	    });
 	    return o;
 	}();
