@@ -31,13 +31,12 @@
 	    "include_docs": "true"
         }
     },
-    { 
-	"from" : "i",
-	"to" : "_list/mustache-only/none",
+    {
+	"from": "_layout",
+        "to": "_list/mustache-only/none",
 	"query": {
-	    "template":"layout",
-	    "main_url":"index"
-	}
+	    "template": "layout"
+	}	
     },
     { 
 	"from" : "index",
@@ -52,6 +51,15 @@
     },
     {
 	"from" : "add",
+	"to":    "_rewrite/_layout",
+	"query": {
+	    "main_url":"_add",
+	    "title_part1": "Add",
+	    "title_part2": "bookmark"
+	}
+    },
+    {
+	"from" : "_add",
 	"to":    "_show/add-bookmark",
 	"query": {
 	    "template": "add-bookmark",
@@ -70,9 +78,8 @@
     },
     {
 	"from": "bookmarks",
-        "to": "_list/mustache-only/none",
+        "to": "_rewrite/_layout",
 	"query": {
-	    "template": "layout",
 	    "main_url":"_bookmarks",
 	    "title_part1": "All",
 	    "title_part2": "bookmarks"
