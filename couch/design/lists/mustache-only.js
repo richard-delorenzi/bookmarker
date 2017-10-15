@@ -10,9 +10,13 @@ function (head, req) {
 
     const template = req.query["template"];
     const title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
+    const main_url= req.query["main_url"];
 
     function stash(){
-        return {title:title};
+        return {
+	    title:title,
+	    main_url:main_url
+	};
     }
 
 

@@ -32,6 +32,14 @@
         }
     },
     { 
+	"from" : "i",
+	"to" : "_list/mustache-only/none",
+	"query": {
+	    "template":"layout",
+	    "main_url":"index"
+	}
+    },
+    { 
 	"from" : "index",
 	"to" : "_list/mustache-only/none",
 	"query": {
