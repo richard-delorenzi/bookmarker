@@ -70,6 +70,16 @@
     },
     {
 	"from": "bookmarks",
+        "to": "_list/mustache-only/none",
+	"query": {
+	    "template": "layout",
+	    "main_url":"_bookmarks",
+	    "title_part1": "All",
+	    "title_part2": "bookmarks"
+	}	
+    },
+        {
+	"from": "_bookmarks",
         "to": "_list/bookmarks/webmarks-by-date",
 	"query": {
 	    "template": "bookmarks",

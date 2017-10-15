@@ -40,8 +40,8 @@ main {
 
 .box {
   border-radius: 5px;
-  padding: 10px;
-  font-size: 150%;
+  z-padding: 10px;
+  z-font-size: 150%;
 }
 
 header, footer {

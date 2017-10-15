@@ -2,18 +2,25 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
+    <title>{{title}}</title>
   </head>
+  
   <body class="wrapper">
-    <header class="box">Header — this is a header</header>
+
+    <header class="box">
+      <h1>{{title}}</h1>
+    </header>
     
     <main>
       <iframe src="{{main_url}}">
 	What no iframes.
       </iframe>
-      </main>
+    </main>
+    
     <nav class="box">
-      Menubar — This is a menu bar
+      {{>menu}}
     </nav>
+
     <aside class="box">Sidebar  — this is a sidebar</aside>
     
     <footer class="box">Footer — this is the footer</footer>
