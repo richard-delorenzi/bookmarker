@@ -85,7 +85,7 @@
 	    "title_part2": "bookmarks"
 	}	
     },
-        {
+    {
 	"from": "_bookmarks",
         "to": "_list/bookmarks/webmarks-by-date",
 	"query": {
@@ -110,7 +110,16 @@
 	}	
     },
     {
-	"from": "tags",
+	"from" : "tags",
+	"to":    "_rewrite/_layout",
+	"query": {
+	    "main_url":"_tags",
+	    "title_part1": "all",
+	    "title_part2": "tags"
+	}
+    },
+    {
+	"from": "_tags",
         "to": "_list/tags/webmarks-by-tag",
 	"query": {
 	    "template": "tags",
@@ -119,7 +128,6 @@
 	    "title_part2": "tags"
 	}	
     },
-    
     {
 	"from": "db/*",
 	"to": "../../*"

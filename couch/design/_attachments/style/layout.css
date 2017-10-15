@@ -9,9 +9,10 @@ header   {grid-area: header;}
 footer   {grid-area: footer;}
 
 /*use exactly 100% of screen*/
-html, body, .wrapper, main{
+html, body, .wrapper, main, iframe{
     margin: 0;
     padding: 0;
+    border: 0;
 }
 .wrapper {
     height: 100vh;
@@ -21,13 +22,13 @@ html, body, .wrapper, main{
 /*Define the grid*/
 .wrapper {
     display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 120px auto 120px;
-    grid-template-rows: min-content auto min-content;
+    grid-gap: 5px;
+    grid-template-columns: 120px auto;
+    grid-template-rows: min-content auto;
+    
     grid-template-areas:
-        "header  header header"
-	"sidebar content sidebar2"
-	"sidebar footer footer";
+        "header  header"
+	"sidebar content";
 }
 
 /*Main keep out of the way. Use grid as it behaves well*/
@@ -40,14 +41,41 @@ main {
 
 .box {
   border-radius: 5px;
-  z-padding: 10px;
-  z-font-size: 150%;
+  padding: 0px;
 }
 
 header, footer {
   background-color: #999;
 }
 
-nav, aside {
-  background-color: #ccc;
+aside {
+  background-color: #eee;
+}
+
+/*style nav bar*/
+nav ul {
+    list-style-type: none;
+    padding-top: 0;
+    font-family: serif;
+}
+
+nav ul > li {
+    margin-top: 0.5em;
+    border-radius: 5px;
+    border: 1px;
+    background-color: #ccc;
+}
+
+nav ul > li:first-child{
+   margin-top: 0;
+}
+
+nav ul > li{
+   padding: 0.1em;
+}
+
+nav ul,
+nav {
+    padding: 0;
+    margin:0;
 }
