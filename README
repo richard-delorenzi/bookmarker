@@ -8,7 +8,7 @@
   - add filters (to hide tags, and bookmarks with these tags)
     - obsolete tag: hides bookmark, does not count tags.
     - obsolete tags list: causes tags to not appear in tag cloud (implementation note: emit tag with count of -∞, then don't display any tag with count ≤ 0.
-  - add menus to all pages
+  - ✓ add menus to all pages
 
 #Bugfix
   - bugfix: link to ? tag
