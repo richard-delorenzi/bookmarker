@@ -114,8 +114,9 @@
       <div>
         json data:
         <textarea
+	  onfocus="auto_grow(this)",
           rows="12",
-          readonly="readonly",
+          zreadonly="readonly",
           class="stretch",
           data-bind="
 	  value: ko_json_data
@@ -200,6 +201,11 @@ GuidMaker.prototype.Guid= function(callback){
         }
     );
 };
+
+function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+}
 
 function addBookmarkModel(){
     const self=this;

@@ -79,3 +79,8 @@ nav {
     padding: 0;
     margin:0;
 }
+
+textarea {
+    overflow: hidden;
+    min-height: 50px;
+}
