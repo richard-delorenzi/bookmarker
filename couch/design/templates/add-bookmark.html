@@ -203,8 +203,10 @@ GuidMaker.prototype.Guid= function(callback){
 };
 
 function auto_grow(element) {
+    const eh = element.clientHeight;
     element.style.height = "5px";
-    element.style.height = (element.scrollHeight)+"px";
+    const sh= element.scrollHeight;
+    element.style.height = Math.max(eh,sh)+"px";
 }
 
 function addBookmarkModel(){
