@@ -2,10 +2,13 @@
   <head>
     <meta charset="utf-8"> 
     <title>{{page_title}}</title>
-    {{>scripts}}
+    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
   </head>
-  <body>   
-    <h1>{{page_title}}</h1>
+  <body class="wrapper">
+    <header class="box">
+      <h1>{{page_title}}</h1>
+    </header>
+    <main class="box">
     <form class="flex">
       <div>
         Title:
@@ -13,8 +16,8 @@
         class="stretch",
         type="text",
         data-bind="
-        value: ko_title
-        ">
+	value: ko_title
+	">
         </input>
       </div>
       <div>
@@ -23,8 +26,8 @@
         class="stretch",
         type="text",
         data-bind="
-        value: ko_url
-        ">
+	value: ko_url
+	">
         </input>
       </div>
       <div>
@@ -33,8 +36,8 @@
         class="stretch",
         type="text",
         data-bind="
-        value: ko_description
-        ">
+	value: ko_description
+	">
         </input>
       </div>
       <div>
@@ -43,8 +46,8 @@
         class="stretch",
         type="text",
         data-bind="
-        value: ko_tags_astext
-        ">
+	value: ko_tags_astext
+	">
         </input>
       </div>
       <div>
@@ -54,8 +57,8 @@
         class="stretch",
         type="text",
         data-bind="
-        value: ko_user
-        ">
+	value: ko_user
+	">
         </input>
       </div>
       <div>
@@ -65,8 +68,8 @@
         class="stretch",
         type="text",
         data-bind="
-        value: ko_date
-        ">
+	value: ko_date
+	">
         </input>
       </div>
       <div>
@@ -74,37 +77,37 @@
         <input
         type="checkbox",
         data-bind="
-        checked: ko_is_private
-        ">
+	checked: ko_is_private
+	">
         </input>
       </div>
       <div>
         id:
         <input
-          readonly="readonly",
-          class="stretch",
-          type="text",
-          data-bind="
-          value: ko_uuid
-          ">
+        readonly="readonly",
+        class="stretch",
+        type="text",
+        data-bind="
+	value: ko_uuid
+	">
         </textarea>
       </div>
       <div>
         revision:
         <input
-          readonly="readonly",
-          class="stretch",
-          type="text",
-          data-bind="
-          value: ko_revision
-          ">
+        readonly="readonly",
+        class="stretch",
+        type="text",
+        data-bind="
+	value: ko_revision
+	">
         </textarea>
       </div>
-      
+
       <button data-bind="
-        enable: ko_is_uuidReady,
-        click: save
-        ">
+	enable: ko_is_uuidReady,
+	click: save
+	">
         save
       </button>
 
@@ -115,14 +118,18 @@
           readonly="readonly",
           class="stretch",
           data-bind="
-          value: ko_json_data
-          ">
+	  value: ko_json_data
+	  ">
         </textarea>
       </div>
-      
+
     </form>
-    
+    </main>
+    <nav class="box">
+      {{>menu}}
+    </nav>
   </body>
+  {{>scripts}}
   <script>
 
 /*This function is not the best it could be*/
@@ -279,5 +286,4 @@ function addBookmarkModel(){
 ko.applyBindings(new addBookmarkModel());
 
   </script>
-  {{<types-ko-templates}}
 </html>

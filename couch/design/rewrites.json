@@ -50,7 +50,7 @@
 	"to"   : "_rewrite/index" 
     },
     {
-	"from" : "add",
+	"from" : "+add",
 	"to":    "_rewrite/_layout",
 	"query": {
 	    "main_url":"_add",
@@ -59,7 +59,7 @@
 	}
     },
     {
-	"from" : "_add",
+	"from" : "add",
 	"to":    "_show/add-bookmark",
 	"query": {
 	    "template": "add-bookmark",
