@@ -143,13 +143,37 @@
 	}
     },
     {
-	"from": "_tags",
+	"from" : "top-tags",
+	"to":    "_rewrite/_layout",
+	"query": {
+	    "main_url":"_top-tags",
+	    "title_part1": "Top",
+	    "title_part2": "tags"
+	}
+    },
+    {
+	"from": "_tags_base",
         "to": "_list/tags/webmarks-by-tag",
 	"query": {
 	    "template": "tags",
-	    "group" : "true",
+	    "group" : "true"
+	}	
+    },
+    {
+	"from": "_tags",
+        "to": "_rewrite/_tags_base",
+	"query": {
 	    "title_part1": "all",
 	    "title_part2": "tags"
+	}	
+    },
+    {
+	"from": "_top-tags",
+        "to": "_rewrite/_tags_base",
+	"query": {
+	    "title_part1": "top",
+	    "title_part2": "tags",
+	    "limit": "400"
 	}	
     },
     {
