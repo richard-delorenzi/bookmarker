@@ -86,15 +86,39 @@
 	}	
     },
     {
-	"from": "_bookmarks",
+	"from": "latest-bookmarks",
+        "to": "_rewrite/_layout",
+	"query": {
+	    "main_url":"_latest-bookmarks",
+	    "title_part1": "Top",
+	    "title_part2": "bookmarks"
+	}	
+    },
+    {
+	"from": "_bookmarks_base",
         "to": "_list/bookmarks/webmarks-by-date",
 	"query": {
 	    "template": "bookmarks",
 	    "reduce": "false",
-	    "title_part1": "All",
-	    "title_part2": "bookmarks",
 	    "include_docs": "true",
 	    "descending" : "true"
+	}	
+    },
+    {
+	"from": "_bookmarks",
+        "to": "_rewrite/_bookmarks_base",
+	"query": {
+	    "title_part1": "All",
+	    "title_part2": "bookmarks"
+	}	
+    },
+    {
+	"from": "_latest-bookmarks",
+        "to": "_rewrite/_bookmarks_base",
+	"query": {
+	    "title_part1": "Latest",
+	    "title_part2": "bookmarks",
+	    "limit": "100"
 	}	
     },
     {
