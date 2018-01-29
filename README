@@ -14,3 +14,4 @@
   - bugfix: link to ? tag
   - ✓ sometags have trailing space or \n, strip whitespace.
   - add page broken: I think caused by framing.
+  - can not bookmark github (bookmarklet does nothing)
