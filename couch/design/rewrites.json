@@ -125,6 +125,8 @@
 	"from": "_bookmarks_by_url",
         "to": "_list/bookmarks/webmarks-by-url",
 	"query": {
+	    "title_part1": "Bookmarks",
+	    "title_part2": "by url",
 	    "template": "bookmarks",
 	    "reduce": "false",
 	    "include_docs": "true",
