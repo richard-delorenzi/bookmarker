@@ -122,6 +122,16 @@
 	}	
     },
     {
+	"from": "_bookmarks_by_url",
+        "to": "_list/bookmarks/webmarks-by-url",
+	"query": {
+	    "template": "bookmarks",
+	    "reduce": "false",
+	    "include_docs": "true",
+	    "descending" : "false"
+	}	
+    },
+    {
 	"from": "tag/:~tagname",
         "to": "_list/bookmarks/webmarks-by-tag",
 	"query": {
