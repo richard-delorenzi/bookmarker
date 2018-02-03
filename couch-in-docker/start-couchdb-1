@@ -10,7 +10,7 @@ function start-couchdb {
 	    -v "${data_on_host}":"${data_in_docker}" \
 	    -v "${config_on_host}":"${config_in_docker}" \
 	    -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password \
-	    couchdb 
+	    couchdb:1
 }
 
 start-couchdb
