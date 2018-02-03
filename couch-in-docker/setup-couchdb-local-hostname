@@ -2,9 +2,9 @@
 
 #add mycouchdb as alias of localhost
 augtool -b '
-  set /files/etc/hosts/01/ipaddr 127.0.0.2
-  set /files/etc/hosts/*[ipaddr="127.0.0.2"]/canonical[.="mycouchdb"] mycouchdb
-  set /files/etc/hosts/*[ipaddr="127.0.0.2"]/alias[.="bookmarkdb"] bookmarkdb
+  set /files/etc/hosts/01/ipaddr 127.0.0.3
+  set /files/etc/hosts/*[ipaddr="127.0.0.3"]/canonical[.="mycouchdb"] mycouchdb
+  set /files/etc/hosts/*[ipaddr="127.0.0.3"]/alias[.="bookmarkdb"] bookmarkdb
   save
 '
 
