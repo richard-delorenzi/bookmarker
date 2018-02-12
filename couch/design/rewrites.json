@@ -77,24 +77,6 @@
 	}
     },
     {
-	"from": "bookmarks",
-        "to": "_rewrite/_layout",
-	"query": {
-	    "main_url":"_bookmarks",
-	    "title_part1": "All",
-	    "title_part2": "bookmarks"
-	}	
-    },
-    {
-	"from": "latest-bookmarks",
-        "to": "_rewrite/_layout",
-	"query": {
-	    "main_url":"_latest-bookmarks",
-	    "title_part1": "Top",
-	    "title_part2": "bookmarks"
-	}	
-    },
-    {
 	"from": "_bookmarks_base",
         "to": "_list/bookmarks/webmarks-by-date",
 	"query": {
@@ -105,7 +87,7 @@
 	}	
     },
     {
-	"from": "_bookmarks",
+	"from": "bookmarks",
         "to": "_rewrite/_bookmarks_base",
 	"query": {
 	    "title_part1": "All",
@@ -113,7 +95,7 @@
 	}	
     },
     {
-	"from": "_latest-bookmarks",
+	"from": "latest-bookmarks",
         "to": "_rewrite/_bookmarks_base",
 	"query": {
 	    "title_part1": "Latest",
@@ -146,24 +128,6 @@
 	}	
     },
     {
-	"from" : "tags",
-	"to":    "_rewrite/_layout",
-	"query": {
-	    "main_url":"_tags",
-	    "title_part1": "all",
-	    "title_part2": "tags"
-	}
-    },
-    {
-	"from" : "top-tags",
-	"to":    "_rewrite/_layout",
-	"query": {
-	    "main_url":"_top-tags",
-	    "title_part1": "Top",
-	    "title_part2": "tags"
-	}
-    },
-    {
 	"from": "_tags_base",
         "to": "_list/tags/webmarks-by-tag",
 	"query": {
@@ -172,7 +136,7 @@
 	}	
     },
     {
-	"from": "_tags",
+	"from": "tags",
         "to": "_rewrite/_tags_base",
 	"query": {
 	    "title_part1": "all",
@@ -180,7 +144,7 @@
 	}	
     },
     {
-	"from": "_top-tags",
+	"from": "top-tags",
         "to": "_rewrite/_tags_base",
 	"query": {
 	    "title_part1": "top",
