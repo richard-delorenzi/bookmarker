@@ -3,12 +3,16 @@
   <head>
     <meta charset="utf-8"> 
     <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
     <link rel="stylesheet" type="text/css" href="/style/site.css"/>
   </head>
 
-  <body>     
-    <h1>{{title}}</h1>
-    
+  <body class="wrapper">
+    <header class="box">
+      <h1>{{title}}</h1>
+    </header>
+
+    <main class="box">
     {{#ifdef_bookmarks}}
       <ul class="boxed">
         {{#bookmarks}}
@@ -41,6 +45,9 @@
         {{/bookmarks}}
       </ul>  
     {{/ifdef_bookmarks}}
-    
+    </main>
+    <nav class="box">
+      {{>menu}}
+    </nav>
   </body> 
 </html>
