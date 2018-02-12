@@ -3,21 +3,29 @@
   <head>
     <meta charset="utf-8"> 
     <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
     <link rel="stylesheet" type="text/css" href="/style/site.css"/>
   </head>
 
-  <body>     
+  <body class="wrapper">     
     {{#ifdef_tags}}
-    <h1>{{title}}</h1>  
-    <ul class="inline comma">
-      {{#tags}}
-      <li>
-	<a style="font-size: {{fontSize}}" href="{{url}}">{{name}}</a>
-      </li>
-      {{/tags}}
-    </ul>  
-    {{/ifdef_tags}}
-    
+    <header class="box">
+      <h1>{{title}}</h1>
+    </header>
+
+    <main class="box">
+      <ul class="inline comma">
+	{{#tags}}
+	<li>
+	  <a style="font-size: {{fontSize}}" href="{{url}}">{{name}}</a>
+	</li>
+	{{/tags}}
+      </ul>  
+      {{/ifdef_tags}}
+    </main>
+    <nav class="box">
+      {{>menu}}
+    </nav>
   </body> 
 
 </html>
