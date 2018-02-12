@@ -50,15 +50,6 @@
 	"to"   : "_rewrite/index" 
     },
     {
-	"from" : "+add",
-	"to":    "_rewrite/_layout",
-	"query": {
-	    "main_url":"_add",
-	    "title_part1": "Add",
-	    "title_part2": "bookmark"
-	}
-    },
-    {
 	"from" : "add",
 	"to":    "_show/add-bookmark",
 	"query": {
