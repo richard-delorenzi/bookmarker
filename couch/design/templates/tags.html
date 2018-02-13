@@ -1,17 +1,12 @@
 <!DOCTYPE HTML >
 <html>
   <head>
-    <meta charset="utf-8"> 
-    <title>{{title}}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
-    <link rel="stylesheet" type="text/css" href="/style/site.css"/>
+    {{>head}}
   </head>
 
   <body class="wrapper">     
     {{#ifdef_tags}}
-    <header class="box">
-      <h1>{{title}}</h1>
-    </header>
+    {{>header}}
 
     <main class="box">
       <ul class="inline comma">
@@ -23,9 +18,7 @@
       </ul>  
       {{/ifdef_tags}}
     </main>
-    <nav class="box">
-      {{>menu}}
-    </nav>
+    {{>nav}}
   </body> 
 
 </html>
