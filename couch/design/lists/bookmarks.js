@@ -17,12 +17,15 @@ function (head, req) {
 	var bookmark_stash=[];
 	var tag_stash=[];
 
+	function tagToUrl(tag){
+	    return "/tag/" + tag.toLowerCase();
+	}
 	function processedTags(tags){
 	    var out=[];
 	    tags.forEach( function (tag) {
 		out.push({
 		    name: tag,
-		    url: "/tag/" + tag.toLowerCase()
+		    url: tagToUrl(tag)
 		});
 	    });
 	    return out;
@@ -33,6 +36,8 @@ function (head, req) {
 	function addTag(tag){
 	    if (!ArrayHas(tag_stash,tag)){
 		tag_stash.push(tag);
+	    }else{
+
 	    }
 	}
 	function addTags(tags){
