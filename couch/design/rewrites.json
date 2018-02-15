@@ -111,9 +111,10 @@
         "to": "_list/bookmarks/webmarks-by-tag",
 	"query": {
 	    "template": "bookmarks",
-	    "reduce": "false",
 	    "title_part1": ":~tagname",
 	    "title_part2": "tags",
+	    "mode": "tags",
+	    "reduce": "false",
 	    "startkey": [":~tagname",{}],
 	    "endkey": [":~tagname"],
 	    "include_docs": "true",

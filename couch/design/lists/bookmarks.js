@@ -15,6 +15,7 @@ function (head, req) {
 
     function stash(){
 	var bookmark_stash=[];
+	var tag_stash=["a","test"];
 
 	function processedTags(tags){
 	    var out=[];
@@ -59,7 +60,12 @@ function (head, req) {
         }
 	
         mainLoop();
-        return {bookmarks:bookmark_stash, title:title};
+
+
+        return {
+	    title:title,
+	    bookmarks:bookmark_stash
+	};
     }
 
 
