@@ -126,7 +126,7 @@
         "to": "_list/tags/webmarks-by-tag",
 	"query": {
 	    "template": "tags",
-	    "group" : "true"
+	    "group_level" : "1"
 	}	
     },
     {
