@@ -27,18 +27,23 @@ function (head, req) {
 	    });
 	    return out;
 	}
+	function addTags(tags){
+	}
 
 	var prevDate=null;
         function row_info(row){
 	    const date = row.doc.created_at.split("T")[0];
 	    const date_stash = {date: date};
 	    const edit_url= "/edit/"+row.id;
+	    const tags=row.doc.tags;
+
+	    addTags(tags);
 
 	    const main_stash ={
 		main:{
 		    url : row.doc.url,
 		    name: row.doc.name,
-		    tags: processedTags(row.doc.tags),
+		    tags: processedTags(tags),
 		    description: row.doc.description,
 		    edit_url: edit_url
 		}
@@ -61,7 +66,12 @@ function (head, req) {
 	
         mainLoop();
 
-	const related_tags=processedTags(tag_stash);
+	//const tag_stash=Array.from(tag_set);
+	const related_tags= (
+	    tag_stash.length == 0?
+		undefined:
+		processedTags(tag_stash)
+	);
         return {
 	    title:title,
 	    bookmarks:bookmark_stash,
