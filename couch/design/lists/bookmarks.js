@@ -11,9 +11,10 @@ function (head, req) {
     const template = req.query["template"];
     const key = req.query["key"];
     const title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
+    const is_tag_mode= (req.query["mode"]=="tags");
 
     function stash(){
-	var the_stash=[];
+	var bookmark_stash=[];
 
 	function processedTags(tags){
 	    var out=[];
@@ -53,12 +54,12 @@ function (head, req) {
 	function mainLoop(){
 	    var row;
             while (row = getRow() ) {
-                 the_stash = the_stash.concat(row_info(row));
+                 bookmark_stash = bookmark_stash.concat(row_info(row));
             }
         }
 	
         mainLoop();
-        return {bookmarks:the_stash, title:title};
+        return {bookmarks:bookmark_stash, title:title};
     }
 
 
