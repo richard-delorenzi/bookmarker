@@ -15,7 +15,7 @@ function (head, req) {
 
     function stash(){
 	var bookmark_stash=[];
-	var tag_stash=["a","test"];
+	var tag_stash=[];
 
 	function processedTags(tags){
 	    var out=[];
@@ -27,7 +27,18 @@ function (head, req) {
 	    });
 	    return out;
 	}
+	function ArrayHas(array,item){
+	    return array.indexOf(item) > -1;
+	}
+	function addTag(tag){
+	    if (!ArrayHas(tag_stash,tag)){
+		tag_stash.push(tag);
+	    }
+	}
 	function addTags(tags){
+	    tags.forEach( function (tag) {
+		addTag(tag);
+	    });
 	}
 
 	var prevDate=null;
@@ -66,7 +77,6 @@ function (head, req) {
 	
         mainLoop();
 
-	//const tag_stash=Array.from(tag_set);
 	const related_tags= (
 	    tag_stash.length == 0?
 		undefined:
