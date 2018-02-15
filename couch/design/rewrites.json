@@ -114,8 +114,10 @@
 	    "reduce": "false",
 	    "title_part1": ":~tagname",
 	    "title_part2": "tags",
-	    "key": [":~tagname"],
-	    "include_docs": "true"
+	    "startkey": [":~tagname",{}],
+	    "endkey": [":~tagname"],
+	    "include_docs": "true",
+	    "descending" : "true"
 	}	
     },
     {
