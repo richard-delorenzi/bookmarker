@@ -61,10 +61,11 @@ function (head, req) {
 	
         mainLoop();
 
-
+	const related_tags=processedTags(tag_stash);
         return {
 	    title:title,
-	    bookmarks:bookmark_stash
+	    bookmarks:bookmark_stash,
+	    related_tags:related_tags
 	};
     }
 
