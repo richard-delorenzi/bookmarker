@@ -51,11 +51,13 @@ function (head, req) {
 		// check if the property/key is defined in the object itself, not in parent
 		if (tags.hasOwnProperty(key)) {
 		    const entry={
-			
-		    };	
+			name: key,
+			url: tagToUrl(key)
+		    };
+		    result.push(entry);
 		}
 	    }
-	    return tags;
+	    return result;
 	}
 
 	var prevDate=null;
@@ -69,8 +71,8 @@ function (head, req) {
 
 	    const main_stash ={
 		main:{
-		    url : row.doc.url,
 		    name: row.doc.name,
+		    url : row.doc.url,
 		    tags: linkedTagsFromNames(tags),
 		    description: row.doc.description,
 		    edit_url: edit_url
