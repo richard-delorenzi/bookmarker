@@ -52,7 +52,8 @@ function (head, req) {
 		if (tags.hasOwnProperty(key)) {
 		    const entry={
 			name: key,
-			url: tagToUrl(key)
+			url: tagToUrl(key),
+			count: tags[key]
 		    };
 		    result.push(entry);
 		}
