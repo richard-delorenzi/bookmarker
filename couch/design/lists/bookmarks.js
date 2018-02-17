@@ -15,7 +15,7 @@ function (head, req) {
 
     function stash(){
 	var bookmark_stash=[];
-	var tag_stash=[];
+	var tag_stash={};
 
 	function tagToUrl(tag){
 	    return "/tag/" + tag.toLowerCase();
@@ -30,20 +30,23 @@ function (head, req) {
 	    });
 	    return out;
 	}
-	function ArrayHas(array,item){
-	    return array.indexOf(item) > -1;
+	function tagExists(item){
+	    return (item in tag_stash);
 	}
 	function addTag(tag){
-	    if (!ArrayHas(tag_stash,tag)){
-		tag_stash.push(tag);
+	    if (!tagExists(tag)){
+		tag_stash[tag]=1;
 	    }else{
-
+		tag_stash[tag]=tag_stash[tag]+1;
 	    }
 	}
 	function addTags(tags){
 	    tags.forEach( function (tag) {
 		addTag(tag);
 	    });
+	}
+	function processedTags(tags){
+	    return tags;
 	}
 
 	var prevDate=null;
@@ -82,16 +85,14 @@ function (head, req) {
 	
         mainLoop();
 
-	const related_tags= (
-	    tag_stash.length == 0?
-		undefined:
-		processedTags(tag_stash)
-	);
+	const related_tags= processedTags(tag_stash);
+	
         return {
 	    title:title,
 	    bookmarks:bookmark_stash,
 	    related_tags:related_tags
 	};
+	
     }
 
 
