@@ -17,7 +17,7 @@ function (head, req) {
     function stash(){
 	var bookmark_stash=[];
 	var tag_stash={};
-	var max = -1;
+	var maxTagCount = -1;
 
 	function tagToUrl(tag){
 	    return "/tag/" + tag.toLowerCase();
@@ -41,7 +41,7 @@ function (head, req) {
 	    }else{
 		var count = tag_stash[tag]+1
 		tag_stash[tag]=count;
-		max = Math.max( max, count);
+		maxTagCount = Math.max( maxTagCount, count);
 	    }
 	}
 	function addTags(tags){
@@ -102,7 +102,7 @@ function (head, req) {
         mainLoop();
 
 	var related_tags= LinkedSizedTagsFromNameAndFrequency(tag_stash);
-	myTagSizeLib.AddTagSizesToDict(related_tags,max);
+	myTagSizeLib.AddTagSizesToDict(related_tags,maxTagCount);
 	
         return {
 	    title:title,

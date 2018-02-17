@@ -42,7 +42,6 @@ function AddTagSizesToDict ( dict, maxCount ) {
     for (var key in dict) {
 	if (dict.hasOwnProperty(key)) {
 	    dict[key].fontSize=fontSize(dict[key].count,maxCount);
-	    dict[key].maxcount=maxCount;
 	}
     }
 }
