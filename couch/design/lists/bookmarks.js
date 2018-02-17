@@ -20,7 +20,7 @@ function (head, req) {
 	function tagToUrl(tag){
 	    return "/tag/" + tag.toLowerCase();
 	}
-	function processedTags(tags){
+	function linkedTagsFromNames(tags){
 	    var out=[];
 	    tags.forEach( function (tag) {
 		out.push({
@@ -45,7 +45,16 @@ function (head, req) {
 		addTag(tag);
 	    });
 	}
-	function processedTags(tags){
+	function LinkedSizedTagsFromNameAndFrequency(tags){
+	    var result=[];
+	    for (var key in tags) {
+		// check if the property/key is defined in the object itself, not in parent
+		if (tags.hasOwnProperty(key)) {
+		    const entry={
+			
+		    };	
+		}
+	    }
 	    return tags;
 	}
 
@@ -62,7 +71,7 @@ function (head, req) {
 		main:{
 		    url : row.doc.url,
 		    name: row.doc.name,
-		    tags: processedTags(tags),
+		    tags: linkedTagsFromNames(tags),
 		    description: row.doc.description,
 		    edit_url: edit_url
 		}
@@ -85,7 +94,7 @@ function (head, req) {
 	
         mainLoop();
 
-	const related_tags= processedTags(tag_stash);
+	const related_tags= LinkedSizedTagsFromNameAndFrequency(tag_stash);
 	
         return {
 	    title:title,
