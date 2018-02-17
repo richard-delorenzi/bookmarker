@@ -32,10 +32,20 @@ function shapedSize(count, total){
 		return (count-1) / (total-1);
 }
 
-function calcTagSizes( list, maxCount ) {
+function calcTagSizesFromList( list, maxCount ) {
     list.forEach( function( element, index, array) {
 	element["fontSize"]=fontSize(element.count, maxCount);
     });
 }
 
-exports.calcTagSizes = calcTagSizes;
+function AddTagSizesToDict ( dict, maxCount ) {
+    for (var key in dict) {
+	if (dict.hasOwnProperty(key)) {
+	    dict[key].fontSize=fontSize(dict[key].count,maxCount);
+	    dict[key].maxcount=maxCount;
+	}
+    }
+}
+
+exports.calcTagSizes = calcTagSizesFromList;
+exports.AddTagSizesToDict=AddTagSizesToDict;

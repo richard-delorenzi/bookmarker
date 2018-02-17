@@ -5,6 +5,7 @@ function (head, req) {
     const List = require("vendor/couchapp/lib/list");
     const path = require("vendor/couchapp/lib/path").init(req);
     const myLib = require("lib/myLib");
+    const myTagSizeLib = require("lib/myTagSizeLib");
 
 //-----------------------------------------------------------------------------------------
 
@@ -16,6 +17,7 @@ function (head, req) {
     function stash(){
 	var bookmark_stash=[];
 	var tag_stash={};
+	var max = -1;
 
 	function tagToUrl(tag){
 	    return "/tag/" + tag.toLowerCase();
@@ -37,7 +39,9 @@ function (head, req) {
 	    if (!tagExists(tag)){
 		tag_stash[tag]=1;
 	    }else{
-		tag_stash[tag]=tag_stash[tag]+1;
+		var count = tag_stash[tag]+1
+		tag_stash[tag]=count;
+		max = Math.max( max, count);
 	    }
 	}
 	function addTags(tags){
@@ -97,7 +101,8 @@ function (head, req) {
 	
         mainLoop();
 
-	const related_tags= LinkedSizedTagsFromNameAndFrequency(tag_stash);
+	var related_tags= LinkedSizedTagsFromNameAndFrequency(tag_stash);
+	myTagSizeLib.AddTagSizesToDict(related_tags,max);
 	
         return {
 	    title:title,
