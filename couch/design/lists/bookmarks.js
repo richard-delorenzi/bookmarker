@@ -6,6 +6,7 @@ function (head, req) {
     const path = require("vendor/couchapp/lib/path").init(req);
     const myLib = require("lib/myLib");
     const myTagSizeLib = require("lib/myTagSizeLib");
+    const marked= require("lib/marked");
 
 //-----------------------------------------------------------------------------------------
 
@@ -103,6 +104,8 @@ function (head, req) {
 
 	var related_tags= LinkedSizedTagsFromNameAndFrequency(tag_stash);
 	myTagSizeLib.AddTagSizesToDict(related_tags,maxTagCount);
+
+	const testzzzz=marked('I am using __markdown__.');
 	
         return {
 	    title:title,
