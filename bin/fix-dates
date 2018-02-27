@@ -9,15 +9,19 @@ def is_dateFormat(data):
 	"\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(\.\d*)?Z",
         data )
 
+def candidateRows():
+    rawdata = urllib.request.urlopen(
+        "http://mycouchdb:80/bookmarks/_design/design/_view/webmarks-by-date"
+    ).read().decode("unicode_escape") 
+    data=json.loads(rawdata)
+    return data["rows"]
 
-rawdata = urllib.request.urlopen(
-    "http://mycouchdb:80/bookmarks/_design/design/_view/webmarks-by-date"
-).read().decode("unicode_escape") 
-data=json.loads(rawdata)
-rows=data["rows"]
+def IDs():
+    for row in candidateRows():
+        date = row["key"][0]
+        id = row["id"]
+        if not is_dateFormat(date):
+            yield (id)
 
-for row in rows:
-    date = row["key"][0]
-    id = row["id"]
-    if not is_dateFormat(date):
-        print (id)
+for id in IDs():
+    print (id)
