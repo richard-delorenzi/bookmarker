@@ -13,6 +13,10 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
     };
 
+    l.isNewOrChanged = function(fieldName) {
+	return !oldDoc || oldDoc[fieldName] != newDoc[fieldName]
+    }
+
     v.number = function(fieldName){
 	v.assert( l.isNumber(newDoc[fieldName]) ,
 		  fieldName+ ": must be a number" );
@@ -29,13 +33,15 @@ function (newDoc, oldDoc, userCtx, secObj) {
     
     v.require("created_at");
     if (newDoc.created_at) {
-	v.dateFormat("created_at");
 	try {
 	    v.unchanged("created_at");
 	} catch(err){
 	    //:kludge:allow fixup of slighly wrong date format
 	    v.assert( oldDoc["created_at"]+"Z" == newDoc["created_at"],
-		      "You may not change the 'created_at' field. Except to fix it my adding a Z to the end.");
+		      "You may not change the 'created_at' field. Except to make it valid, by adding a Z to the end.");
+	}
+	if ( l.isNewOrChanged("created_at")){
+	    v.dateFormat("created_at");
 	}
     }
 	
