@@ -29,14 +29,15 @@ function (head, req) {
 	    const count = row.value;
 	    const name=row.key[0];
 	    maxes[input_key] = Math.max( maxes[input_key], count);
-	    
-	    outputList.push(
-		{
-		    count: count,
-		    name: name,
-		    url: "/" +url_prefix+ "/" +name
-		}
-	    );
+	    if (count >= 0 ){
+		outputList.push(
+		    {
+			count: count,
+			name: name,
+			url: "/" +url_prefix+ "/" +name
+		    }
+		);
+	    }
 	}
 	
 	function mainLoop(){

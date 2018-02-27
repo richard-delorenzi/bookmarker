@@ -35,10 +35,12 @@ function (newDoc, oldDoc, userCtx, secObj) {
     
     switch (newDoc.type)
     {
-    case "webmark":
-	break;
-    default:
-	v.assert(false, "invalid type");
+	case "webmark":
+	    break;
+	case "webmark:tag-disable":
+	    break;
+	default:
+	    v.assert(false, "invalid type");
     }
 
     if (newDoc.type == "webmark") {
@@ -47,5 +49,9 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	v.require("description");
 	v.require("is_private");
 	v.require("tags");
-    } 
+    }
+
+    if (newDoc.type == "webmark:tag-disable") {
+	v.require("name");
+    }
 }
