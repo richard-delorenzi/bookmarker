@@ -3,6 +3,7 @@
 import re
 import json
 import urllib.request
+import requests
 
 urlBase= "http://mycouchdb:80/bookmarks/"
 
@@ -41,7 +42,10 @@ def docWithId(id):
     return pageData(id)
 
 def putDoc(id,rev,doc):
-    print (doc)
+    print(id)
+    doc=json.dumps(doc)
+    status = requests.put(urlBase+ "/" +id, data=doc)
+    print(status)
 
 for id in IDs():
     doc= docWithId(urlBase +id)
