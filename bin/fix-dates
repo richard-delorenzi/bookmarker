@@ -40,10 +40,13 @@ def IDs():
 def docWithId(id):
     return pageData(id)
 
+def putDoc(id,rev,doc):
+    print (doc)
+
 for id in IDs():
     doc= docWithId(urlBase +id)
     rev= doc["_rev"]
     fixedDate=doc["created_at"]+"Z"
     id= doc["_id"]
     doc["created_at"]=fixedDate
-    print (doc)
+    putDoc( id, rev, doc )
