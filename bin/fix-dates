@@ -45,6 +45,5 @@ for id in IDs():
     rev= doc["_rev"]
     fixedDate=doc["created_at"]+"Z"
     id= doc["_id"]
-    #print( id, rev, fixedDate )
-    
+    doc["created_at"]=fixedDate
     print (doc)
