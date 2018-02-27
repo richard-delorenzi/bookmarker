@@ -7,7 +7,10 @@
   - add tag suggestions
   - add filters (to hide tags, and bookmarks with these tags)
     - obsolete tag: hides bookmark, does not count tags.
-    - obsolete tags list: causes tags to not appear in tag cloud (implementation note: emit tag with count of -∞, then don't display any tag with count ≤ 0.
+    - obsolete tags list: causes tags to not appear in tag cloud 
+       - ✓ add a doc with tag  count of -∞, then don't display any tag with count ≤ 0.
+       - add code to add above doc.
+       - ( I am now wondering how usefull this is, maybe to hide tags from public view).
   - ✓ add menus to all pages
 
 #Bugfix
