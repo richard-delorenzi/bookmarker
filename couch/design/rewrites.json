@@ -1,153 +1,152 @@
 [
     {
-	"from": "favicon.ico",
-	"to": "images/stars.png"
+        "from": "favicon.ico",
+        "to": "images/stars.png"
     },
     {
-	"from" : "script/*",
-	"to" : "script/*"
+        "from" : "script/*",
+        "to" : "script/*"
     },
     { 
-	"from" : "utils_script",
-	"to" :   "/_utils/script/*"
+        "from" : "utils_script",
+        "to" :   "/_utils/script/*"
     },
     {
-	"from" : "style/*",
-	"to" : "style/*"
+        "from" : "style/*",
+        "to" : "style/*"
     },
     {
-	"from" : "images/*",
-	"to" : "images/*"
+        "from" : "images/*",
+        "to" : "images/*"
     },
     {
-	"from" : "vendor/*",
-	"to" : "vendor/*"
+        "from" : "vendor/*",
+        "to" : "vendor/*"
     },
     {   
         "from": "server_lib/:~name",
         "to": "_list/sub/design",
         "query": {
-	    "~dir": "lib",	    
-	    "include_docs": "true"
+            "~dir": "lib",          
+            "include_docs": "true"
         }
     },
     {
-	"from": "_layout",
+        "from": "_layout",
         "to": "_list/mustache-only/none",
-	"query": {
-	    "template": "layout"
-	}	
+        "query": {
+            "template": "layout"
+        }       
     },
     { 
-	"from" : "index",
-	"to" : "_list/mustache-only/none",
-	"query": {
-	    "template":"index"
-	}
+        "from" : "index",
+        "to" : "_list/mustache-only/none",
+        "query": {
+            "template":"index"
+        }
     },
     {
-	"from" : "",
-	"to"   : "_rewrite/index" 
+        "from" : "",
+        "to"   : "_rewrite/index" 
     },
     {
-	"from" : "add",
-	"to":    "_show/add-bookmark",
-	"query": {
-	    "template": "add-bookmark",
-	    "title_part1": "Add",
-	    "title_part2": "bookmark"
-	}
+        "from" : "add",
+        "to":    "_show/add-bookmark",
+        "query": {
+            "template": "add-bookmark",
+            "title_part1": "Add",
+            "title_part2": "bookmark"
+        }
     },
     {
-	"from" : "edit/:~id",
-	"to":    "_show/add-bookmark/:~id",
-	"query": {
-	    "template": "add-bookmark",
-	    "title_part1": "Edit",
-	    "title_part2": "bookmark"
-	}
+        "from" : "edit/:~id",
+        "to":    "_show/add-bookmark/:~id",
+        "query": {
+            "template": "add-bookmark",
+            "title_part1": "Edit",
+            "title_part2": "bookmark"
+        }
     },
     {
-	"from": "_bookmarks_base",
+        "from": "_bookmarks_base",
         "to": "_list/bookmarks/webmarks-by-date",
-	"query": {
-	    "template": "bookmarks",
-	    "reduce": "false",
-	    "include_docs": "true",
-	    "descending" : "true"
-	}	
+        "query": {
+            "template": "bookmarks",
+            "reduce": "false",
+            "include_docs": "true",
+            "descending" : "true"
+        }       
     },
     {
-	"from": "bookmarks",
+        "from": "bookmarks",
         "to": "_rewrite/_bookmarks_base",
-	"query": {
-	    "title_part1": "All",
-	    "title_part2": "bookmarks"
-	}	
+        "query": {
+            "title_part1": "All",
+            "title_part2": "bookmarks"
+        }       
     },
     {
-	"from": "latest-bookmarks",
+        "from": "latest-bookmarks",
         "to": "_rewrite/_bookmarks_base",
-	"query": {
-	    "title_part1": "Latest",
-	    "title_part2": "bookmarks",
-	    "limit": "100"
-	}	
+        "query": {
+            "title_part1": "Latest",
+            "title_part2": "bookmarks",
+            "limit": "100"
+        }       
     },
     {
-	"from": "_bookmarks_by_url",
-        "to": "_list/bookmarks/webmarks-by-url",
-	"query": {
-	    "title_part1": "Bookmarks",
-	    "title_part2": "by url",
-	    "template": "bookmarks",
-	    "reduce": "false",
-	    "include_docs": "true",
-	    "descending" : "false"
-	}	
+        "from": "bookmarks_by_url/:~name",
+        "to": "_view/webmarks-by-url",
+        "query": {
+            "reduce": "false",
+            "include_docs": "true",
+            "descending" : "false",
+            "startkey": [":~name"],
+            "endkey": [":~name"]
+        }       
     },
     {
-	"from": "tag/:~tagname",
+        "from": "tag/:~tagname",
         "to": "_list/bookmarks/webmarks-by-tag",
-	"query": {
-	    "template": "bookmarks",
-	    "title_part1": ":~tagname",
-	    "title_part2": "tags",
-	    "mode": "tags",
-	    "reduce": "false",
-	    "startkey": [":~tagname",{}],
-	    "endkey": [":~tagname"],
-	    "include_docs": "true",
-	    "descending" : "true"
-	}	
+        "query": {
+            "template": "bookmarks",
+            "title_part1": ":~tagname",
+            "title_part2": "tags",
+            "mode": "tags",
+            "reduce": "false",
+            "startkey": [":~tagname",{}],
+            "endkey": [":~tagname"],
+            "include_docs": "true",
+            "descending" : "true"
+        }       
     },
     {
-	"from": "_tags_base",
+        "from": "_tags_base",
         "to": "_list/tags/webmarks-by-tag",
-	"query": {
-	    "template": "tags",
-	    "group_level" : "1"
-	}	
+        "query": {
+            "template": "tags",
+            "group_level" : "1"
+        }       
     },
     {
-	"from": "tags",
+        "from": "tags",
         "to": "_rewrite/_tags_base",
-	"query": {
-	    "title_part1": "all",
-	    "title_part2": "tags"
-	}	
+        "query": {
+            "title_part1": "all",
+            "title_part2": "tags"
+        }       
     },
     {
-	"from": "top-tags",
+        "from": "top-tags",
         "to": "_rewrite/_tags_base",
-	"query": {
-	    "title_part1": "top",
-	    "title_part2": "tags",
-	    "limit": "400"
-	}	
+        "query": {
+            "title_part1": "top",
+            "title_part2": "tags",
+            "limit": "400"
+        }       
     },
     {
-	"from": "db/*",
-	"to": "../../*"
+        "from": "db/*",
+        "to": "../../*"
     }
 ]
