@@ -17,4 +17,4 @@
   - ✓ sometags have trailing space or \n, strip whitespace.
   - ✓ add page broken: I think caused by framing.
   - can not bookmark github (bookmarklet does nothing)
-  - can not edit some bookmarks.
+  - can not edit some bookmarks: seems to be older bookmarks, that I imported. It is because of invalid time stamp (no Z at end)

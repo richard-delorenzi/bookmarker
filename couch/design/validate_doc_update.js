@@ -28,9 +28,17 @@ function (newDoc, oldDoc, userCtx, secObj) {
     v.unchanged("type");
     
     v.require("created_at");
-    v.unchanged("created_at");
-    if (newDoc.created_at) v.dateFormat("created_at");
-
+    if (newDoc.created_at) {
+	v.dateFormat("created_at");
+	try {
+	    v.unchanged("created_at");
+	} catch(err){
+	    //:kludge:allow fixup of slighly wrong date format
+	    v.assert( oldDoc["created_at"]+"Z" == newDoc["created_at"],
+		      "You may not change the 'created_at' field. Except to fix it my adding a Z to the end.");
+	}
+    }
+	
     v.require("author");
     
     switch (newDoc.type)
