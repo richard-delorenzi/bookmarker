@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+
+import re
+import json
+import urllib.request
+
+def is_dateFormat(data):
+    return re.match (
+	"\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(\.\d*)?Z",
+        data )
+
+
+rawdata = urllib.request.urlopen(
+    "http://mycouchdb:80/bookmarks/_design/design/_view/webmarks-by-date"
+).read().decode("unicode_escape") 
+data=json.loads(rawdata)
+rows=data["rows"]
+
+for row in rows:
+    date = row["key"][0]
+    id = row["id"]
+    if not is_dateFormat(date):
+        print (id)
