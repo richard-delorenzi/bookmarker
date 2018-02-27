@@ -4,7 +4,6 @@
   - ✓ make it so I can edit existing bookmark
   - make it detect when adding an already existing bookmark
   - add tag hierarchy
-  - add tag suggestions
   - add filters (to hide tags, and bookmarks with these tags)
     - obsolete tag: hides bookmark, does not count tags.
     - obsolete tags list: causes tags to not appear in tag cloud 
