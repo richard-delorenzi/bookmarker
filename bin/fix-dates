@@ -41,7 +41,7 @@ def IDs():
 def docWithId(id):
     return pageData(id)
 
-def putDoc(id,rev,doc):
+def putDoc(id,doc):
     print(id)
     doc=json.dumps(doc)
     status = requests.put(urlBase+ "/" +id, data=doc)
@@ -53,4 +53,4 @@ for id in IDs():
     fixedDate=doc["created_at"]+"Z"
     id= doc["_id"]
     doc["created_at"]=fixedDate
-    putDoc( id, rev, doc )
+    putDoc( id, doc )
