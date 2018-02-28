@@ -55,14 +55,20 @@ for id in IDs():
     doc= docWithId(urlBase +id)
     rev= doc["_rev"]
     id= doc["_id"]
+    date=doc["created_at"]
+
+    is_changed=false
 
     #fix date
-    fixedDate=doc["created_at"]+"Z"
-    doc["created_at"]=fixedDate
+    if not is_dateFormat(date):
+        fixedDate=date+"Z"
+        doc["created_at"]=fixedDate
+        is_changed=true
 
     #fix description
     if not "description" in doc:
         doc["description"]=""
+        is_changed=true
         
-    #print (doc)
-    putDoc( id, doc )
+    if is_changed:
+        putDoc( id, doc )
