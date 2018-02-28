@@ -43,7 +43,7 @@ def docWithId(id):
 
 def putDoc(id,doc):
     doc=json.dumps(doc)
-    r = requests.put(urlBase+ "/" +id, data=doc)
+    r = requests.put(urlBase +id, data=doc)
     status=r.status_code
     if status != 201:
         print(id)
