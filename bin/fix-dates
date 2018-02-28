@@ -68,6 +68,7 @@ for id in IDs():
     if not "description" in doc:
         doc["description"]=""
         is_changed=True
-        
+
+    #if changed then write back changed doc
     if is_changed:
         putDoc( id, doc )
