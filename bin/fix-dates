@@ -44,13 +44,26 @@ def docWithId(id):
 def putDoc(id,doc):
     print(id)
     doc=json.dumps(doc)
-    status = requests.put(urlBase+ "/" +id, data=doc)
+    r = requests.put(urlBase+ "/" +id, data=doc)
+    status=r.status_code
     print(status)
+    if status != 201:
+        print(r.headers)
+        print(r.text)
+    exit()
 
 for id in IDs():
     doc= docWithId(urlBase +id)
     rev= doc["_rev"]
-    fixedDate=doc["created_at"]+"Z"
     id= doc["_id"]
+
+    #fix date
+    fixedDate=doc["created_at"]+"Z"
     doc["created_at"]=fixedDate
+
+    #fix description
+    if not "description" in doc:
+        doc["description"]=""
+        
+    #print (doc)
     putDoc( id, doc )
