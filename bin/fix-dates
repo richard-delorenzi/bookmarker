@@ -69,6 +69,31 @@ for id in IDs():
         doc["description"]=""
         is_changed=True
 
+    prev_tag=None
+    newTags=[]
+    is_tagsChanged=False
+    if "tags" in doc:
+        for tag in doc["tags"]:
+                
+            if prev_tag == "filetype":
+                newTag="filetype:" +tag
+                newTags.append(newTag)
+                is_tagsChanged=True
+                print(newTag)
+            else:
+                if tag != "filetype":
+                    newTags.append(tag)
+
+            prev_tag=tag
+       
+        if is_tagsChanged:
+            is_changed=True
+            doc["tags"]=newTags
+            print (newTags)
+            print (doc)
+            print ("----changed")
+        
     #if changed then write back changed doc
     if is_changed:
         putDoc( id, doc )
+
