@@ -35,8 +35,7 @@ def IDs():
     for row in candidateRows():
         date = row["key"][0]
         id = row["id"]
-        if not is_dateFormat(date):
-            yield (id)
+        yield (id)
 
 def docWithId(id):
     return pageData(id)
@@ -57,18 +56,18 @@ for id in IDs():
     id= doc["_id"]
     date=doc["created_at"]
 
-    is_changed=false
+    is_changed=False
 
     #fix date
     if not is_dateFormat(date):
         fixedDate=date+"Z"
         doc["created_at"]=fixedDate
-        is_changed=true
+        is_changed=True
 
     #fix description
     if not "description" in doc:
         doc["description"]=""
-        is_changed=true
+        is_changed=True
         
     if is_changed:
         putDoc( id, doc )
