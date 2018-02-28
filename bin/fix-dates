@@ -42,12 +42,12 @@ def docWithId(id):
     return pageData(id)
 
 def putDoc(id,doc):
-    print(id)
     doc=json.dumps(doc)
     r = requests.put(urlBase+ "/" +id, data=doc)
     status=r.status_code
-    print(status)
     if status != 201:
+        print(id)
+        print(status)
         print(r.headers)
         print(r.text)
     exit()
