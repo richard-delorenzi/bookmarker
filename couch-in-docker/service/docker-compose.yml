@@ -1,0 +1,34 @@
+version: "3.5"
+services:
+  bookmarks:
+    #build:
+    image: couchdb:1
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          #memory: 50M
+      restart_policy:
+        condition: on-failure
+    restart: "no"
+    ports:
+      - "127.0.0.3:80:5984"
+    networks:
+      - bookmarknet
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    container_name: bookmarks
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+    volumes:
+      - ../data1:/usr/local/var/lib/couchdb
+      - ../config1:/usr/local/etc/couchdb/local.d:ro
+    
+networks:
+  bookmarksnet:
