@@ -3,14 +3,14 @@ services:
   myBookmarks:
     #build:
     image: couchdb:1@sha256:5de9259370ae38387b6742f162b36b32533fa7d2a66af7a1d36adf4063266e6d
-    #deploy:
-      #replicas: 1
-      #resources:
-        #limits:
-          #cpus: "0.1"
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
           #memory: 50M
-      #restart_policy:
-        #condition: on-failure
+      restart_policy:
+        condition: on-failure
     ports:
       - "127.0.0.3:80:5984"
     networks:
