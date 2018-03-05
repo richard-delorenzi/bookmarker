@@ -2,7 +2,7 @@ version: "3.5"
 services:
   myBookmarks:
     #build:
-    image: couchdb:1
+    image: couchdb:1@sha256:5de9259370ae38387b6742f162b36b32533fa7d2a66af7a1d36adf4063266e6d
     #deploy:
       #replicas: 1
       #resources:
@@ -14,13 +14,13 @@ services:
     ports:
       - "127.0.0.3:80:5984"
     networks:
-      - bookmarknet
+      - bookmark
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ["CMD", "/usr/bin/curl", "-f", "http://localhost:5984"]
       interval: 1m30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 1s
     environment:
       - COUCHDB_USER=admin
       - COUCHDB_PASSWORD=password
@@ -29,4 +29,4 @@ services:
       - ../config1:/usr/local/etc/couchdb/local.d
     
 networks:
-  bookmarknet:
+  bookmark:
