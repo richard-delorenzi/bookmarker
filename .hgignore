@@ -18,3 +18,5 @@ converter/delicious.2.html
 #backups
 couchdb-bookmarks-*.zip
 
+#authentication
+couch/design/.couchapprc
