@@ -15,3 +15,6 @@ couch-in-docker/config1/
 #bookmarks
 converter/delicious.2.html
 
+#backups
+couchdb-bookmarks-*.zip
+
