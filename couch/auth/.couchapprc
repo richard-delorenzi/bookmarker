@@ -1,0 +1,13 @@
+{   
+    "env" : {
+	"remote" : {
+	    "db" : "https://me:dont-add-pw-revision-controlled@http://pgce.richard.delorenzi.homenet.org:5984/login"
+	},
+	"default" : {	
+	    "db"  : "http://admin:password@localhost:5984/login"
+	},
+	"2.0" : {	
+	    "db"  : "http://admin:password@localhost:5000/login"
+	}
+    }
+}

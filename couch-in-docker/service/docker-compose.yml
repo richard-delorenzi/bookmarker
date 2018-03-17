@@ -1,6 +1,8 @@
+#Mybookmarks
+
 version: "3.5"
 services:
-  myBookmarks:
+  couchdb:
     #build:
     image: couchdb:1@sha256:5de9259370ae38387b6742f162b36b32533fa7d2a66af7a1d36adf4063266e6d
     deploy:

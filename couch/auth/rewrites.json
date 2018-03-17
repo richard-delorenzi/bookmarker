@@ -1,0 +1,12 @@
+[
+    {
+	"from" : "login",
+	"to"   : "static-pages/login.html"	    
+    },{
+	"from" : "",
+	"to"   : "_rewrite/login"   
+    },{
+	"from" : "/*",
+	"to"   : "../../../bookmarks/_design/design/_rewrite/*"   
+    }
+]
