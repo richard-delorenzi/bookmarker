@@ -50,6 +50,10 @@
 	"to"   : "_rewrite/index" 
     },
     {
+	"from" : "login",
+	"to"   : "../../../login/_design/auth/_rewrite" 
+    },
+    {
 	"from" : "add",
 	"to":    "_show/add-bookmark",
 	"query": {

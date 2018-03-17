@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker swarm init || true
-docker stack deploy --resolve-image never  -c docker-compose.yml bm-stack
+sudo --group docker docker swarm init || true
+sudo --group docker docker stack deploy --resolve-image never  -c docker-compose.yml bm-stack
