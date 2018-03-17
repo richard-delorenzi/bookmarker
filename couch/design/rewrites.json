@@ -142,15 +142,6 @@
 	}	
     },
     {
-	"from": "top-tags",
-        "to": "_rewrite/_tags_base",
-	"query": {
-	    "title_part1": "top",
-	    "title_part2": "tags",
-	    "limit": "400"
-	}	
-    },
-    {
 	"from": "db/*",
 	"to": "../../*"
     }

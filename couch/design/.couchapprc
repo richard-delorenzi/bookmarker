@@ -1,7 +1,0 @@
-{   
-    "env" : {
-	"default" : {	
-	    "db"  : "http://admin:password@mycouchdb:80/bookmarks"
-	}
-    }
-}
