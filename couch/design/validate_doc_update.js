@@ -13,6 +13,10 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
     };
 
+    l.isNewOrChanged = function(fieldName) {
+	return !oldDoc || oldDoc[fieldName] != newDoc[fieldName]
+    }
+
     v.number = function(fieldName){
 	v.assert( l.isNumber(newDoc[fieldName]) ,
 		  fieldName+ ": must be a number" );
@@ -28,17 +32,29 @@ function (newDoc, oldDoc, userCtx, secObj) {
     v.unchanged("type");
     
     v.require("created_at");
-    v.unchanged("created_at");
-    if (newDoc.created_at) v.dateFormat("created_at");
-
+    if (newDoc.created_at) {
+	try {
+	    v.unchanged("created_at");
+	} catch(err){
+	    //:kludge:allow fixup of slighly wrong date format
+	    v.assert( oldDoc["created_at"]+"Z" == newDoc["created_at"],
+		      "You may not change the 'created_at' field. Except to make it valid, by adding a Z to the end.");
+	}
+	if ( l.isNewOrChanged("created_at")){
+	    v.dateFormat("created_at");
+	}
+    }
+	
     v.require("author");
     
     switch (newDoc.type)
     {
-    case "webmark":
-	break;
-    default:
-	v.assert(false, "invalid type");
+	case "webmark":
+	    break;
+	case "webmark:tag-disable":
+	    break;
+	default:
+	    v.assert(false, "invalid type");
     }
 
     if (newDoc.type == "webmark") {
@@ -47,5 +63,9 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	v.require("description");
 	v.require("is_private");
 	v.require("tags");
-    } 
+    }
+
+    if (newDoc.type == "webmark:tag-disable") {
+	v.require("name");
+    }
 }

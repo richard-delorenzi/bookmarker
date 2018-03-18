@@ -50,6 +50,10 @@
         "to"   : "_rewrite/index" 
     },
     {
+	"from" : "login",
+	"to"   : "../../../login/_design/auth/_rewrite" 
+    },
+    {
         "from" : "add",
         "to":    "_show/add-bookmark",
         "query": {
@@ -134,15 +138,6 @@
         "query": {
             "title_part1": "all",
             "title_part2": "tags"
-        }       
-    },
-    {
-        "from": "top-tags",
-        "to": "_rewrite/_tags_base",
-        "query": {
-            "title_part1": "top",
-            "title_part2": "tags",
-            "limit": "400"
         }       
     },
     {

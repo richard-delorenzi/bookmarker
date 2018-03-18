@@ -1,0 +1,99 @@
+#!/usr/bin/python3
+
+import re
+import json
+import urllib.request
+import requests
+
+urlBase= "http://mycouchdb:80/bookmarks/"
+
+
+def is_dateFormat(data):
+    return re.match (
+	"\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(\.\d*)?Z",
+        data )
+
+def pageContent(page):
+    return urllib.request.urlopen(
+        page
+    ).read().decode("utf-8")   
+
+def pageData(page):
+    rawdata=pageContent(
+        page
+    )
+    return json.loads(rawdata)
+
+def candidateRows():
+    data=pageData(
+        urlBase+ "_design/design/_view/webmarks-by-date"
+    )
+    return data["rows"]
+
+    
+def IDs():
+    for row in candidateRows():
+        date = row["key"][0]
+        id = row["id"]
+        yield (id)
+
+def docWithId(id):
+    return pageData(id)
+
+def putDoc(id,doc):
+    doc=json.dumps(doc)
+    r = requests.put(urlBase +id, data=doc)
+    status=r.status_code
+    if status != 201:
+        print(id)
+        print(status)
+        print(r.headers)
+        print(r.text)
+
+for id in IDs():
+    doc= docWithId(urlBase +id)
+    rev= doc["_rev"]
+    id= doc["_id"]
+    date=doc["created_at"]
+
+    is_changed=False
+
+    #fix date
+    if not is_dateFormat(date):
+        fixedDate=date+"Z"
+        doc["created_at"]=fixedDate
+        is_changed=True
+
+    #fix description
+    if not "description" in doc:
+        doc["description"]=""
+        is_changed=True
+
+    prev_tag=None
+    newTags=[]
+    is_tagsChanged=False
+    if "tags" in doc:
+        for tag in doc["tags"]:
+                
+            if prev_tag == "filetype":
+                newTag="filetype:" +tag
+                newTags.append(newTag)
+                is_tagsChanged=True
+                print(newTag)
+            else:
+                if tag != "filetype":
+                    newTags.append(tag)
+
+            prev_tag=tag
+       
+        if is_tagsChanged:
+            is_changed=True
+            doc["tags"]=newTags
+            print (newTags)
+            print (doc)
+            print ("----changed")
+        
+    #if changed then write back changed doc
+    if is_changed:
+        putDoc( id, doc )
+

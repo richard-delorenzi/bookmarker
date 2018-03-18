@@ -221,6 +221,11 @@ ul.plain > li{
 
 /*put a comma after items*/
 ul.comma li:after  { content: ", "; }
+/*put a extra space after items*/
+ul.space li:after  {
+    content: " ";
+    white-space: pre;
+}
 
 /*... expect last item*/
 ul li:last-child:after { content: ""; }
