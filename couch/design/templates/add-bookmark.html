@@ -215,10 +215,21 @@ function auto_grow(element) {
     element.style.height = Math.max(eh,sh)+"px";
 }
 
+_jsonFetch_asyncAjax= function(url, callback){
+    $.ajax({
+        dataType: "json",
+        url: url,
+        success: callback
+    });
+}
+
+
 function addBookmarkModel(){
     const self=this;
     const now=new Date().toJSON();
     const date= "{{bm_created_at}}" || now;
+    const _jsonFetch = _jsonFetch_asyncAjax;
+
 
     self.ko_title=ko.observable(htmlDecoded("{{bm_name}}"));
     self.ko_url=ko.observable(htmlDecoded("{{bm_url}}"));
@@ -229,7 +240,8 @@ function addBookmarkModel(){
     self.ko_is_private=ko.observable({{bm_is_private}});
     self.ko_revision=ko.observable("{{bm_rev}}");
     self.ko_uuid=ko.observable("{{docId}}");
-
+    self.ko_similar_urls=ko.observable([ "a","b","c"]);
+	
     self.is_uuidReady= function() {
         return  self.ko_uuid() != "";
     };
@@ -284,10 +296,6 @@ function addBookmarkModel(){
     self.json_data = function() {
         return JSON.stringify(self.data());
     };
-
-    self.ko_similar_urls=ko.computed(function(){
-	return [ "a","b","c"];
-    },self);
     
     self.save= function() {
         if (self.is_uuidReady()){
