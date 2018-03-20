@@ -55,8 +55,8 @@
       </span>
       <div>
         Similar URLs:
-	<ul data-bind="foreach: ko_similar_urls">	
-	  <li  data-bind="text: $data"></li>
+	<ul data-bind="foreach: ko_similar_urls">
+	  <li  data-bind="text: url"></li>
 	</ul>
       </div>  
       <div>
@@ -242,7 +242,7 @@ function addBookmarkModel(){
     self.ko_is_private=ko.observable({{bm_is_private}});
     self.ko_revision=ko.observable("{{bm_rev}}");
     self.ko_uuid=ko.observable("{{docId}}");
-    self.ko_similar_urls=ko.observable([ "a","b","c"]);
+    self.ko_similar_urls=ko.observableArray([]);
 	
     self.is_uuidReady= function() {
         return  self.ko_uuid() != "";
@@ -322,12 +322,12 @@ function addBookmarkModel(){
 	_jsonFetch(
 	    lookup,
 	    function(data){
-		result=[];
 		$.each(data.rows, function(index, row){
 		    url=row.key[0];
-		    result.push(url);
+		    self.ko_similar_urls.push({
+			url:url
+		    });
 		});
-		self.ko_similar_urls(result);
 	    });
     }
     getSimilarUrls("www.sciencemuseum.org.uk");
