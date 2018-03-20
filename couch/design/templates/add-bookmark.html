@@ -315,10 +315,14 @@ function addBookmarkModel(){
         }
     };
 
-    function getSimilarUrls(){
-      const url='http://bookmarkdb/webmarks-by-url?startkey=["www.sciencemuseum.org.uk"]&endkey=["www.sciencemuseum.org.uk/\ufff0"]'
+    function getSimilarUrls(url){
+	const base="/webmarks-by-url?";
+	
+	const lookup=base+
+	      'startkey=["' +url+ '"]&' +
+	      'endkey=["' +url+ '\ufff0"]'
     _jsonFetch(
-	url,
+	lookup,
 	function(data){
 	    result=[];
 	    $.each(data.rows, function(index, row){
@@ -328,7 +332,7 @@ function addBookmarkModel(){
 	    self.ko_similar_urls(result);
 	});
     }
-    getSimilarUrls();
+    getSimilarUrls("www.sciencemuseum.org.uk");
 }
 
 ko.applyBindings(new addBookmarkModel());
