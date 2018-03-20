@@ -115,12 +115,11 @@
       <div>
         json data:
         <textarea
-	  onfocus="auto_grow(this)",
-          rows="12",
           zreadonly="readonly",
           class="stretch",
           data-bind="
-	  value: ko_json_data
+	  value: ko_json_data,
+	  attr:{ rows: ko_json_data_height }
 	  ">
         </textarea>
       </div>
@@ -269,6 +268,11 @@ function addBookmarkModel(){
             data:self.data()
         };
         return JSON.stringify(data,null,4);
+    },self);
+
+    self.ko_json_data_height=ko.computed(function(){
+        const txt=self.ko_json_data();
+	return (txt.match(/\n/g) || []).length;
     },self);
     
     self.json_data = function() {
