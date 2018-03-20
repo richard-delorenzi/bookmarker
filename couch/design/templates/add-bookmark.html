@@ -315,22 +315,20 @@ function addBookmarkModel(){
         }
     };
 
-    function getSimilarUrls(url){
-	const base="/webmarks-by-url?";
-	
-	const lookup=base+
+    function getSimilarUrls(url){	
+	const lookup="/webmarks-by-url?"+
 	      'startkey=["' +url+ '"]&' +
 	      'endkey=["' +url+ '\ufff0"]'
-    _jsonFetch(
-	lookup,
-	function(data){
-	    result=[];
-	    $.each(data.rows, function(index, row){
-		n=row.key[0];
-		result.push(n);
+	_jsonFetch(
+	    lookup,
+	    function(data){
+		result=[];
+		$.each(data.rows, function(index, row){
+		    n=row.key[0];
+		    result.push(n);
+		});
+		self.ko_similar_urls(result);
 	    });
-	    self.ko_similar_urls(result);
-	});
     }
     getSimilarUrls("www.sciencemuseum.org.uk");
 }
