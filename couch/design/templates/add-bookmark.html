@@ -14,113 +14,113 @@
       <div>
         Title:
         <input
-        class="stretch",
-        type="text",
-        data-bind="
-	value: ko_title
-	">
+           class="stretch",
+           type="text",
+           data-bind="
+		      value: ko_title
+		      ">
         </input>
       </div>
       <div>
         url:
         <input
-        class="stretch",
-        type="text",
-        data-bind="
-	value: ko_url
-	">
+           class="stretch",
+           type="text",
+           data-bind="
+		      value: ko_url
+		      ">
         </input>
       </div>
       <div>
         description:
         <input
-        class="stretch",
-        type="text",
-        data-bind="
-	value: ko_description
-	">
+           class="stretch",
+           type="text",
+           data-bind="
+		      value: ko_description
+		      ">
         </input>
       </div>
       <div>
         Tags:
         <input
-        class="stretch",
-        type="text",
-        data-bind="
-	value: ko_tags_astext
-	">
+           class="stretch",
+           type="text",
+           data-bind="
+		      value: ko_tags_astext
+		      ">
         </input>
       </div>
       <div>
         user:
         <input
-        readonly="readonly",
-        class="stretch",
-        type="text",
-        data-bind="
-	value: ko_user
-	">
+           readonly="readonly",
+           class="stretch",
+           type="text",
+           data-bind="
+		      value: ko_user
+		      ">
         </input>
       </div>
       <div>
         date:
         <input
-        readonly="readonly",
-        class="stretch",
-        type="text",
-        data-bind="
-	value: ko_date
-	">
+           readonly="readonly",
+           class="stretch",
+           type="text",
+           data-bind="
+		      value: ko_date
+		      ">
         </input>
       </div>
       <div>
         private:
         <input
-        type="checkbox",
-        data-bind="
-	checked: ko_is_private
-	">
+           type="checkbox",
+           data-bind="
+		      checked: ko_is_private
+		      ">
         </input>
       </div>
       <div>
         id:
         <input
-        readonly="readonly",
-        class="stretch",
-        type="text",
-        data-bind="
-	value: ko_uuid
-	">
+           readonly="readonly",
+           class="stretch",
+           type="text",
+           data-bind="
+		      value: ko_uuid
+		      ">
         </textarea>
       </div>
       <div>
         revision:
         <input
-        readonly="readonly",
-        class="stretch",
-        type="text",
-        data-bind="
-	value: ko_revision
-	">
+           readonly="readonly",
+           class="stretch",
+           type="text",
+           data-bind="
+		      value: ko_revision
+		      ">
         </textarea>
       </div>
 
       <button data-bind="
-	enable: ko_is_uuidReady,
-	click: save
-	">
+			 enable: ko_is_uuidReady,
+			 click: save
+			 ">
         save
       </button>
 
       <div>
         json data:
         <textarea
-          readonly="readonly",
-          class="stretch",
-          data-bind="
-	  value: ko_json_data,
-	  attr:{ rows: ko_json_data_height }
-	  ">
+           readonly="readonly",
+           class="stretch",
+           data-bind="
+		      value: ko_json_data,
+		      attr:{ rows: ko_json_data_height }
+		      ">
         </textarea>
       </div>
 
