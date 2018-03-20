@@ -99,14 +99,12 @@
         }       
     },
     {
-        "from": "bookmarks_by_url/:~name",
+        "from": "webmarks-by-url",
         "to": "_view/webmarks-by-url",
         "query": {
             "reduce": "false",
             "include_docs": "true",
-            "descending" : "false",
-            "startkey": [":~name"],
-            "endkey": [":~name"]
+            "descending" : "false"
         }       
     },
     {

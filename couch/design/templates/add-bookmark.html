@@ -51,6 +51,8 @@
 		      ">
         </input>
       </div>
+      <span data-bind="text: JSON.stringify(ko_similar_urls(),null,4)">
+      </span>
       <div>
         Similar URLs:
 	<ul data-bind="foreach: ko_similar_urls">	
@@ -312,6 +314,21 @@ function addBookmarkModel(){
             });
         }
     };
+
+    function getSimilarUrls(){
+      const url='http://bookmarkdb/webmarks-by-url?startkey=["www.sciencemuseum.org.uk"]&endkey=["www.sciencemuseum.org.uk/\ufff0"]'
+    _jsonFetch(
+	url,
+	function(data){
+	    result=[];
+	    $.each(data.rows, function(index, row){
+		n=row.key[0];
+		result.push(n);
+	    });
+	    self.ko_similar_urls(result);
+	});
+    }
+    getSimilarUrls();
 }
 
 ko.applyBindings(new addBookmarkModel());
