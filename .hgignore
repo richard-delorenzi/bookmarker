@@ -20,3 +20,4 @@ couchdb-bookmarks-*.zip
 
 #authentication
 couch/design/.couchapprc
+couch/design/.couchapprc.withpw
