@@ -56,7 +56,7 @@
       <div>
         Similar URLs:
 	<ul data-bind="foreach: ko_similar_urls">	
-	  <li  data-bind="text: url"></li>
+	  <li  data-bind="text: $data"></li>
 	</ul>
       </div>  
       <div>
@@ -288,7 +288,7 @@ function addBookmarkModel(){
     };
 
     self.ko_similar_urls=ko.computed(function(){
-	return [ {url:"a"},{url:"b"},{url:"c"}];
+	return [ "a","b","c"];
     },self);
     
     self.save= function() {
