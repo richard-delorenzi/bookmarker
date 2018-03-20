@@ -324,8 +324,8 @@ function addBookmarkModel(){
 	    function(data){
 		result=[];
 		$.each(data.rows, function(index, row){
-		    n=row.key[0];
-		    result.push(n);
+		    url=row.key[0];
+		    result.push(url);
 		});
 		self.ko_similar_urls(result);
 	    });
