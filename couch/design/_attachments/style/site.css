@@ -325,6 +325,15 @@ a img {
 
 *:target { color : red }
 
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    ztext-decoration: none;
+    zcolor: initial;
+}
+
 /****************************************************************/
 
 select option:disabled, select.disabledSelected
