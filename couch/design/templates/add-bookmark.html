@@ -56,7 +56,12 @@
       <div>
         Similar URLs:
 	<ul data-bind="foreach: ko_similar_urls">
-	  <li  data-bind="text: url"></li>
+	  <li>
+	    <span data-bind="text: url"></span>
+	    <a data-bind="attr:{href:edit_url}">
+              <button>Edit</button>
+            </a>
+	  </li>
 	</ul>
       </div>  
       <div>
@@ -323,9 +328,11 @@ function addBookmarkModel(){
 	    lookup,
 	    function(data){
 		$.each(data.rows, function(index, row){
-		    url=row.key[0];
+		    const url=row.key[0];
+		    const edit_url= "/edit/"+row.id;
 		    self.ko_similar_urls.push({
-			url:url
+			url:url,
+			edit_url:edit_url
 		    });
 		});
 	    });
