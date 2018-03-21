@@ -318,7 +318,7 @@ function addBookmarkModel(){
         }
     };
 
-    function getSimilarUrls(url){	
+    function _getSimilarUrls(url){	
 	const lookup="/webmarks-by-url?"+
 	      'startkey=["' +url+ '"]&' +
 	      'endkey=["' +url+ '\ufff0"]'
@@ -335,7 +335,11 @@ function addBookmarkModel(){
 		});
 	    });
     }
-    getSimilarUrls("www.sciencemuseum.org.uk");
+    function getSimilarUrls(){
+	const url="www.sciencemuseum.org.uk"
+	_getSimilarUrls(url);
+    }
+    getSimilarUrls();
 }
 
 ko.applyBindings(new addBookmarkModel());
