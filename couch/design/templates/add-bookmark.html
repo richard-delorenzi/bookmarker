@@ -17,8 +17,8 @@
            class="stretch",
            type="text",
            data-bind="
-		      value: ko_title
-		      ">
+                      value: ko_title
+                      ">
         </input>
       </div>
       <div>
@@ -27,8 +27,8 @@
            class="stretch",
            type="text",
            data-bind="
-		      value: ko_url
-		      ">
+                      value: ko_url
+                      ">
         </input>
       </div>
       <div>
@@ -37,8 +37,8 @@
            class="stretch",
            type="text",
            data-bind="
-		      value: ko_description
-		      ">
+                      value: ko_description
+                      ">
         </input>
       </div>
       <div>
@@ -47,20 +47,20 @@
            class="stretch",
            type="text",
            data-bind="
-		      value: ko_tags_astext
-		      ">
+                      value: ko_tags_astext
+                      ">
         </input>
       </div>
       <span data-bind="text: JSON.stringify(ko_similar_urls(),null,4)">
       </span>
       <div>
         Similar URLs:
-	<ul data-bind="foreach: ko_similar_urls">
-	  <li>
-	    <span data-bind="text: url"></span>
-	    <a class="button" data-bind="attr:{href:edit_url}">Edit</a>
-	  </li>
-	</ul>
+        <ul data-bind="foreach: ko_similar_urls">
+          <li>
+            <span data-bind="text: url"></span>
+            <a class="button" data-bind="attr:{href:edit_url}">Edit</a>
+          </li>
+        </ul>
       </div>  
       <div>
         user:
@@ -69,8 +69,8 @@
            class="stretch",
            type="text",
            data-bind="
-		      value: ko_user
-		      ">
+                      value: ko_user
+                      ">
         </input>
       </div>
       <div>
@@ -80,8 +80,8 @@
            class="stretch",
            type="text",
            data-bind="
-		      value: ko_date
-		      ">
+                      value: ko_date
+                      ">
         </input>
       </div>
       <div>
@@ -89,8 +89,8 @@
         <input
            type="checkbox",
            data-bind="
-		      checked: ko_is_private
-		      ">
+                      checked: ko_is_private
+                      ">
         </input>
       </div>
       <div>
@@ -100,8 +100,8 @@
            class="stretch",
            type="text",
            data-bind="
-		      value: ko_uuid
-		      ">
+                      value: ko_uuid
+                      ">
         </input>
       </div>
       <div>
@@ -111,15 +111,15 @@
            class="stretch",
            type="text",
            data-bind="
-		      value: ko_revision
-		      ">
+                      value: ko_revision
+                      ">
         </input>
       </div>
 
       <button data-bind="
-			 enable: ko_is_uuidReady,
-			 click: save
-			 ">
+                         enable: ko_is_uuidReady,
+                         click: save
+                         ">
         save
       </button>
 
@@ -129,9 +129,9 @@
            readonly="readonly",
            class="stretch",
            data-bind="
-		      value: ko_json_data,
-		      attr:{ rows: ko_json_data_height }
-		      ">
+                      value: ko_json_data,
+                      attr:{ rows: ko_json_data_height }
+                      ">
         </textarea>
       </div>
 
@@ -246,7 +246,7 @@ function addBookmarkModel(){
     self.ko_revision=ko.observable("{{bm_rev}}");
     self.ko_uuid=ko.observable("{{docId}}");
     self.ko_similar_urls=ko.observableArray([]);
-	
+        
     self.is_uuidReady= function() {
         return  self.ko_uuid() != "";
     };
@@ -279,10 +279,10 @@ function addBookmarkModel(){
             author: self.ko_user(),
             tags: self.ko_tags(),
             type: "webmark"
-	};
+        };
     
         data._rev= self.ko_revision() || undefined;
-	return data;
+        return data;
     };
     
     self.ko_json_data=ko.computed(function(){
@@ -295,7 +295,7 @@ function addBookmarkModel(){
 
     self.ko_json_data_height=ko.computed(function(){
         const txt=self.ko_json_data();
-	return (txt.match(/\n/g) || []).length;
+        return (txt.match(/\n/g) || []).length;
     },self);
     
     self.json_data = function() {
@@ -318,26 +318,28 @@ function addBookmarkModel(){
         }
     };
 
-    function _getSimilarUrls(url){	
-	const lookup="/webmarks-by-url?"+
-	      'startkey=["' +url+ '"]&' +
-	      'endkey=["' +url+ '\ufff0"]'
-	_jsonFetch(
-	    lookup,
-	    function(data){
-		$.each(data.rows, function(index, row){
-		    const url=row.key[0];
-		    const edit_url= "/edit/"+row.id;
-		    self.ko_similar_urls.push({
-			url:url,
-			edit_url:edit_url
-		    });
-		});
-	    });
+    function _getSimilarUrls(url){      
+        const lookup="/webmarks-by-url?"+
+              'startkey=["' +url+ '"]&' +
+              'endkey=["' +url+ '\ufff0"]'
+        _jsonFetch(
+            lookup,
+            function(data){
+                $.each(data.rows, function(index, row){
+                    const url=row.key[0];
+                    const edit_url= "/edit/"+row.id;
+                    self.ko_similar_urls.push({
+                        url:url,
+                        edit_url:edit_url
+                    });
+                });
+            });
     }
     function getSimilarUrls(){
-	const url="www.sciencemuseum.org.uk"
-	_getSimilarUrls(url);
+        var re = new RegExp('^[^:]+:/+');
+        var full_url=htmlDecoded("{{bm_url}}");
+        var urlWithoutProtocol = full_url.replace(re,"");
+        _getSimilarUrls(urlWithoutProtocol);
     }
     getSimilarUrls();
 }
