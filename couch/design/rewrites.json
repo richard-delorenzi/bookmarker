@@ -145,26 +145,8 @@
             "title_part2": "tags"
         }       
     },
-    
-    {
-        "from": "_blog_base",
-        "to": "_list/webmarks/blog-by-date",
-        "query": {
-            "template": "webmarks",
-            "reduce": "false",
-            "include_docs": "true",
-            "descending" : "true",
-	    "subSite" : "blog"
-        }       
-    },
-    {
-        "from": "blogs",
-        "to": "_rewrite/_blog_base",
-        "query": {
-            "title_part1": "Blog",
-            "title_part2": "Titles"
-        }       
-    },
+
+
     {
         "from" : "blogs/add",
         "to":    "_show/add-webmark",
@@ -176,7 +158,35 @@
 	    "type": "blog"
         }
     },
-        {
+    {
+        "from": "_blogs_base",
+        "to": "_list/webmarks/blog-by-date",
+        "query": {
+            "template": "webmarks",
+            "reduce": "false",
+            "include_docs": "true",
+            "descending" : "true",
+	    "subSite" : "blog"
+        }       
+    },
+    {
+        "from": "blogs",
+        "to": "_rewrite/_blogs_base",
+        "query": {
+            "title_part1": "Blog",
+            "title_part2": "Titles"
+        }       
+    },
+    {
+        "from": "blogs/latest",
+        "to": "_rewrite/_blogs_base",
+        "query": {
+            "title_part1": "Latest",
+            "title_part2": "blogs",
+            "limit": "100"
+        }       
+    },
+    {
         "from": "blogs/tag/:~tagname",
         "to": "_list/webmarks/blogs-by-tag",
         "query": {
