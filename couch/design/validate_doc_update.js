@@ -69,7 +69,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
 
     if (newDoc.type == "blog") {
 	v.require("name");
-	v.require("description");
+	v.require("content");
 	v.require("is_private");
 	v.require("tags");
     }
