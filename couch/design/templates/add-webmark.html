@@ -21,6 +21,7 @@
                       ">
         </input>
       </div>
+      {{#if_webmark}}
       <div>
         url:
         <input
@@ -31,6 +32,17 @@
                       ">
         </input>
       </div>
+      <!--<span data-bind="text: JSON.stringify(ko_similar_urls(),null,4)">
+      </span>-->
+      <div>
+        Similar URLs:
+        <ul data-bind="foreach: ko_similar_urls">
+          <li>
+            <span data-bind="text: url"></span>
+            <a class="button" data-bind="attr:{href:edit_url}">Edit</a>
+          </li>
+        </ul>
+      </div>  
       <div>
         description:
         <input
@@ -41,6 +53,19 @@
                       ">
         </input>
       </div>
+      {{/if_webmark}}
+      {{#if_blog}}
+      <div>
+        Content markup:
+	<textarea
+           class="stretch",
+           data-bind="
+                      value: ko_description,
+                      attr:{ rows: ko_json_data_height }
+                      ">
+        </textarea>
+      </div>
+      {{/if_blog}}
       <div>
         Tags:
         <input
@@ -51,17 +76,6 @@
                       ">
         </input>
       </div>
-      <!--<span data-bind="text: JSON.stringify(ko_similar_urls(),null,4)">-->
-      </span>
-      <div>
-        Similar URLs:
-        <ul data-bind="foreach: ko_similar_urls">
-          <li>
-            <span data-bind="text: url"></span>
-            <a class="button" data-bind="attr:{href:edit_url}">Edit</a>
-          </li>
-        </ul>
-      </div>  
       <div class="hidden">
         user:
         <input

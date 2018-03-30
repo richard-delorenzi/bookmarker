@@ -47,7 +47,9 @@ function (doc, req) {
 	    page_title:page_title,
 	    docId:docId,
 	    subSite: subSite,
-	    type: type
+	    type: type,
+	    if_blog: (type==="blog"),
+	    if_webmark: (type==="webmark")
 	};
 
 	if (docId == null){
