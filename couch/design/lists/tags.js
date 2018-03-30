@@ -34,7 +34,7 @@ function (head, req) {
 		    {
 			count: count,
 			name: name,
-			url: "/" +url_prefix+ "/" +name
+			url: url_prefix+ "/" +name
 		    }
 		);
 	    }
