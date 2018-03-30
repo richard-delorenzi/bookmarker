@@ -176,6 +176,39 @@
 	    "type": "blog"
         }
     },
+        {
+        "from": "blogs/tag/:~tagname",
+        "to": "_list/webmarks/blogs-by-tag",
+        "query": {
+            "template": "webmarks",
+            "title_part1": ":~tagname",
+            "title_part2": "tags",
+            "mode": "tags",
+            "reduce": "false",
+            "startkey": [":~tagname",{}],
+            "endkey": [":~tagname"],
+            "include_docs": "true",
+            "descending" : "true",
+	    "subSite" : "blog"
+        }       
+    },
+    {
+        "from": "blogs/_tags_base",
+        "to": "_list/tags/blogs-by-tag",
+        "query": {
+            "template": "tags",
+            "group_level" : "1",
+	    "subSite" : "blog"
+        }       
+    },
+    {
+        "from": "blogs/tags",
+        "to": "_rewrite/blogs/_tags_base",
+        "query": {
+            "title_part1": "all",
+            "title_part2": "tags"
+        }       
+    },
     
     {
         "from": "db/*",
