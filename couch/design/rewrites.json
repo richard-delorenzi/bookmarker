@@ -60,7 +60,8 @@
         "query": {
             "template": "add-webmark",
             "title_part1": "Add",
-            "title_part2": "webmark"
+            "title_part2": "webmark",
+	    "subSite" : "webmark"
         }
     },
     {
@@ -69,7 +70,8 @@
         "query": {
             "template": "add-webmark",
             "title_part1": "Edit",
-            "title_part2": "webmark"
+            "title_part2": "webmark",
+	    "subSite" : "webmark"
         }
     },
     {
@@ -79,7 +81,8 @@
             "template": "webmarks",
             "reduce": "false",
             "include_docs": "true",
-            "descending" : "true"
+            "descending" : "true",
+	    "subSite" : "webmark"
         }       
     },
     {
@@ -120,7 +123,8 @@
             "startkey": [":~tagname",{}],
             "endkey": [":~tagname"],
             "include_docs": "true",
-            "descending" : "true"
+            "descending" : "true",
+	    "subSite" : "webmark"
         }       
     },
     {
@@ -128,7 +132,8 @@
         "to": "_list/tags/webmarks-by-tag",
         "query": {
             "template": "tags",
-            "group_level" : "1"
+            "group_level" : "1",
+	    "subSite" : "webmark"
         }       
     },
     {
@@ -147,7 +152,8 @@
             "template": "webmarks",
             "reduce": "false",
             "include_docs": "true",
-            "descending" : "true"
+            "descending" : "true",
+	    "subSite" : "blogs"
         }       
     },
     {

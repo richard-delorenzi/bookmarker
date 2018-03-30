@@ -14,6 +14,7 @@ function (head, req) {
     const key = req.query["key"];
     const title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
     const is_tag_mode= (req.query["mode"]=="tags");
+    const subSite = req.query["subSite"];
 
     function stash(){
 	var bookmark_stash=[];
@@ -109,6 +110,7 @@ function (head, req) {
 	
         return {
 	    title:title,
+	    subSite: subSite,
 	    bookmarks:bookmark_stash,
 	    related_tags:related_tags
 	};

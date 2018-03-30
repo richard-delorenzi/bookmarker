@@ -15,6 +15,7 @@ function (doc, req) {
     );
     const docId= (doc!=null)? doc._id : null;
     const template = req.query["template"];
+    const subSite = req.query["subSite"];
     
     function is_string(m) {
 	return (typeof m === 'string' || m instanceof String);
@@ -42,7 +43,8 @@ function (doc, req) {
     function stash(){
 	var stash={
 	    page_title:page_title,
-	    docId:docId
+	    docId:docId,
+	    subSite: subSite
 	};
 
 	if (docId == null){
