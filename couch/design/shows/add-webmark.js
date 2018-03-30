@@ -13,6 +13,7 @@ function (doc, req) {
 	    (" ") +
 	    (req.query["title_part2"] || "" )
     );
+    const request=req.requested_path;
     const docId= (doc!=null)? doc._id : null;
     const template = req.query["template"];
     const subSite = req.query["subSite"];
