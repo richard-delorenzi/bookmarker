@@ -164,6 +164,16 @@
             "title_part2": "Titles"
         }       
     },
+    {
+        "from" : "blogs/add",
+        "to":    "_show/add-webmark",
+        "query": {
+            "template": "add-webmark",
+            "title_part1": "Add",
+            "title_part2": "blog — ⚠ not ready ⚠ ",
+	    "subSite" : "blog"
+        }
+    },
     
     {
         "from": "db/*",
