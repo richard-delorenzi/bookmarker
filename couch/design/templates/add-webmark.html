@@ -59,9 +59,9 @@
         Content markup:
 	<textarea
            class="stretch",
+           rows= 10,
            data-bind="
-                      value: ko_description,
-                      attr:{ rows: ko_json_data_height }
+                      value: ko_content
                       ">
         </textarea>
       </div>
@@ -254,6 +254,7 @@ function addWebMarkModel(){
     self.ko_title=ko.observable(htmlDecoded("{{bm_name}}"));
     self.ko_url=ko.observable(htmlDecoded("{{bm_url}}"));
     self.ko_description=ko.observable(htmlDecoded("{{bm_description}}"));
+    self.ko_content=ko.observable("");
     self.ko_tags_astext=ko.observable("{{bm_tags_asText}}");
     self.ko_user=ko.observable("{{bm_author}}");
     self.ko_date=ko.observable(date);
@@ -287,8 +288,13 @@ function addWebMarkModel(){
     self.data = function() {
         data= {
             name: self.ko_title(),
+	    {{#if_webmark}}
             url: self.ko_url(),
             description: self.ko_description(),
+	    {{/if_webmark}}
+	    {{#if_blog}}
+	    content: self.ko_content(),
+	    {{/if_blog}}
             created_at: self.ko_date(),
             is_private : self.ko_is_private(),
             author: self.ko_user(),
