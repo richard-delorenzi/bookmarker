@@ -261,6 +261,7 @@ function addWebMarkModel(){
     self.ko_is_private=ko.observable({{bm_is_private}});
     self.ko_revision=ko.observable("{{bm_rev}}");
     self.ko_uuid=ko.observable("{{docId}}");
+    self.ko_type=ko.observable("{{bm_type}}");
     self.ko_similar_urls=ko.observableArray([]);
         
     self.is_uuidReady= function() {
@@ -299,7 +300,7 @@ function addWebMarkModel(){
             is_private : self.ko_is_private(),
             author: self.ko_user(),
             tags: self.ko_tags(),
-            type: "{{type}}"
+            type: self.ko_type()
         };
     
         data._rev= self.ko_revision() || undefined;

@@ -47,7 +47,6 @@ function (doc, req) {
 	    page_title:page_title,
 	    docId:docId,
 	    subSite: subSite,
-	    type: type,
 	    if_blog: (type==="blog"),
 	    if_webmark: (type==="webmark")
 	};
@@ -56,6 +55,7 @@ function (doc, req) {
 	    stash.bm_name= req.query["title"];
 	    stash.bm_url=req.query["url"];
 	    stash.bm_description=req.query["description"];
+	    stash.bm_type=type;
 	    stash.bm_author="ctrl_alt_delor@home";
 	    stash.bm_is_private=false;
 	}else{
@@ -67,6 +67,7 @@ function (doc, req) {
 	    stash.bm_tags_asText=doc["tags"].join(" ");
 	    stash.bm_url=doc["url"];
 	    stash.bm_description=doc["description"];
+	    stash.bm_type=doc["type"];
 	    stash.bm_rev=doc._rev;
 	}
 	return trailingAndLeadingWhitespaceStriped(stash);

@@ -158,6 +158,16 @@
 	    "type": "blog"
         }
     },
+        {
+        "from" : "blogs/edit/:~id",
+        "to":    "_show/add-webmark/:~id",
+        "query": {
+            "template": "add-webmark",
+            "title_part1": "Edit",
+            "title_part2": "blog",
+	    "subSite" : "blog"
+        }
+    },
     {
         "from": "_blogs_base",
         "to": "_list/webmarks/blog-by-date",
