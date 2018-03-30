@@ -358,3 +358,12 @@ select option:not(:disabled)
 {
     flex: auto;
 }
+
+/****************************************************************/
+/*hidden*/
+
+.hidden,
+div.hidden /*need to be specific, to override some of the divs*/
+{
+    display:none;
+}
