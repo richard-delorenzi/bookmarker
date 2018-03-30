@@ -99,7 +99,7 @@
         }       
     },
     {
-        "from": "webmarks-by-url",
+        "from": "webmarks/by-url",
         "to": "_view/webmarks-by-url",
         "query": {
             "reduce": "false",
@@ -108,7 +108,7 @@
         }       
     },
     {
-        "from": "tag/:~tagname",
+        "from": "webmarks/tag/:~tagname",
         "to": "_list/webmarks/webmarks-by-tag",
         "query": {
             "template": "webmarks",
@@ -123,7 +123,7 @@
         }       
     },
     {
-        "from": "_tags_base",
+        "from": "webmarks/_tags_base",
         "to": "_list/tags/webmarks-by-tag",
         "query": {
             "template": "tags",
@@ -131,8 +131,8 @@
         }       
     },
     {
-        "from": "tags",
-        "to": "_rewrite/_tags_base",
+        "from": "webmarks/tags",
+        "to": "_rewrite/webmarks/_tags_base",
         "query": {
             "title_part1": "all",
             "title_part2": "tags"
