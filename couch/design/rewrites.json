@@ -53,6 +53,7 @@
 	"from" : "login",
 	"to"   : "../../../login/_design/auth/_rewrite" 
     },
+    
     {
         "from" : "webmarks/add",
         "to":    "_show/add-webmark",
@@ -138,6 +139,26 @@
             "title_part2": "tags"
         }       
     },
+    
+    {
+        "from": "_blog_base",
+        "to": "_list/webmarks/blog-by-date",
+        "query": {
+            "template": "blog",
+            "reduce": "false",
+            "include_docs": "true",
+            "descending" : "true"
+        }       
+    },
+    {
+        "from": "blog",
+        "to": "_rewrite/_blog_base",
+        "query": {
+            "title_part1": "Blog",
+            "title_part2": "Titles"
+        }       
+    },
+    
     {
         "from": "db/*",
         "to": "../../*"
