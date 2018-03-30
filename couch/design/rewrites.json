@@ -144,7 +144,7 @@
         "from": "_blog_base",
         "to": "_list/webmarks/blog-by-date",
         "query": {
-            "template": "blog",
+            "template": "webmarks",
             "reduce": "false",
             "include_docs": "true",
             "descending" : "true"
