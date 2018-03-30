@@ -157,7 +157,7 @@
         }       
     },
     {
-        "from": "blog",
+        "from": "blogs",
         "to": "_rewrite/_blog_base",
         "query": {
             "title_part1": "Blog",
