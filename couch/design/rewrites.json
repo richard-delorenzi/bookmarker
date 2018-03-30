@@ -61,7 +61,8 @@
             "template": "add-webmark",
             "title_part1": "Add",
             "title_part2": "webmark",
-	    "subSite" : "webmark"
+	    "subSite" : "webmark",
+	    "type": "webmark"
         }
     },
     {
@@ -171,7 +172,8 @@
             "template": "add-webmark",
             "title_part1": "Add",
             "title_part2": "blog — ⚠ not ready ⚠ ",
-	    "subSite" : "blog"
+	    "subSite" : "blog",
+	    "type": "blog"
         }
     },
     

@@ -278,7 +278,7 @@ function addWebMarkModel(){
             is_private : self.ko_is_private(),
             author: self.ko_user(),
             tags: self.ko_tags(),
-            type: "webmark"
+            type: "{{type}}"
         };
     
         data._rev= self.ko_revision() || undefined;
