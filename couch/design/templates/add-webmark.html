@@ -229,7 +229,7 @@ _jsonFetch_asyncAjax= function(url, callback){
 }
 
 
-function addBookmarkModel(){
+function addWebMarkModel(){
     const self=this;
     const now=new Date().toJSON();
     const date= "{{bm_created_at}}" || now;
@@ -305,7 +305,7 @@ function addBookmarkModel(){
     self.save= function() {
         if (self.is_uuidReady()){
             $.ajax({
-                url: "http://bookmarkdb/db/"+self.ko_uuid(),
+                url: "/db/"+self.ko_uuid(),
                 type: "PUT",
                 data: self.json_data(),
                 success: function(responce){
@@ -344,7 +344,7 @@ function addBookmarkModel(){
     getSimilarUrls();
 }
 
-ko.applyBindings(new addBookmarkModel());
+ko.applyBindings(new addWebMarkModel());
 
   </script>
 </html>
