@@ -54,52 +54,52 @@
 	"to"   : "../../../login/_design/auth/_rewrite" 
     },
     {
-        "from" : "add",
-        "to":    "_show/add-bookmark",
+        "from" : "webmarks/add",
+        "to":    "_show/add-webmark",
         "query": {
-            "template": "add-bookmark",
+            "template": "add-webmark",
             "title_part1": "Add",
-            "title_part2": "bookmark"
+            "title_part2": "webmark"
         }
     },
     {
-        "from" : "edit/:~id",
-        "to":    "_show/add-bookmark/:~id",
+        "from" : "webmarks/edit/:~id",
+        "to":    "_show/add-webmark/:~id",
         "query": {
-            "template": "add-bookmark",
+            "template": "add-webmark",
             "title_part1": "Edit",
-            "title_part2": "bookmark"
+            "title_part2": "webmark"
         }
     },
     {
-        "from": "_bookmarks_base",
-        "to": "_list/bookmarks/webmarks-by-date",
+        "from": "_webmarks_base",
+        "to": "_list/webmarks/webmarks-by-date",
         "query": {
-            "template": "bookmarks",
+            "template": "webmarks",
             "reduce": "false",
             "include_docs": "true",
             "descending" : "true"
         }       
     },
     {
-        "from": "bookmarks",
-        "to": "_rewrite/_bookmarks_base",
+        "from": "webmarks",
+        "to": "_rewrite/_webmarks_base",
         "query": {
             "title_part1": "All",
-            "title_part2": "bookmarks"
+            "title_part2": "webmarks"
         }       
     },
     {
-        "from": "latest-bookmarks",
-        "to": "_rewrite/_bookmarks_base",
+        "from": "webmarks/latest",
+        "to": "_rewrite/_webmarks_base",
         "query": {
             "title_part1": "Latest",
-            "title_part2": "bookmarks",
+            "title_part2": "webmarks",
             "limit": "100"
         }       
     },
     {
-        "from": "webmarks-by-url",
+        "from": "webmarks/by-url",
         "to": "_view/webmarks-by-url",
         "query": {
             "reduce": "false",
@@ -108,10 +108,10 @@
         }       
     },
     {
-        "from": "tag/:~tagname",
-        "to": "_list/bookmarks/webmarks-by-tag",
+        "from": "webmarks/tag/:~tagname",
+        "to": "_list/webmarks/webmarks-by-tag",
         "query": {
-            "template": "bookmarks",
+            "template": "webmarks",
             "title_part1": ":~tagname",
             "title_part2": "tags",
             "mode": "tags",
@@ -123,7 +123,7 @@
         }       
     },
     {
-        "from": "_tags_base",
+        "from": "webmarks/_tags_base",
         "to": "_list/tags/webmarks-by-tag",
         "query": {
             "template": "tags",
@@ -131,8 +131,8 @@
         }       
     },
     {
-        "from": "tags",
-        "to": "_rewrite/_tags_base",
+        "from": "webmarks/tags",
+        "to": "_rewrite/webmarks/_tags_base",
         "query": {
             "title_part1": "all",
             "title_part2": "tags"

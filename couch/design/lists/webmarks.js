@@ -21,7 +21,7 @@ function (head, req) {
 	var maxTagCount = -1;
 
 	function tagToUrl(tag){
-	    return "/tag/" + tag.toLowerCase();
+	    return "tag/" + tag.toLowerCase();
 	}
 	function linkedTagsFromNames(tags){
 	    var out=[];
@@ -70,7 +70,7 @@ function (head, req) {
         function row_info(row){
 	    const date = row.doc.created_at.split("T")[0];
 	    const date_stash = {date: date};
-	    const edit_url= "/edit/"+row.id;
+	    const edit_url= "edit/"+row.id;
 	    const tags=row.doc.tags;
 
 	    addTags(tags);
