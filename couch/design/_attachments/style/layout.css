@@ -28,7 +28,8 @@ html, body, .wrapper, main, iframe{
     
     grid-template-areas:
         "header  header"
-	"sidebar content";
+	"sidebar content"
+        "footer footer" ;
 }
 
 /*Main keep out of the way. Use grid as it behaves well*/

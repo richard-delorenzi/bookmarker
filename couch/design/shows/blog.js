@@ -8,7 +8,6 @@ function (doc, req) {
 
 //-----------------------------------------------------------------------------------------
 
-    const page_title = "title";
     const request=req.requested_path;
     const docId= (doc!=null)? doc._id : null;
     const template = req.query["template"];
@@ -21,8 +20,7 @@ function (doc, req) {
 
     function stash(){
 	var stash={
-	    page_title:page_title,
-	    name:doc.name,
+	    title:doc.name,
 	    content:doc.content,
 	    author:doc.author,
 	    created_at:doc.created_at,
