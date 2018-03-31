@@ -23,7 +23,9 @@
 	      {{#ifdef_description}}	
 	        <div>{{description}}</div>
 	      {{/ifdef_description}}
-	      <a href="{{url}}">{{url}}</a><br/>
+	      {{#ifdef_url}}
+	        <a href="{{url}}">{{url}}</a><br/>
+              {{/ifdef_url}}
 	      tags:
               <ul class="inline comma">
 	        {{#tags}}
