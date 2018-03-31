@@ -77,7 +77,7 @@ function (head, req) {
 	    addTags(tags);
 
 	    const link= (subSite ==="blog")
-		  ?"hello"
+		  ?row.id
 		  :undefined;
 	    const main_stash ={
 		main:{
