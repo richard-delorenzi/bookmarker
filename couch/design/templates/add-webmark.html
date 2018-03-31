@@ -254,7 +254,7 @@ function addWebMarkModel(){
     self.ko_title=ko.observable(htmlDecoded("{{bm_name}}"));
     self.ko_url=ko.observable(htmlDecoded("{{bm_url}}"));
     self.ko_description=ko.observable(htmlDecoded("{{bm_description}}"));
-    self.ko_content=ko.observable("");
+    self.ko_content=ko.observable("{{bm_content}}");
     self.ko_tags_astext=ko.observable("{{bm_tags_asText}}");
     self.ko_user=ko.observable("{{bm_author}}");
     self.ko_date=ko.observable(date);

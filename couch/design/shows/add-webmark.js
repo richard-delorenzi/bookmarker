@@ -63,6 +63,7 @@ function (doc, req) {
 	    stash.bm_author=doc["author"];
 	    stash.bm_url=doc["url"];
 	    stash.bm_description=doc["description"];
+	    stash.bm_content=doc["content"];
 	    stash.bm_type=doc["type"];
 	    stash.bm_is_private=doc["is_private"];
 	    stash.bm_created_at=doc["created_at"];
