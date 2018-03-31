@@ -76,10 +76,14 @@ function (head, req) {
 
 	    addTags(tags);
 
+	    const link= (subSite ==="blog")
+		  ?"hello"
+		  :undefined;
 	    const main_stash ={
 		main:{
 		    name: row.doc.name,
 		    url : row.doc.url,
+		    link: link,
 		    tags: linkedTagsFromNames(tags),
 		    description: row.doc.description,
 		    edit_url: edit_url

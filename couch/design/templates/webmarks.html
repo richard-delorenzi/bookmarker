@@ -19,7 +19,14 @@
           
           {{#main}}
             <li>
-	      <h3>{{name}}</h3>
+	      <h3>
+                {{#ifdef_link}}
+                  <a href="{{link}}">{{name}}</a>
+                {{/ifdef_link}}
+                {{^ifdef_link}}
+                  {{name}}
+                {{/ifdef_link}} 
+              </h3>
 	      {{#ifdef_description}}	
 	        <div>{{description}}</div>
 	      {{/ifdef_description}}
