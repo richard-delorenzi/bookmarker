@@ -230,6 +230,14 @@
             "title_part2": "tags"
         }       
     },
+    {
+	"from": "blogs/blog/:~id",
+	"to":    "_show/blog/:~id",
+        "query": {
+            "template": "blog",
+	    "subSite" : "blog"
+        }
+    },
     
     {
         "from": "db/*",
