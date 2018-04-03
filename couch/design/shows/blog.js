@@ -5,6 +5,7 @@ function (doc, req) {
     const List = require("vendor/couchapp/lib/list");
     const path = require("vendor/couchapp/lib/path").init(req);
     const myLib = require("lib/myLib");
+    const marked= require("lib/marked");
 
 //-----------------------------------------------------------------------------------------
 
@@ -21,7 +22,7 @@ function (doc, req) {
     function stash(){
 	var stash={
 	    title:doc.name,
-	    content:doc.content,
+	    content_html:marked(doc.content),
 	    author:doc.author,
 	    created_at:doc.created_at,
 	    tags:doc.tags,
