@@ -26,7 +26,8 @@ function (doc, req) {
 	    author:doc.author,
 	    created_at:doc.created_at,
 	    tags:doc.tags,
-	    subSite: subSite
+	    subSite: subSite,
+	    editUrl: "edit/" +docId
 	};
 
 	return stash;
