@@ -35,6 +35,7 @@ html, body, .wrapper, main, iframe{
 /*Main keep out of the way. Use grid as it behaves well*/
 main {
     display:grid;
+    height: 0; /*stretch to fit*/
 }
 
 /*****************************************************************/
