@@ -349,12 +349,12 @@ select option:not(:disabled)
 
 /****************************************************************/
 /*flex*/
-.flex div
+.flex > div
 {
     display: flex;
 }
 
-.flex div *.stretch
+.flex > div *.stretch
 {
     flex: auto;
 }
