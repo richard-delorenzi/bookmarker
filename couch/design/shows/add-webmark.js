@@ -17,7 +17,7 @@ function (doc, req) {
     const docId= (doc!=null)? doc._id : null;
     const template = req.query["template"];
     const subSite = req.query["subSite"];
-    const type = req.query["type"];
+    const type = doc && doc["type"] ?  doc["type"] : req.query["type"]; 
     
     function is_string(m) {
 	return (typeof m === 'string' || m instanceof String);

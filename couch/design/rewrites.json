@@ -165,8 +165,7 @@
             "template": "add-webmark",
             "title_part1": "Edit",
             "title_part2": "blog",
-	    "subSite" : "blog",
-	    "type": "blog"
+	    "subSite" : "blog"
         }
     },
     {
