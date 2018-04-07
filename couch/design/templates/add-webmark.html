@@ -8,10 +8,9 @@
     </header>
     <main class="box">
     <form class="flex">
-      <div>
+      <div class="stretch">
         Title:
         <input
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_title
@@ -19,10 +18,9 @@
         </input>
       </div>
       {{#if_webmark}}
-      <div>
+      <div class="stretch">
         url:
         <input
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_url
@@ -40,10 +38,9 @@
           </li>
         </ul>
       </div>  
-      <div>
+      <div class="stretch">
         description:
         <input
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_description
@@ -52,10 +49,9 @@
       </div>
       {{/if_webmark}}
       {{#if_blog}}
-      <div>
+      <div class="stretch">
         Content markup:
 	<textarea
-           class="stretch",
            rows= 10,
            data-bind="
                       value: ko_content
@@ -71,32 +67,29 @@
         </div>
       </div>
       {{/if_blog}}
-      <div>
+      <div class="stretch">
         Tags:
         <input
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_tags_astext
                       ">
         </input>
       </div>
-      <div class="hidden">
+      <div class="hidden stretch">
         user:
         <input
            readonly="readonly",
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_user
                       ">
         </input>
       </div>
-      <div>
+      <div class="stretch">
         date:
         <input
            readonly="readonly",
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_date
@@ -112,22 +105,20 @@
                       ">
         </input>
       </div>
-      <div class="hidden">
+      <div class="hidden stretch">
         id:
         <input
            readonly="readonly",
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_uuid
                       ">
         </input>
       </div>
-      <div class="hidden">
+      <div class="hidden stretch">
         revision:
         <input
            readonly="readonly",
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_revision
@@ -143,11 +134,10 @@
       </button>
 
       <hr/>
-      <div>
+      <div class="stretch">
         json data:
         <textarea
            readonly="readonly",
-           class="stretch",
            data-bind="
                       value: ko_json_data,
                       attr:{ rows: ko_json_data_height }
