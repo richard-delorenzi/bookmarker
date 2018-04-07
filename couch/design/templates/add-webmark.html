@@ -65,6 +65,16 @@
                       ">
         </textarea>
       </div>
+     <div>
+        Content preview:
+	<textarea
+           class="stretch",
+           rows= 10,
+           data-bind="
+                      value: ko_content_preview
+                      ">
+        </textarea>
+      </div>
       {{/if_blog}}
       <div>
         Tags:
@@ -323,6 +333,11 @@ function addWebMarkModel(){
     self.json_data = function() {
         return JSON.stringify(self.data());
     };
+
+    self.ko_content_preview=ko.computed(function(){
+	const html = marked(self.ko_content());
+	return html;
+    },self);
     
     self.save= function() {
         if (self.is_uuidReady()){
