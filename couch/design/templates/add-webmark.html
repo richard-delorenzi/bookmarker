@@ -322,7 +322,7 @@ function addWebMarkModel(){
 
     self.ko_json_data_height=ko.computed(function(){
         const txt=self.ko_json_data();
-        return (txt.match(/\n/g) || []).length;
+        return (txt.match(/\n/g) || []).length +1;
     },self);
     
     self.json_data = function() {
