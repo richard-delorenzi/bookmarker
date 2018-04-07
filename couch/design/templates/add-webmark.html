@@ -67,13 +67,11 @@
       </div>
      <div>
         Content preview:
-	<textarea
-           class="stretch",
-           rows= 10,
+	<div
            data-bind="
-                      value: ko_content_preview
+                      html: ko_content_preview
                       ">
-        </textarea>
+        </div>
       </div>
       {{/if_blog}}
       <div>
