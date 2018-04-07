@@ -329,10 +329,12 @@ function addWebMarkModel(){
         return JSON.stringify(self.data());
     };
 
+{{#if_blog}}
     self.ko_content_preview=ko.computed(function(){
 	const html = marked(self.ko_content());
 	return html;
     },self);
+{{/if_blog}}
     
     self.save= function() {
         if (self.is_uuidReady()){
