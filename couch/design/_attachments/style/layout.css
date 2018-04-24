@@ -9,7 +9,7 @@ header   {grid-area: header;}
 footer   {grid-area: footer;}
 
 /*use exactly 100% of screen*/
-html, body, .wrapper, main, iframe{
+html, body, .wrapper, main, iframe, header, aside{
     margin: 0;
     padding: 0;
     border: 0;
@@ -24,18 +24,20 @@ html, body, .wrapper, main, iframe{
     display: grid;
     grid-gap: 5px;
     grid-template-columns: 120px auto;
-    grid-template-rows: min-content auto;
+    grid-template-rows: min-content auto min-content;
     
     grid-template-areas:
         "header  header"
 	"sidebar content"
-        "footer footer" ;
+        "footer footer";
 }
 
 /*Main keep out of the way. Use grid as it behaves well*/
 main {
     display:grid;
-    height: 0; /*stretch to fit*/
+    zheight: 0; /*stretch to fit*/
+    height: auto;
+    overflow: scroll;
 }
 
 /*****************************************************************/
