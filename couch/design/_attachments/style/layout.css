@@ -37,7 +37,7 @@ main {
     display:grid;
     zheight: 0; /*stretch to fit*/
     height: auto;
-    overflow: scroll;
+    overflow: auto;
 }
 
 /*****************************************************************/
@@ -45,7 +45,7 @@ main {
 
 .box {
   border-radius: 5px;
-  padding: 0px;
+  padding: 0;
 }
 
 header, footer {
@@ -75,7 +75,7 @@ nav ul > li:first-child{
 }
 
 nav ul > li{
-   padding: 0.1em;
+    padding: 0.1em;
 }
 
 nav ul,
