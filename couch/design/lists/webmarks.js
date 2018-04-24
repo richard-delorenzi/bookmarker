@@ -14,6 +14,7 @@ function (head, req) {
     const key = req.query["key"];
     const title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
     const is_tag_mode= (req.query["mode"]=="tags");
+    const subSite = req.query["subSite"];
 
     function stash(){
 	var bookmark_stash=[];
@@ -75,10 +76,14 @@ function (head, req) {
 
 	    addTags(tags);
 
+	    const link= (subSite ==="blog")
+		  ?"blog/"+row.id
+		  :undefined;
 	    const main_stash ={
 		main:{
 		    name: row.doc.name,
 		    url : row.doc.url,
+		    link: link,
 		    tags: linkedTagsFromNames(tags),
 		    description: row.doc.description,
 		    edit_url: edit_url
@@ -109,6 +114,7 @@ function (head, req) {
 	
         return {
 	    title:title,
+	    subSite: subSite,
 	    bookmarks:bookmark_stash,
 	    related_tags:related_tags
 	};

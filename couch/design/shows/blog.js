@@ -1,24 +1,36 @@
 "use strict";
-function (head, req) {
+function (doc, req) {
     const ddoc = this;
     const Mustache = require("lib/mustache");
     const List = require("vendor/couchapp/lib/list");
     const path = require("vendor/couchapp/lib/path").init(req);
     const myLib = require("lib/myLib");
+    const marked= require("lib/marked");
 
 //-----------------------------------------------------------------------------------------
 
+    const request=req.requested_path;
+    const docId= (doc!=null)? doc._id : null;
     const template = req.query["template"];
-    const title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
-    const main_url= req.query["main_url"];
-    const subSite= req.query["subSite"];
+    const subSite = req.query["subSite"];
+    
+    function is_string(m) {
+	return (typeof m === 'string' || m instanceof String);
+    }
+
 
     function stash(){
-        return {
-	    title:title,
-	    main_url:main_url,
-	    subSite: subSite
+	var stash={
+	    title:doc.name,
+	    content_html:marked(doc.content),
+	    author:doc.author,
+	    created_at:doc.created_at,
+	    tags:doc.tags,
+	    subSite: subSite,
+	    editUrl: "edit/" +docId
 	};
+
+	return stash;
     }
 
 
@@ -26,12 +38,11 @@ function (head, req) {
     //-- The provides function serves the format the client requests.
     //-- The first matching format is sent, so reordering functions changes 
     //-- thier priority. In this case HTML is the preferred format, so it comes first.
-
     provides("html", function() {
         return Mustache.to_html(ddoc.templates[template],  myLib.addIfdef(stash()), ddoc.templates.partials);
     });
 
     provides("json", function() {
         return JSON.stringify(stash());
-    });   
+    });
 };

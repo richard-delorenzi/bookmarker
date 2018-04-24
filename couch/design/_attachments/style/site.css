@@ -259,54 +259,6 @@ dl.inline dt{
     font-weight: bold;
 }
 
-/****************************************************************/
-/*menu list*/
-ul.menu
-{
-    list-style-type: none;
-    padding: 0;
-    padding-top: 0;
-    font-family: serif;
-}
-
-ul.menu .menu-name {
-    color:green;
-    font-family: sans-serif;
-    font-weight: bold;
-}
-
-ul.menu .menu-name.subsection {
-}
-
-ul.menu .menu-name.section {
-    font-size: larger;
-}
-
-ul.menu > li {
-    padding-top: 1em;
-}
-
-ul.menu > li:first-child {
-    padding-top: 0;
-}
-
-ul.menu.items > li,
-ul.menu.subsections > li {
-    padding-top: 0;
-}
-
-li.subsection {
-    padding-top: 0;
-    z-background-color: red;
-    z-border-style: solid;
-}
-
-ul.menu.items li:nth-child(2n+1) {
-    z-webkit-filter:  hue-rotate(90deg);
-    z-moz-filter: hue-rotate(90deg);
-    background-color: LightGray;
-}
-
 
 /****************************************************************/
 /*links*/
@@ -349,12 +301,22 @@ select option:not(:disabled)
 
 /****************************************************************/
 /*flex*/
-.flex div
+.flex > .stretch
 {
     display: flex;
 }
 
-.flex div *.stretch
+.flex > .stretch input,
+.flex > .stretch textarea
 {
     flex: auto;
+}
+
+/****************************************************************/
+/*hidden*/
+
+.hidden,
+div.hidden /*need to be specific, to override some of the divs*/
+{
+    display:none;
 }

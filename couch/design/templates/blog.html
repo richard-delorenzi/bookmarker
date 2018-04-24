@@ -1,0 +1,20 @@
+<!DOCTYPE HTML >
+<html>
+  <head>
+    {{>head}}
+  </head>
+
+  <body class="wrapper">
+    {{>header}}
+
+    <main class="box">
+      {{{content_html}}}
+    </main>
+    <footer>
+      <a href="{{editUrl}}">
+        <button>Edit</button>
+      </a>
+    </footer>
+    {{>nav}}
+  </body> 
+</html>

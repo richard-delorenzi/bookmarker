@@ -4,12 +4,12 @@ version: "3.5"
 services:
   couchdb:
     #build:
-    image: couchdb:1@sha256:5de9259370ae38387b6742f162b36b32533fa7d2a66af7a1d36adf4063266e6d
+    image: couchdb:1
     deploy:
       replicas: 1
       resources:
         limits:
-          cpus: "0.1"
+          cpus: "0.25"
           #memory: 50M
       restart_policy:
         condition: on-failure

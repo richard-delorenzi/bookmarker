@@ -11,6 +11,7 @@ function (head, req) {
 
     const template = req.query["template"];
     const title = req.query["title_part1"]+ " " +req.query["title_part2"];
+    const subSite = req.query["subSite"];
 
     function stash(){
 	var tags =    new Array();
@@ -49,7 +50,11 @@ function (head, req) {
         }
 	
         mainLoop();
-        return {tags:tags, title:title};
+        return {
+	    tags:tags,
+	    title:title,
+	    subSite:subSite
+	};
     }
 
 

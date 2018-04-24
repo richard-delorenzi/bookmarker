@@ -7,6 +7,7 @@
   <body class="wrapper">
     {{>header}}
 
+    {{>nav}}
     <main class="box">
       {{{testzzzz}}}
     {{#ifdef_bookmarks}}
@@ -19,11 +20,20 @@
           
           {{#main}}
             <li>
-	      <h3>{{name}}</h3>
+	      <h3>
+                {{#ifdef_link}}
+                  <a href="{{link}}">{{name}}</a>
+                {{/ifdef_link}}
+                {{^ifdef_link}}
+                  {{name}}
+                {{/ifdef_link}} 
+              </h3>
 	      {{#ifdef_description}}	
 	        <div>{{description}}</div>
 	      {{/ifdef_description}}
-	      <a href="{{url}}">{{url}}</a><br/>
+	      {{#ifdef_url}}
+	        <a href="{{url}}">{{url}}</a><br/>
+              {{/ifdef_url}}
 	      tags:
               <ul class="inline comma">
 	        {{#tags}}
@@ -42,6 +52,6 @@
       </ul>  
     {{/ifdef_bookmarks}}
     </main>
-    {{>nav}}
+    {{>footer}}
   </body> 
 </html>

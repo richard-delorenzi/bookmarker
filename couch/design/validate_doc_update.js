@@ -53,6 +53,8 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	    break;
 	case "webmark:tag-disable":
 	    break;
+	case "blog":
+	    break;
 	default:
 	    v.assert(false, "invalid type");
     }
@@ -64,6 +66,14 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	v.require("is_private");
 	v.require("tags");
     }
+
+    if (newDoc.type == "blog") {
+	v.require("name");
+	v.require("content");
+	v.require("is_private");
+	v.require("tags");
+    }
+
 
     if (newDoc.type == "webmark:tag-disable") {
 	v.require("name");

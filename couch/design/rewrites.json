@@ -53,13 +53,16 @@
 	"from" : "login",
 	"to"   : "../../../login/_design/auth/_rewrite" 
     },
+    
     {
         "from" : "webmarks/add",
         "to":    "_show/add-webmark",
         "query": {
             "template": "add-webmark",
             "title_part1": "Add",
-            "title_part2": "webmark"
+            "title_part2": "webmark",
+	    "subSite" : "webmark",
+	    "type": "webmark"
         }
     },
     {
@@ -68,7 +71,8 @@
         "query": {
             "template": "add-webmark",
             "title_part1": "Edit",
-            "title_part2": "webmark"
+            "title_part2": "webmark",
+	    "subSite" : "webmark"
         }
     },
     {
@@ -78,7 +82,8 @@
             "template": "webmarks",
             "reduce": "false",
             "include_docs": "true",
-            "descending" : "true"
+            "descending" : "true",
+	    "subSite" : "webmark"
         }       
     },
     {
@@ -119,7 +124,8 @@
             "startkey": [":~tagname",{}],
             "endkey": [":~tagname"],
             "include_docs": "true",
-            "descending" : "true"
+            "descending" : "true",
+	    "subSite" : "webmark"
         }       
     },
     {
@@ -127,7 +133,8 @@
         "to": "_list/tags/webmarks-by-tag",
         "query": {
             "template": "tags",
-            "group_level" : "1"
+            "group_level" : "1",
+	    "subSite" : "webmark"
         }       
     },
     {
@@ -138,6 +145,99 @@
             "title_part2": "tags"
         }       
     },
+
+
+    {
+        "from" : "blogs/add",
+        "to":    "_show/add-webmark",
+        "query": {
+            "template": "add-webmark",
+            "title_part1": "Add",
+            "title_part2": "blog — ⚠ not ready ⚠ ",
+	    "subSite" : "blog",
+	    "type": "blog"
+        }
+    },
+        {
+        "from" : "blogs/edit/:~id",
+        "to":    "_show/add-webmark/:~id",
+        "query": {
+            "template": "add-webmark",
+            "title_part1": "Edit",
+            "title_part2": "blog",
+	    "subSite" : "blog"
+        }
+    },
+    {
+        "from": "_blogs_base",
+        "to": "_list/webmarks/blog-by-date",
+        "query": {
+            "template": "webmarks",
+            "reduce": "false",
+            "include_docs": "true",
+            "descending" : "true",
+	    "subSite" : "blog"
+        }       
+    },
+    {
+        "from": "blogs",
+        "to": "_rewrite/_blogs_base",
+        "query": {
+            "title_part1": "Blog",
+            "title_part2": "Titles"
+        }       
+    },
+    {
+        "from": "blogs/latest",
+        "to": "_rewrite/_blogs_base",
+        "query": {
+            "title_part1": "Latest",
+            "title_part2": "blogs",
+            "limit": "100"
+        }       
+    },
+    {
+        "from": "blogs/tag/:~tagname",
+        "to": "_list/webmarks/blogs-by-tag",
+        "query": {
+            "template": "webmarks",
+            "title_part1": ":~tagname",
+            "title_part2": "tags",
+            "mode": "tags",
+            "reduce": "false",
+            "startkey": [":~tagname",{}],
+            "endkey": [":~tagname"],
+            "include_docs": "true",
+            "descending" : "true",
+	    "subSite" : "blog"
+        }       
+    },
+    {
+        "from": "blogs/_tags_base",
+        "to": "_list/tags/blogs-by-tag",
+        "query": {
+            "template": "tags",
+            "group_level" : "1",
+	    "subSite" : "blog"
+        }       
+    },
+    {
+        "from": "blogs/tags",
+        "to": "_rewrite/blogs/_tags_base",
+        "query": {
+            "title_part1": "all",
+            "title_part2": "tags"
+        }       
+    },
+    {
+	"from": "blogs/blog/:~id",
+	"to":    "_show/blog/:~id",
+        "query": {
+            "template": "blog",
+	    "subSite" : "blog"
+        }
+    },
+    
     {
         "from": "db/*",
         "to": "../../*"

@@ -1,9 +1,6 @@
 <html>
   <head>
-    <meta charset="utf-8"> 
-    <title>{{page_title}}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
-    <link rel="stylesheet" type="text/css" href="/style/site.css"/>
+    {{>head}}
   </head>
   <body class="wrapper">
     <header class="box">
@@ -11,48 +8,27 @@
     </header>
     <main class="box">
     <form class="flex">
-      <div>
+      <div class="stretch">
         Title:
         <input
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_title
                       ">
         </input>
       </div>
-      <div>
+      {{#if_webmark}}
+      <div class="stretch">
         url:
         <input
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_url
                       ">
         </input>
       </div>
-      <div>
-        description:
-        <input
-           class="stretch",
-           type="text",
-           data-bind="
-                      value: ko_description
-                      ">
-        </input>
-      </div>
-      <div>
-        Tags:
-        <input
-           class="stretch",
-           type="text",
-           data-bind="
-                      value: ko_tags_astext
-                      ">
-        </input>
-      </div>
-      <!--<span data-bind="text: JSON.stringify(ko_similar_urls(),null,4)">-->
-      </span>
+      <!--<span data-bind="text: JSON.stringify(ko_similar_urls(),null,4)">
+      </span>-->
       <div>
         Similar URLs:
         <ul data-bind="foreach: ko_similar_urls">
@@ -62,22 +38,58 @@
           </li>
         </ul>
       </div>  
-      <div>
+      <div class="stretch">
+        description:
+        <input
+           type="text",
+           data-bind="
+                      value: ko_description
+                      ">
+        </input>
+      </div>
+      {{/if_webmark}}
+      {{#if_blog}}
+      <div class="stretch">
+        Content markup:
+	<textarea
+           rows= 10,
+           data-bind="
+                      value: ko_content
+                      ">
+        </textarea>
+      </div>
+     <div>
+        Content preview:
+	<div
+           data-bind="
+                      html: ko_content_preview
+                      ">
+        </div>
+      </div>
+      {{/if_blog}}
+      <div class="stretch">
+        Tags:
+        <input
+           type="text",
+           data-bind="
+                      value: ko_tags_astext
+                      ">
+        </input>
+      </div>
+      <div class="hidden stretch">
         user:
         <input
            readonly="readonly",
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_user
                       ">
         </input>
       </div>
-      <div>
+      <div class="stretch">
         date:
         <input
            readonly="readonly",
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_date
@@ -93,22 +105,20 @@
                       ">
         </input>
       </div>
-      <div>
+      <div class="hidden stretch">
         id:
         <input
            readonly="readonly",
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_uuid
                       ">
         </input>
       </div>
-      <div>
+      <div class="hidden stretch">
         revision:
         <input
            readonly="readonly",
-           class="stretch",
            type="text",
            data-bind="
                       value: ko_revision
@@ -123,11 +133,11 @@
         save
       </button>
 
-      <div>
+      <hr/>
+      <div class="stretch">
         json data:
         <textarea
            readonly="readonly",
-           class="stretch",
            data-bind="
                       value: ko_json_data,
                       attr:{ rows: ko_json_data_height }
@@ -239,12 +249,14 @@ function addWebMarkModel(){
     self.ko_title=ko.observable(htmlDecoded("{{bm_name}}"));
     self.ko_url=ko.observable(htmlDecoded("{{bm_url}}"));
     self.ko_description=ko.observable(htmlDecoded("{{bm_description}}"));
+    self.ko_content=ko.observable(`{{bm_content}}`);
     self.ko_tags_astext=ko.observable("{{bm_tags_asText}}");
     self.ko_user=ko.observable("{{bm_author}}");
     self.ko_date=ko.observable(date);
     self.ko_is_private=ko.observable({{bm_is_private}});
     self.ko_revision=ko.observable("{{bm_rev}}");
     self.ko_uuid=ko.observable("{{docId}}");
+    self.ko_type=ko.observable("{{bm_type}}");
     self.ko_similar_urls=ko.observableArray([]);
         
     self.is_uuidReady= function() {
@@ -272,13 +284,18 @@ function addWebMarkModel(){
     self.data = function() {
         data= {
             name: self.ko_title(),
+	    {{#if_webmark}}
             url: self.ko_url(),
             description: self.ko_description(),
+	    {{/if_webmark}}
+	    {{#if_blog}}
+	    content: self.ko_content(),
+	    {{/if_blog}}
             created_at: self.ko_date(),
             is_private : self.ko_is_private(),
             author: self.ko_user(),
             tags: self.ko_tags(),
-            type: "webmark"
+            type: self.ko_type()
         };
     
         data._rev= self.ko_revision() || undefined;
@@ -295,12 +312,19 @@ function addWebMarkModel(){
 
     self.ko_json_data_height=ko.computed(function(){
         const txt=self.ko_json_data();
-        return (txt.match(/\n/g) || []).length;
+        return (txt.match(/\n/g) || []).length +1;
     },self);
     
     self.json_data = function() {
         return JSON.stringify(self.data());
     };
+
+{{#if_blog}}
+    self.ko_content_preview=ko.computed(function(){
+	const html = marked(self.ko_content());
+	return html;
+    },self);
+{{/if_blog}}
     
     self.save= function() {
         if (self.is_uuidReady()){
