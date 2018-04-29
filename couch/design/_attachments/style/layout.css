@@ -34,7 +34,7 @@ html, body, .wrapper, main, iframe, header, aside{
 
 /*Main keep out of the way. Use grid as it behaves well*/
 main {
-    display:grid;
+    zdisplay:grid;
     zheight: 0; /*stretch to fit*/
     height: auto;
     overflow: auto;
