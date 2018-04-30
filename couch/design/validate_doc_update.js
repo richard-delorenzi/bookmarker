@@ -29,9 +29,11 @@ function (newDoc, oldDoc, userCtx, secObj) {
     if (v.isAdmin()) return true;
 
     v.require("type");
-    v.unchanged("type");
-    
+    v.unchanged("type");  
     v.require("created_at");
+    v.require("author");
+
+    //check time
     if (newDoc.created_at) {
 	try {
 	    v.unchanged("created_at");
@@ -45,8 +47,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	}
     }
 	
-    v.require("author");
-    
+    //check type 
     switch (newDoc.type)
     {
 	case "webmark":
