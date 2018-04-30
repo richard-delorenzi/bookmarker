@@ -41,6 +41,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
     // admins or owner can always delete
     if (v.isAdmin()) return true;
 
+    //all docs must have these fields
     v.require("type");
     v.unchanged("type");  
     v.require("created_at");
