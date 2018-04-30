@@ -59,6 +59,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	    v.assert(false, "invalid type");
     }
 
+    //rules for webmarks
     if (newDoc.type == "webmark") {
 	v.require("name");
 	v.require("url");
@@ -67,6 +68,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	v.require("tags");
     }
 
+    //rules for blog
     if (newDoc.type == "blog") {
 	v.require("name");
 	v.require("content");
@@ -74,7 +76,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	v.require("tags");
     }
 
-
+    // rules for disabled tags
     if (newDoc.type == "webmark:tag-disable") {
 	v.require("name");
     }
