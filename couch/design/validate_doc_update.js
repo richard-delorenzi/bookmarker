@@ -5,9 +5,22 @@ function (newDoc, oldDoc, userCtx, secObj) {
     var v = require("lib/validate").init(newDoc, oldDoc, userCtx, secObj);
     var l = function(){}
 
-    l.isAuthor = function() {
+    l.isAnAuthor = function() {
+	//:tricky: checks author role
 	return v.isAdmin() || userCtx.roles.indexOf("author") != -1;
     };
+
+    v.onlyAuthor = function() {
+	v.assert (l.isAnAuthor());
+	//:tricky: checks author field
+	if (false){ //DISABLED - not tested (not coded).
+	    if (newDoc.author) {
+		enforce(
+		    newDoc.author == userCtx.name,
+		    "You may only update documents that you own: with author " + userCtx.name);
+	    }
+	}
+    }
 
     l.isNumber = function(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
