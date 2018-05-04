@@ -7,11 +7,11 @@ function (newDoc, oldDoc, userCtx, secObj) {
 
     l.isAnAuthor = function() {
 	//:tricky: checks author role
-	return v.isAdmin() || userCtx.roles.indexOf("author") != -1;
+	return userCtx.roles.indexOf("author") != -1 || v.isAdmin();
     };
 
     v.onlyAuthor = function() {
-	v.assert (l.isAnAuthor());
+	v.assert (l.isAnAuthor(),"You must be an author, to edit.");
 	//:tricky: checks author field
 	if (false){ //DISABLED - not tested (not coded).
 	    if (newDoc.author) {
@@ -38,14 +38,15 @@ function (newDoc, oldDoc, userCtx, secObj) {
     ////////////////////////////////////////////////////////////////
     //checks
 
-    // admins or owner can always delete
+    // admins can always delete
     if (v.isAdmin()) return true;
-
+    
     //all docs must have these fields
     v.require("type");
     v.unchanged("type");  
     v.require("created_at");
     v.require("author");
+    v.onlyAuthor();
 
     //check time
     if (newDoc.created_at) {
