@@ -5,9 +5,22 @@ function (newDoc, oldDoc, userCtx, secObj) {
     var v = require("lib/validate").init(newDoc, oldDoc, userCtx, secObj);
     var l = function(){}
 
-    l.isAuthor = function() {
-	return v.isAdmin() || userCtx.roles.indexOf("author") != -1;
+    l.isAnAuthor = function() {
+	//:tricky: checks author role
+	return userCtx.roles.indexOf("author") != -1 || v.isAdmin();
     };
+
+    v.onlyAuthor = function() {
+	v.assert (l.isAnAuthor(),"You must be an author, to edit.");
+	//:tricky: checks author field
+	if (false){ //DISABLED - not tested (not coded).
+	    if (newDoc.author) {
+		enforce(
+		    newDoc.author == userCtx.name,
+		    "You may only update documents that you own: with author " + userCtx.name);
+	    }
+	}
+    }
 
     l.isNumber = function(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
@@ -25,13 +38,17 @@ function (newDoc, oldDoc, userCtx, secObj) {
     ////////////////////////////////////////////////////////////////
     //checks
 
-    // admins or owner can always delete
+    // admins can always delete
     if (v.isAdmin()) return true;
-
-    v.require("type");
-    v.unchanged("type");
     
+    //all docs must have these fields
+    v.require("type");
+    v.unchanged("type");  
     v.require("created_at");
+    v.require("author");
+    v.onlyAuthor();
+
+    //check time
     if (newDoc.created_at) {
 	try {
 	    v.unchanged("created_at");
@@ -45,8 +62,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	}
     }
 	
-    v.require("author");
-    
+    //check type 
     switch (newDoc.type)
     {
 	case "webmark":
@@ -59,6 +75,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	    v.assert(false, "invalid type");
     }
 
+    //rules for webmarks
     if (newDoc.type == "webmark") {
 	v.require("name");
 	v.require("url");
@@ -67,6 +84,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	v.require("tags");
     }
 
+    //rules for blog
     if (newDoc.type == "blog") {
 	v.require("name");
 	v.require("content");
@@ -74,7 +92,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	v.require("tags");
     }
 
-
+    // rules for disabled tags
     if (newDoc.type == "webmark:tag-disable") {
 	v.require("name");
     }
