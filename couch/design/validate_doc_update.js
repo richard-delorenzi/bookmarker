@@ -13,12 +13,10 @@ function (newDoc, oldDoc, userCtx, secObj) {
     v.onlyAuthor = function() {
 	v.assert (l.isAnAuthor(),"You must be an author, to edit.");
 	//:tricky: checks author field
-	if (false){ //DISABLED - not tested (not coded).
-	    if (newDoc.author) {
-		enforce(
-		    newDoc.author == userCtx.name,
-		    "You may only update documents that you own: with author " + userCtx.name);
-	    }
+	if (newDoc.author) {
+	    v.assert(
+		newDoc.author == userCtx.name,
+		"You may only edit documents that you own: " + userCtx.name);
 	}
     }
 
@@ -46,6 +44,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
     v.unchanged("type");  
     v.require("created_at");
     v.require("author");
+    v.unchanged("author");
     v.onlyAuthor();
 
     //check time

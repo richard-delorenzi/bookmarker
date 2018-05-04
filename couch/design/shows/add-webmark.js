@@ -5,6 +5,7 @@ function (doc, req) {
     const List = require("vendor/couchapp/lib/list");
     const path = require("vendor/couchapp/lib/path").init(req);
     const myLib = require("lib/myLib");
+    const userCtx = req.userCtx;
 
 //-----------------------------------------------------------------------------------------
 
@@ -53,7 +54,7 @@ function (doc, req) {
 
 	if (docId == null){
 	    stash.bm_name= req.query["title"];
-	    stash.bm_author="ctrl_alt_delor@home";
+	    stash.bm_author=userCtx.name;
 	    stash.bm_url=req.query["url"];
 	    stash.bm_description=req.query["description"];
 	    stash.bm_type=type;
