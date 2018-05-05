@@ -184,7 +184,7 @@
         }       
     },
     {
-        "from": "blogs",
+        "from": "blogs/all",
         "to": "_rewrite/_blogs_base",
         "query": {
             "title_part1": "Blog",
@@ -199,6 +199,10 @@
             "title_part2": "blogs",
             "limit": "100"
         }       
+    },
+    {
+        "from": "blogs",
+        "to": "_rewrite/blogs/latest"
     },
     {
         "from": "blogs/tag/:~tagname",
