@@ -87,7 +87,7 @@
         }       
     },
     {
-        "from": "webmarks",
+        "from": "webmarks/all",
         "to": "_rewrite/_webmarks_base",
         "query": {
             "title_part1": "All",
@@ -102,6 +102,10 @@
             "title_part2": "webmarks",
             "limit": "100"
         }       
+    },
+    {
+        "from": "webmarks",
+        "to": "_rewrite/webmarks/latest"
     },
     {
         "from": "webmarks/by-url",
