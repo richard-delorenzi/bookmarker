@@ -105,19 +105,27 @@ function modeFromUrl() {
 }
 
 function _info() {
-    if ( subsiteFromUrl() === "webmarks" &&
-	 modeFromUrl() === "add" ){
-	return {
-	    url: urlQueryParameterByName("url"),
-	    title: urlQueryParameterByName("title"),
-	    description: urlQueryParameterByName("description"),
-	};
-	
+    Result = {};
+    if ( modeFromUrl() === "add" ){
+	Result.tags= "";
+	Result.is_private= false;
+	Result.rev= null;
+	if ( subsiteFromUrl() === "webmarks" ){
+	    Result.url= urlQueryParameterByName("url");
+	    Result.title= urlQueryParameterByName("title");
+	    Result.description= urlQueryParameterByName("description");
+	    Result.type= "webmark";
+	}else if ( subsiteFromUrl() === "blogs" ){
+	   
+	}else{
+	   
+	}	
     }else if ( modeFromUrl() === "edit" ) {
-	return {};
+	
     }else{
-	return {};
+	
     }
+    return Result;
 }
 const info= _info();
 
@@ -134,13 +142,13 @@ function addWebMarkModel(){
     self.ko_url=ko.observable(info.url);
     self.ko_description=ko.observable(info.description);
     self.ko_content=ko.observable(`{{bm_content}}`);
-    self.ko_tags_astext=ko.observable("{{bm_tags_asText}}");
+    self.ko_tags_astext=ko.observable(info.tags);
     self.ko_user=ko.observable("{{bm_author}}");
     self.ko_date=ko.observable(date);
-    self.ko_is_private=ko.observable({{bm_is_private}});
-    self.ko_revision=ko.observable("{{bm_rev}}");
-    self.ko_uuid=ko.observable("{{docId}}");
-    self.ko_type=ko.observable("{{bm_type}}");
+    self.ko_is_private=ko.observable(info.is_private);
+    self.ko_revision=ko.observable(info.rev);
+    self.ko_uuid=ko.observable("");
+    self.ko_type=ko.observable(info.type);
     self.ko_similar_urls=ko.observableArray([]);
         
     self.is_uuidReady= function() {
@@ -168,8 +176,8 @@ function addWebMarkModel(){
     self.data = function() {
 	data= {
 	    zzzz1: window.location,
-	    sibsite:  subsiteFromUrl(),
-	    mode: modeFromUrl(),
+	    z_sibsite:  subsiteFromUrl(),
+	    z_mode: modeFromUrl(),
             name: self.ko_title(),
             created_at: self.ko_date(),
             is_private : self.ko_is_private(),
