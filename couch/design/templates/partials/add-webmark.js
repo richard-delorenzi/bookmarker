@@ -104,6 +104,11 @@ function modeFromUrl() {
     return urlPath()[2];
 }
 
+function idFromUrl() {
+    //Require: urlPath()[2] === "edit"
+    return urlPath()[3];
+}
+
 function _info() {
     Result = {};
     Result.author="{{bm_author}}";
@@ -124,6 +129,7 @@ function _info() {
 	   
 	}	
     }else if ( modeFromUrl() === "edit" ) {
+	Result.id=idFromUrl();
 	Result.date="{{bm_created_at}}";
 	Result.content=`{{bm_content}}`;
     }else{
