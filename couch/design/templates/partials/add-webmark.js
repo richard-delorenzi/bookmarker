@@ -104,6 +104,22 @@ function modeFromUrl() {
     return urlPath()[2];
 }
 
+function _info() {
+    if ( subsiteFromUrl() === "webmarks" &&
+	 modeFromUrl() === "add" ){
+	return {
+	    url: urlQueryParameterByName("url"),
+	    title: urlQueryParameterByName("title"),
+	    description: urlQueryParameterByName("description"),
+	};
+	
+    }else if ( modeFromUrl() === "edit" ) {
+	return {};
+    }else{
+	return {};
+    }
+}
+const info= _info();
 
 ////////////////////////////////////////////////////////////////
 
@@ -114,9 +130,9 @@ function addWebMarkModel(){
     const _jsonFetch = _jsonFetch_asyncAjax;
 
 
-    self.ko_title=ko.observable(htmlDecoded("{{bm_name}}"));
-    self.ko_url=ko.observable(htmlDecoded("{{bm_url}}"));
-    self.ko_description=ko.observable(htmlDecoded("{{bm_description}}"));
+    self.ko_title=ko.observable(info.title);
+    self.ko_url=ko.observable(info.url);
+    self.ko_description=ko.observable(info.description);
     self.ko_content=ko.observable(`{{bm_content}}`);
     self.ko_tags_astext=ko.observable("{{bm_tags_asText}}");
     self.ko_user=ko.observable("{{bm_author}}");
