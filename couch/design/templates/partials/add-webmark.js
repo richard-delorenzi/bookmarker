@@ -106,6 +106,7 @@ function modeFromUrl() {
 
 function _info() {
     Result = {};
+    Result.author="{{bm_author}}";
     if ( modeFromUrl() === "add" ){
 	Result.tags= "";
 	Result.is_private= false;
@@ -123,7 +124,8 @@ function _info() {
 	   
 	}	
     }else if ( modeFromUrl() === "edit" ) {
-	result.date="{{bm_created_at}}";
+	Result.date="{{bm_created_at}}";
+	Result.content=`{{bm_content}}`;
     }else{
 	
     }
@@ -135,17 +137,15 @@ const info= _info();
 
 function addWebMarkModel(){
     const self=this;
-    const date= info.date;
     const _jsonFetch = _jsonFetch_asyncAjax;
-
 
     self.ko_title=ko.observable(info.title);
     self.ko_url=ko.observable(info.url);
     self.ko_description=ko.observable(info.description);
-    self.ko_content=ko.observable(`{{bm_content}}`);
+    self.ko_content=ko.observable(info.content);
     self.ko_tags_astext=ko.observable(info.tags);
-    self.ko_user=ko.observable("{{bm_author}}");
-    self.ko_date=ko.observable(date);
+    self.ko_user=ko.observable(info.author);
+    self.ko_date=ko.observable(info.date);
     self.ko_is_private=ko.observable(info.is_private);
     self.ko_revision=ko.observable(info.rev);
     self.ko_uuid=ko.observable("");
@@ -176,9 +176,6 @@ function addWebMarkModel(){
     
     self.data = function() {
 	data= {
-	    zzzz1: window.location,
-	    z_sibsite:  subsiteFromUrl(),
-	    z_mode: modeFromUrl(),
             name: self.ko_title(),
             created_at: self.ko_date(),
             is_private : self.ko_is_private(),
