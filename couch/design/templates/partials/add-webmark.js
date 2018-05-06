@@ -111,7 +111,6 @@ function idFromUrl() {
 
 function _info() {
     Result = {};
-    Result.author="{{bm_author}}";
     if ( modeFromUrl() === "add" ){
 	Result.tags= "";
 	Result.is_private= false;
@@ -150,28 +149,34 @@ function addWebMarkModel(){
     self.ko_description=ko.observable(info.description);
     self.ko_content=ko.observable(info.content);
     self.ko_tags_astext=ko.observable(info.tags);
-    self.ko_user=ko.observable(info.author);
+    self.ko_user=ko.observable("");
     self.ko_date=ko.observable(info.date);
     self.ko_is_private=ko.observable(info.is_private);
     self.ko_revision=ko.observable(info.rev);
     self.ko_uuid=ko.observable("");
     self.ko_type=ko.observable(info.type);
     self.ko_similar_urls=ko.observableArray([]);
-        
-    self.is_uuidReady= function() {
-        return  self.ko_uuid() != "";
-    };
-    
-    if ( !self.is_uuidReady() ){
-        self.guidMaker = new GuidMaker();
-        self.guidMaker.Guid( function(guid) {
-            self.ko_uuid(guid);
-        });
-    }
 
-    self.ko_is_uuidReady= ko.computed( function() {
-        return  self.ko_uuid() != "";
+    ////////////////////////////////////////////////////////////////
+    //create guid
+    self.guidMaker = new GuidMaker();
+    self.guidMaker.Guid( function(guid) {
+        self.ko_uuid(guid);
+    });
+
+    //get user name
+    _jsonFetch("/whoAmI", function(data){
+	self.ko_user(data.name);
+    });
+
+    ////////////////////////////////////////////////////////////////
+
+    self.ko_is_Ready= ko.computed( function() {
+        return self.ko_uuid() != "" &&
+	    self.ko_user != "";
     },self);
+
+    ////////////////////////////////////////////////////////////////
     
     self.ko_tags=ko.computed(function(){
         const input=self.ko_tags_astext();
@@ -226,7 +231,7 @@ function addWebMarkModel(){
     }
     
     self.save= function() {
-        if (self.is_uuidReady()){
+        if (self.is_Ready()){
             $.ajax({
                 url: "/db/"+self.ko_uuid(),
                 type: "PUT",
