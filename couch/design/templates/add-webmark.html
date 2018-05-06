@@ -238,20 +238,13 @@ _jsonFetch_asyncAjax= function(url, callback){
     });
 }
 
-//process query string
-var urlParams;
-(window.onpopstate = function () {
-    var match,
-        pl     = /\+/g,  // Regex for replacing addition symbol with a space
-        search = /([^&=]+)=?([^&]*)/g,
-        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-        query  = window.location.search.substring(1);
-
-    urlParams = {};
-    while (match = search.exec(query) !== null)
-       urlParams[decode(match[1])] = decode(match[2]);
-})();
-
+//process query string	
+    function ParameterByName(name) {
+	var match = RegExp(
+	    '[?&]' + name + '=([^&]*)'
+	).exec(window.location.search);
+	return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
 
 function addWebMarkModel(){
     const self=this;
@@ -296,7 +289,8 @@ function addWebMarkModel(){
     },self);
     
     self.data = function() {
-        data= {
+	data= {
+	    zzzz: window.location,
             name: self.ko_title(),
 	    {{#if_webmark}}
             url: self.ko_url(),
