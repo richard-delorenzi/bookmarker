@@ -110,6 +110,8 @@ function _info() {
 	Result.tags= "";
 	Result.is_private= false;
 	Result.rev= null;
+	const now=new Date().toJSON();
+	Result.date= now;
 	if ( subsiteFromUrl() === "webmarks" ){
 	    Result.url= urlQueryParameterByName("url");
 	    Result.title= urlQueryParameterByName("title");
@@ -121,7 +123,7 @@ function _info() {
 	   
 	}	
     }else if ( modeFromUrl() === "edit" ) {
-	
+	result.date="{{bm_created_at}}";
     }else{
 	
     }
@@ -133,8 +135,7 @@ const info= _info();
 
 function addWebMarkModel(){
     const self=this;
-    const now=new Date().toJSON();
-    const date= "{{bm_created_at}}" || now;
+    const date= info.date;
     const _jsonFetch = _jsonFetch_asyncAjax;
 
 
