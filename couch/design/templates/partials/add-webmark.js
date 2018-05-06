@@ -67,6 +67,8 @@ GuidMaker.prototype.Guid= function(callback){
     );
 };
 
+////////////////////////////////////////////////////////////////
+
 function auto_grow(element) {
     const eh = element.clientHeight;
     element.style.height = "5px";
@@ -82,13 +84,28 @@ _jsonFetch_asyncAjax= function(url, callback){
     });
 }
 
-//process query string	
-function ParameterByName(name) {
+//process url string	
+function urlQueryParameterByName(name) {
     var match = RegExp(
 	'[?&]' + name + '=([^&]*)'
     ).exec(window.location.search);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
+
+function urlPath() {
+    return window.location.pathname.split("/");
+}
+
+function subsiteFromUrl() {
+    return urlPath()[1];
+}
+
+function modeFromUrl() {
+    return urlPath()[2];
+}
+
+
+////////////////////////////////////////////////////////////////
 
 function addWebMarkModel(){
     const self=this;
@@ -134,21 +151,23 @@ function addWebMarkModel(){
     
     self.data = function() {
 	data= {
-	    zzzz: window.location,
+	    zzzz1: window.location,
+	    sibsite:  subsiteFromUrl(),
+	    mode: modeFromUrl(),
             name: self.ko_title(),
-	    {{#if_webmark}}
-            url: self.ko_url(),
-            description: self.ko_description(),
-	    {{/if_webmark}}
-	    {{#if_blog}}
-	    content: self.ko_content(),
-	    {{/if_blog}}
             created_at: self.ko_date(),
             is_private : self.ko_is_private(),
             author: self.ko_user(),
             tags: self.ko_tags(),
             type: self.ko_type()
         };
+	if ( subsiteFromUrl() === "webmarks" ){
+	    data.url = self.ko_url();
+            data.description = self.ko_description();
+	}
+        if ( subsiteFromUrl() === "blogs" ){
+	    data.content = self.ko_content();
+	}
     
         data._rev= self.ko_revision() || undefined;
         return data;
@@ -171,12 +190,12 @@ function addWebMarkModel(){
         return JSON.stringify(self.data());
     };
 
-{{#if_blog}}
-    self.ko_content_preview=ko.computed(function(){
-	const html = marked(self.ko_content());
-	return html;
-    },self);
-{{/if_blog}}
+    if (  subsiteFromUrl() === "blogs" ){
+	self.ko_content_preview=ko.computed(function(){
+	    const html = marked(self.ko_content());
+	    return html;
+	},self);
+    }
     
     self.save= function() {
         if (self.is_uuidReady()){
