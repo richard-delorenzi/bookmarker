@@ -94,7 +94,7 @@ function addWebMarkModel(){
 	    _jsonFetch("/db/" + id, function(data){
 		self.ko_revision(data._rev);
 		self.ko_date(data.created_at);
-		self.ko_tags_astext("tags");
+		self.ko_tags_astext(data.tags.join(" "));
 		self.ko_is_private(data.is_private);
 		self.ko_user(data.author);	    
 		self.ko_url(data.url);
