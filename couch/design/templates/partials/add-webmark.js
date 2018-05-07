@@ -55,17 +55,17 @@ function addWebMarkModel(){
     const self=this;
     const _jsonFetch = _jsonFetch_asyncAjax;
 
-    self.ko_uuid=ko.observable();
-    self.ko_revision=ko.observable();
-    self.ko_date=ko.observable();
-    self.ko_tags_astext=ko.observable();
-    self.ko_is_private=ko.observable();
-    self.ko_user=ko.observable();
-    self.ko_url=ko.observable();
-    self.ko_title=ko.observable();
-    self.ko_description=ko.observable();
-    self.ko_type=ko.observable(); 
-    self.ko_content=ko.observable();
+    self.ko_uuid=ko.observable("wait");
+    self.ko_revision=ko.observable("wait");
+    self.ko_date=ko.observable("wait");
+    self.ko_tags_astext=ko.observable("wait");
+    self.ko_is_private=ko.observable("wait");
+    self.ko_user=ko.observable("wait");
+    self.ko_url=ko.observable("wait");
+    self.ko_title=ko.observable("wait");
+    self.ko_description=ko.observable("wait");
+    self.ko_type=ko.observable("wait"); 
+    self.ko_content=ko.observable("wait");
 
     //
     self.ko_similar_urls=ko.observableArray([]);
@@ -90,16 +90,22 @@ function addWebMarkModel(){
 	}else if ( modeFromUrl() === "edit" ) {
 	    const id=idFromUrl();
 	    self.ko_uuid(id);
-	    self.ko_revision("rev");
-	    self.ko_date("date");
-	    self.ko_tags_astext("tags");
-	    self.ko_is_private(false);
-	    self.ko_user("user");	    
-	    self.ko_url("url");
-	    self.ko_title("title");
-	    self.ko_description("description");
-	    self.ko_type("type");
-	    self.ko_content("content");
+
+	    _jsonFetch("/db/" + id, function(data){
+		self.ko_revision(data._rev);
+		self.ko_date(data.created_at);
+		self.ko_tags_astext("tags");
+		self.ko_is_private(data.is_private);
+		self.ko_user(data.author);	    
+		self.ko_url(data.url);
+		self.ko_title(data.name);
+		self.ko_description(data.description);
+		const type=data.type;
+		self.ko_type(type);
+		if (type==="blog"){
+		    self.ko_content(data.content);
+		}
+	    });
 	}else{
 	
 	}
