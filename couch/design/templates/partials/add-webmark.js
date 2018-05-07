@@ -74,6 +74,12 @@ function addWebMarkModel(){
 	Result = {};
 	if ( modeFromUrl() === "add" ){
 	    const now=new Date().toJSON();
+	    //create guid
+	    self.guidMaker = new GuidMaker();
+	    self.guidMaker.Guid( function(guid) {
+		self.ko_uuid(guid);
+	    });
+	    self.ko_revision(null);
 	    self.ko_date(now);
 	    self.ko_tags_astext("");
 	    self.ko_is_private(false);
@@ -96,14 +102,17 @@ function addWebMarkModel(){
 		self.ko_date(data.created_at);
 		self.ko_tags_astext(data.tags.join(" "));
 		self.ko_is_private(data.is_private);
-		self.ko_user(data.author);	    
-		self.ko_url(data.url);
+		self.ko_user(data.author);
 		self.ko_title(data.name);
-		self.ko_description(data.description);
 		const type=data.type;
 		self.ko_type(type);
-		if (type==="blog"){
+		if (type=== "webmark" ){
+		    self.ko_url(data.url);
+		    self.ko_description(data.description);
+		} else if (type==="blog"){
 		    self.ko_content(data.content);
+		}else{
+		    //error
 		}
 	    });
 	}else{
@@ -114,22 +123,14 @@ function addWebMarkModel(){
     init();
 
     ////////////////////////////////////////////////////////////////
-    //create guid
-    self.guidMaker = new GuidMaker();
-    self.guidMaker.Guid( function(guid) {
-        self.ko_uuid(guid);
-    });
 
-    //get user name
-    _jsonFetch("/whoAmI", function(data){
-	self.ko_user(data.name);
-    });
-
-    ////////////////////////////////////////////////////////////////
-
+    self.is_Ready=function() {
+            return self.ko_uuid() != "" &&
+		self.ko_user != "";
+    };
+    
     self.ko_is_Ready= ko.computed( function() {
-        return self.ko_uuid() != "" &&
-	    self.ko_user != "";
+        return self.is_Ready();
     },self);
 
     ////////////////////////////////////////////////////////////////
