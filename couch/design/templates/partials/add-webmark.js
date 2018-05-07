@@ -55,17 +55,17 @@ function addWebMarkModel(){
     const self=this;
     const _jsonFetch = _jsonFetch_asyncAjax;
 
-    self.ko_uuid=ko.observable("wait");
-    self.ko_revision=ko.observable("wait");
-    self.ko_date=ko.observable("wait");
-    self.ko_tags_astext=ko.observable("wait");
-    self.ko_is_private=ko.observable("wait");
-    self.ko_user=ko.observable("wait");
-    self.ko_url=ko.observable("wait");
-    self.ko_title=ko.observable("wait");
-    self.ko_description=ko.observable("wait");
-    self.ko_type=ko.observable("wait"); 
-    self.ko_content=ko.observable("wait");
+    self.ko_uuid=ko.observable();
+    self.ko_revision=ko.observable();
+    self.ko_date=ko.observable();
+    self.ko_tags_astext=ko.observable("");
+    self.ko_is_private=ko.observable();
+    self.ko_user=ko.observable();
+    self.ko_url=ko.observable();
+    self.ko_title=ko.observable();
+    self.ko_description=ko.observable();
+    self.ko_type=ko.observable(); 
+    self.ko_content=ko.observable();
 
     //
     self.ko_similar_urls=ko.observableArray([]);
