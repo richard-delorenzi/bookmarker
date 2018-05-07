@@ -144,9 +144,11 @@ function addWebMarkModel(){
                 $.each(data.rows, function(index, row){
                     const url=row.key[0];
                     const edit_url= "/edit/"+row.id;
+                    const name=row.doc.name;
                     self.ko_similar_urls.push({
                         url:url,
-                        edit_url:edit_url
+                        edit_url:edit_url,
+                        name:name
                     });
                 });
             });

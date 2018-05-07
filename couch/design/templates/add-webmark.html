@@ -33,7 +33,8 @@
         Similar URLs:
         <ul data-bind="foreach: ko_similar_urls">
           <li>
-            <span data-bind="text: url"></span>
+            <span data-bind="text: url"></span><br/>
+            <span data-bind="text: name"></span>
             <a class="button" data-bind="attr:{href:edit_url}">Edit</a>
           </li>
         </ul>
