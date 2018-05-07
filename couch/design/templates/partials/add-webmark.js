@@ -49,53 +49,63 @@ function idFromUrl() {
     return urlPath()[3];
 }
 
-function _info() {
-    Result = {};
-    if ( modeFromUrl() === "add" ){
-	Result.tags= "";
-	Result.is_private= false;
-	Result.rev= null;
-	const now=new Date().toJSON();
-	Result.date= now;
-	if ( subsiteFromUrl() === "webmarks" ){
-	    Result.url= urlQueryParameterByName("url");
-	    Result.title= urlQueryParameterByName("title");
-	    Result.description= urlQueryParameterByName("description");
-	    Result.type= "webmark";
-	}else if ( subsiteFromUrl() === "blogs" ){
-	   
-	}else{
-	   
-	}	
-    }else if ( modeFromUrl() === "edit" ) {
-	Result.id=idFromUrl();
-	Result.date="{{bm_created_at}}";
-	Result.content=`{{bm_content}}`;
-    }else{
-	
-    }
-    return Result;
-}
-const info= _info();
-
 ////////////////////////////////////////////////////////////////
 
 function addWebMarkModel(){
     const self=this;
     const _jsonFetch = _jsonFetch_asyncAjax;
 
-    self.ko_title=ko.observable(info.title);
-    self.ko_url=ko.observable(info.url);
-    self.ko_description=ko.observable(info.description);
-    self.ko_content=ko.observable(info.content);
-    self.ko_tags_astext=ko.observable(info.tags);
-    self.ko_user=ko.observable("");
-    self.ko_date=ko.observable(info.date);
-    self.ko_is_private=ko.observable(info.is_private);
-    self.ko_revision=ko.observable(info.rev);
-    self.ko_uuid=ko.observable("");
-    self.ko_type=ko.observable(info.type);
+    self.ko_uuid=ko.observable();
+    self.ko_revision=ko.observable();
+    self.ko_date=ko.observable();
+    self.ko_tags_astext=ko.observable();
+    self.ko_is_private=ko.observable();
+    self.ko_user=ko.observable();
+    self.ko_url=ko.observable();
+    self.ko_title=ko.observable();
+    self.ko_description=ko.observable();
+    self.ko_type=ko.observable(); 
+    self.ko_content=ko.observable();
+
+    //
     self.ko_similar_urls=ko.observableArray([]);
+
+    function init() {
+	Result = {};
+	if ( modeFromUrl() === "add" ){
+	    const now=new Date().toJSON();
+	    self.ko_date(now);
+	    self.ko_tags_astext("");
+	    self.ko_is_private(false);
+	    if ( subsiteFromUrl() === "webmarks" ){
+		self.ko_url(urlQueryParameterByName("url"));
+		self.ko_title(urlQueryParameterByName("title"));
+		self.ko_description(urlQueryParameterByName("description"));
+		self.ko_type("webmark");
+	    }else if ( subsiteFromUrl() === "blogs" ){
+		
+	    }else{
+		
+	    }	
+	}else if ( modeFromUrl() === "edit" ) {
+	    const id=idFromUrl();
+	    self.ko_uuid(id);
+	    self.ko_revision("rev");
+	    self.ko_date("date");
+	    self.ko_tags_astext("tags");
+	    self.ko_is_private(false);
+	    self.ko_user("user");	    
+	    self.ko_url("url");
+	    self.ko_title("title");
+	    self.ko_description("description");
+	    self.ko_type("type");
+	    self.ko_content("content");
+	}else{
+	
+	}
+	return Result;
+    }
+    init();
 
     ////////////////////////////////////////////////////////////////
     //create guid
