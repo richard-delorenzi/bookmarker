@@ -71,7 +71,6 @@ function addWebMarkModel(){
     self.ko_similar_urls=ko.observableArray([]);
 
     function init() {
-	Result = {};
 	if ( modeFromUrl() === "add" ){
 	    const now=new Date().toJSON();
 	    //create guid
@@ -96,7 +95,8 @@ function addWebMarkModel(){
 		
 	    }else{
 		
-	    }	
+	    }
+	    self.getSimilarUrls(self.ko_url());
 	}else if ( modeFromUrl() === "edit" ) {
 	    const id=idFromUrl();
 	    self.ko_uuid(id);
@@ -118,13 +118,12 @@ function addWebMarkModel(){
 		}else{
 		    //error
 		}
+                self.getSimilarUrls(self.ko_url());
 	    });
 	}else{
 	
 	}
-	return Result;
     }
-    init();
 
     ////////////////////////////////////////////////////////////////
 
@@ -207,10 +206,10 @@ function addWebMarkModel(){
         }
     };
 
-    function _getSimilarUrls(url){      
-        const lookup="/webmarks-by-url?"+
+    self._getSimilarUrls= function(url){      
+        const lookup="/webmarks/by-url?"+
               'startkey=["' +url+ '"]&' +
-              'endkey=["' +url+ '\ufff0"]'
+              'endkey=["' +url+ '\ufff0"]';
         _jsonFetch(
             lookup,
             function(data){
@@ -223,14 +222,15 @@ function addWebMarkModel(){
                     });
                 });
             });
-    }
-    function getSimilarUrls(){
+    };
+    self.getSimilarUrls= function(url){
         var re = new RegExp('^[^:]+:/+');
-        var full_url=htmlDecoded("{{bm_url}}");
+        var full_url=url;
         var urlWithoutProtocol = full_url.replace(re,"");
-        _getSimilarUrls(urlWithoutProtocol);
-    }
-    getSimilarUrls();
+        self._getSimilarUrls(urlWithoutProtocol);
+    };
+
+    init();
 }
 
 ko.applyBindings(new addWebMarkModel());
