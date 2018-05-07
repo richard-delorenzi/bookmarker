@@ -72,45 +72,45 @@ function addWebMarkModel(){
 
     function init() {
 	if ( modeFromUrl() === "add" ){
-	    const now=new Date().toJSON();
-	    //create guid
+            //create guid
 	    self.guidMaker = new GuidMaker();
 	    self.guidMaker.Guid( function(guid) {
 		self.ko_uuid(guid);
 	    });
+            //get user name
+	    _jsonFetch("/whoAmI", function(data){
+		self.ko_user(data.name);
+	    });
+
+            const url=urlQueryParameterByName("url");
+            const title=urlQueryParameterByName("title");
+            const description=urlQueryParameterByName("description");
+	    const now=new Date().toJSON();
+
+            self.getSimilarUrls(url);
+	   
 	    self.ko_revision(null);
 	    self.ko_date(now);
 	    self.ko_tags_astext("");
 	    self.ko_is_private(false);
-	    //get user name
-	    _jsonFetch("/whoAmI", function(data){
-		self.ko_user(data.name);
-	    });
 	    if ( subsiteFromUrl() === "webmarks" ){
-		self.ko_url(urlQueryParameterByName("url"));
-		self.ko_title(urlQueryParameterByName("title"));
-		self.ko_description(urlQueryParameterByName("description"));
+		self.ko_url(url);
+		self.ko_title(title);
+		self.ko_description(description);
 		self.ko_type("webmark");
 	    }else if ( subsiteFromUrl() === "blogs" ){
 		
 	    }else{
 		
 	    }
-	    self.getSimilarUrls(self.ko_url());
+	    
 	}else if ( modeFromUrl() === "edit" ) {
 	    const id=idFromUrl();
-	    self.ko_uuid(id);
 
 	    _jsonFetch("/db/" + id, function(data){
-		self.ko_revision(data._rev);
-		self.ko_date(data.created_at);
-		self.ko_tags_astext(data.tags.join(" "));
-		self.ko_is_private(data.is_private);
-		self.ko_user(data.author);
-		self.ko_title(data.name);
-		const type=data.type;
-		self.ko_type(type);
-		if (type=== "webmark" ){
+                const type=data.type;
+                if (type=== "webmark" ){
+                    self.getSimilarUrls(data.url);
 		    self.ko_url(data.url);
 		    self.ko_description(data.description);
 		} else if (type==="blog"){
@@ -118,12 +118,47 @@ function addWebMarkModel(){
 		}else{
 		    //error
 		}
-                self.getSimilarUrls(self.ko_url());
+		self.ko_revision(data._rev);
+		self.ko_date(data.created_at);
+		self.ko_tags_astext(data.tags.join(" "));
+		self.ko_is_private(data.is_private);
+		self.ko_user(data.author);
+		self.ko_title(data.name);
+		self.ko_type(type);
 	    });
+            self.ko_uuid(id);
 	}else{
 	
 	}
     }
+
+    ////////////////////////////////////////////////////////////////
+    
+    self._getSimilarUrls= function(url){      
+        const lookup="/webmarks/by-url?"+
+              'startkey=["' +url+ '"]&' +
+              'endkey=["' +url+ '\ufff0"]';
+        _jsonFetch(
+            lookup,
+            function(data){
+                $.each(data.rows, function(index, row){
+                    const url=row.key[0];
+                    const edit_url= "/edit/"+row.id;
+                    self.ko_similar_urls.push({
+                        url:url,
+                        edit_url:edit_url
+                    });
+                });
+            });
+    };
+    self.getSimilarUrls= function(url){
+        var re = new RegExp('^[^:]+:/+');
+        var full_url=url;
+        var urlWithoutProtocol = full_url.replace(re,"");
+        self._getSimilarUrls(urlWithoutProtocol);
+    };
+
+    init();
 
     ////////////////////////////////////////////////////////////////
 
@@ -205,32 +240,6 @@ function addWebMarkModel(){
             });
         }
     };
-
-    self._getSimilarUrls= function(url){      
-        const lookup="/webmarks/by-url?"+
-              'startkey=["' +url+ '"]&' +
-              'endkey=["' +url+ '\ufff0"]';
-        _jsonFetch(
-            lookup,
-            function(data){
-                $.each(data.rows, function(index, row){
-                    const url=row.key[0];
-                    const edit_url= "/edit/"+row.id;
-                    self.ko_similar_urls.push({
-                        url:url,
-                        edit_url:edit_url
-                    });
-                });
-            });
-    };
-    self.getSimilarUrls= function(url){
-        var re = new RegExp('^[^:]+:/+');
-        var full_url=url;
-        var urlWithoutProtocol = full_url.replace(re,"");
-        self._getSimilarUrls(urlWithoutProtocol);
-    };
-
-    init();
 }
 
 ko.applyBindings(new addWebMarkModel());
