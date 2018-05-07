@@ -5,7 +5,7 @@ function htmlDecoded(str){
     return (str=="") ? "" : temp.firstChild.nodeValue;
 }
 
-{{>guidMaker}}
+{{>guidMaker-js}}
 
 ////////////////////////////////////////////////////////////////
 
