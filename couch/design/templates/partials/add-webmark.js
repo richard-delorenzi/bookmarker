@@ -83,6 +83,10 @@ function addWebMarkModel(){
 	    self.ko_date(now);
 	    self.ko_tags_astext("");
 	    self.ko_is_private(false);
+	    //get user name
+	    _jsonFetch("/whoAmI", function(data){
+		self.ko_user(data.name);
+	    });
 	    if ( subsiteFromUrl() === "webmarks" ){
 		self.ko_url(urlQueryParameterByName("url"));
 		self.ko_title(urlQueryParameterByName("title"));
