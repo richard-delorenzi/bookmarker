@@ -140,7 +140,7 @@ function addWebMarkModel(){
     ////////////////////////////////////////////////////////////////
     
     self.ko_tags=ko.computed(function(){
-        const input=self.ko_tags_astext();
+        const input=self.ko_tags_astext().trim();
         return input==""?
             []:
             input.split(" ");
