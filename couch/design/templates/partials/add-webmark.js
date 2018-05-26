@@ -155,10 +155,12 @@ function addWebMarkModel(){
         );
     };
     self.getSimilarUrls= function(url){
-        var re = new RegExp('^[^:]+:/+');
-        var full_url=url;
-        var urlWithoutProtocol = full_url.replace(re,"");
-        self._getSimilarUrls(urlWithoutProtocol);
+        if (url!=null){
+            var re = new RegExp('^[^:]+:/+');
+            var full_url=url;
+            var urlWithoutProtocol = full_url.replace(re,"");
+            self._getSimilarUrls(urlWithoutProtocol);
+        }
     };
 
     init();
