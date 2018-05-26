@@ -134,7 +134,7 @@ function addWebMarkModel(){
 
     ////////////////////////////////////////////////////////////////
     
-    self._getSimilarUrls= function(url){      
+    self._getSimilarUrls= function(url){
         const lookup="/webmarks/by-url?"+
               'startkey=["' +url+ '"]&' +
               'endkey=["' +url+ '\ufff0"]';
@@ -149,9 +149,10 @@ function addWebMarkModel(){
                         url:url,
                         edit_url:edit_url,
                         name:name
-                    });
+                        });
                 });
-            });
+            }
+        );
     };
     self.getSimilarUrls= function(url){
         var re = new RegExp('^[^:]+:/+');
