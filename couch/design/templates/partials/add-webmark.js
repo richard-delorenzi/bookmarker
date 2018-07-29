@@ -143,7 +143,7 @@ function addWebMarkModel(){
             function(data){
                 $.each(data.rows, function(index, row){
                     const url=row.key[0];
-                    const edit_url= "/edit/"+row.id;
+                    const edit_url= "/webmarks/edit/"+row.id;
                     const name=row.doc.name;
                     self.ko_similar_urls.push({
                         url:url,
