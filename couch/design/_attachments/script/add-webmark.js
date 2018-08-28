@@ -223,7 +223,8 @@ function addWebMarkModel(){
 
     if (  subsiteFromUrl() === "blogs" ){
 	self.ko_content_preview=ko.computed(function(){
-	    const html = marked(self.ko_content());
+            const md = self.ko_content();
+            const html = marked(md);
 	    return html;
 	},self);
     }
