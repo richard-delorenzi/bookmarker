@@ -1,6 +1,11 @@
 /*****************************************************************/
 /*Layout*/
 
+/*Fix non-html5 browsers*/
+header, section, footer, aside, nav, main, article, figure {
+    display: block;
+}
+
 /*map html to css-grid*/
 nav      {grid-area: sidebar; }
 aside    {grid-area: sidebar2;}

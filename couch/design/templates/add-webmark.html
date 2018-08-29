@@ -55,17 +55,14 @@
 	<textarea
            rows= 10,
            data-bind="
-                      value: ko_content
+             textInput: ko_content
                       ">
         </textarea>
       </div>
-     <div>
-        Content preview:
-	<div
-           data-bind="
-                      html: ko_content_preview
-                      ">
-        </div>
+      <div
+         data-bind="
+         html: ko_content_preview
+         ">
       </div>
       {{/if_blog}}
       <div class="stretch">
@@ -153,7 +150,5 @@
     </nav>
   </body>
   {{>scripts}}
-  <script>
-    {{>add-webmark-js}}
-  </script>
+  {{>add-webmark-js}}
 </html>
