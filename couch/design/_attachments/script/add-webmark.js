@@ -222,11 +222,11 @@ function addWebMarkModel(){
     };
 
     if (  subsiteFromUrl() === "blogs" ){
-	self.ko_content_preview=ko.computed(function(){
+	self.ko_content_preview=ko.pureComputed(function(){
             const md = self.ko_content();
             const html = marked(md);
 	    return html;
-	},self);
+	},self); /*.extend({ rateLimit: { method: "notifyWhenChangesStop", timeout: 400 } });*/
     }
     
     self.save= function() {
@@ -246,4 +246,7 @@ function addWebMarkModel(){
     };
 }
 
-ko.applyBindings(new addWebMarkModel());
+//start
+ko.options.deferUpdates = true;
+var model1=new addWebMarkModel();
+ko.applyBindings(model1);
