@@ -91,13 +91,14 @@ function addWebMarkModel(){
 	    self.ko_date(now);
 	    self.ko_tags_astext("");
 	    self.ko_is_private(false);
-	    if ( subsiteFromUrl() === "webmarks" ){
+            const subsite=subsiteFromUrl();
+            const type= subsite.slice(0,-1);
+            self.ko_type(type);
+	    if ( subsite === "webmarks" ){
 		self.ko_url(url);
 		self.ko_title(title);
 		self.ko_description(description);
-		self.ko_type("webmark");
-	    }else if ( subsiteFromUrl() === "blogs" ){
-		self.ko_type("blog");
+	    }else if ( subsite === "blogs" ){
 	    }else{
 		
 	    }
