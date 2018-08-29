@@ -73,23 +73,31 @@ table {
     font-family: "Arial Unicode MS"; /* fix ie6 but only for tables*/
 }
 
-tbody tr:nth-child(2n) {
+table thead tr {
     background-color: #e0e0e0;
 }
-tbody tr:nth-child(2n+1) {
+
+table tbody tr:nth-child(2n) {
+    background-color: #e0e0e0;
+}
+table tbody tr:nth-child(2n+1) {
     background-color: #c0c0c0;
 }
-tbody tr.removed:nth-child(2n)
-{ 
-  background-color: #e06060;
+
+table.no-stripe tbody tr {
+   background-color: #e0e0e0;
 }
-tbody tr.removed:nth-child(2n+1)
-{ 
-  background-color: #c06060;
+
+table.border td,
+table.border th {
+    border:1px solid;
+}
+
+table.center {
+    text-align:center;
 }
 
 td, th {
-    z-border:1px solid;
     padding: 0.2em; 
 }
 table + table { /* >=ie7 or >=firefox2(maybe lower)*/
