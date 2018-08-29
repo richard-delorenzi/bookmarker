@@ -63,7 +63,7 @@ function addWebMarkModel(){
     self.ko_title=ko.observable();
     self.ko_description=ko.observable();
     self.ko_type=ko.observable(); 
-    self.ko_content=ko.observable();
+    self.ko_content=ko.observable("");
 
     //
     self.ko_similar_urls=ko.observableArray([]);
