@@ -97,7 +97,7 @@ function addWebMarkModel(){
 		self.ko_description(description);
 		self.ko_type("webmark");
 	    }else if ( subsiteFromUrl() === "blogs" ){
-		
+		self.ko_type("blog");
 	    }else{
 		
 	    }
