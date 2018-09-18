@@ -1,10 +1,7 @@
 {   
     "env" : {
-	"remote" : {
-	    "db" : "https://"
-	},
 	"default" : {	
-	    "db"  : "http://admin:password@mycouchdb:80/login"
+	    "db"  : "http://127.0.0.1:5984/login"
 	}
     }
 }
