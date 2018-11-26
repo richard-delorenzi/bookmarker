@@ -1,10 +1,5 @@
-#!/bin/bash
-
-cd "$(dirname "$0")"/.
-host_base_dir="$(pwd)"
-cd -
-
 function start-couchdb {
+    host_base_dir="/home/richard/+Files/workshops/bookmarks/couch-in-docker"
     data_on_host="${host_base_dir}/data1"
     data_in_docker="/usr/local/var/lib/couchdb"
     config_on_host="${host_base_dir}/config1"
