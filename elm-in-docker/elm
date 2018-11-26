@@ -1,6 +1,0 @@
-#!/bin/bash
-
-script_name=$(readlink -f "$BASH_SOURCE")
-script_dir_name=$(dirname "$script_name")
-
-sudo -g docker "${script_dir_name}/_elm" "$@"
