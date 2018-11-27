@@ -49,7 +49,8 @@ function (doc, req) {
 	    docId:docId,
 	    subSite: subSite,
 	    if_blog: (type==="blog"),
-	    if_webmark: (type==="webmark")
+	    if_webmark: (type==="webmark"),
+            if_edit: true
 	};
 
 	if (docId == null){

@@ -117,6 +117,7 @@ function (head, req) {
 	    subSite: subSite,
             if_blogs: (subSite==="blog"),
             if_webmarks: (subSite==="webmark"),
+            if_read: true,
 	    bookmarks:bookmark_stash,
 	    related_tags:related_tags
 	};
