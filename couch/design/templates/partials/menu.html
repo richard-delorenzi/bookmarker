@@ -1,15 +1,14 @@
-<ul class="menu">
-  <li><a href="/">Home</a></li>
-  <li><a href="/{{subSite}}s/latest">Latest {{subSite}}s in date order</a></li>
-  <li><a href="/{{subSite}}s/all">All {{subSite}}s in date order</a></li>
-  <li><a href="/{{subSite}}s/tags">All tags</a></li>
-  <li><a href="/{{subSite}}s/add">add {{subSite}}</a></li>
-  {{#if_webmarks}}
-  <li>
-    <a href="javascript: {{>webmarklet}}">
-      add webmark
-    </a> webmarklet ← webmark this link, using browser webmark, and put it in your menu bar.
-  </li>
-  {{/if_webmarks}}
-  <li><a href="/login">login</a></li>
-</ul>
+<li><a href="/">Home</a></li>
+<li><a href="/{{subSite}}s/latest">Latest {{subSite}}s in date order</a></li>
+<li><a href="/{{subSite}}s/all">All {{subSite}}s in date order</a></li>
+<li><a href="/{{subSite}}s/tags">All tags</a></li>
+<li><a href="/{{subSite}}s/add">add {{subSite}}</a></li>
+{{#if_webmarks}}
+<li>
+  <a href="javascript: {{>webmarklet}}">
+    add webmark
+  </a> webmarklet ← webmark this link, using browser webmark, and put it in your menu bar.
+</li>
+{{/if_webmarks}}
+
+
