@@ -1,3 +1,12 @@
-edit menu
-
+{{#if_edit}}
+  <li>
+    <button data-bind="
+      enable: ko_is_Ready,
+      click: save
+      ">
+      save
+    </button>
+  </li>
+  <li>Cancel</li>
+{{/if_edit}}
 

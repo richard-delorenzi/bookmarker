@@ -1,11 +1,7 @@
 <nav class="box">
   <ul class="menu">
-    {{#if_read}}
-      {{>menu}}
-    {{/if_read}}
-    {{#if_edit}}
-      {{>edit-menu}}
-    {{/if_edit}}
+    {{>menu}}
+    {{>edit-menu}}
     {{>login}}
   </ul>
 </nav>
