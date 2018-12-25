@@ -14,7 +14,11 @@ const profilePicture = new Uppload({
     bind: ["#profilePicImage"],
     call: ["div.profile button#uploadButton"],
     //endpoint: "https://example.com/upload_backend",
-    allowedTypes: "image"
+    allowedTypes: "image",
+    services: ["upload", "camera", "link"],
+    crop: {
+        startSize: [100,100, "%"]
+    }
 });
 
   </script>
