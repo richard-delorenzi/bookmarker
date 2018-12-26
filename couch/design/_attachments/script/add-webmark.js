@@ -264,8 +264,7 @@ function addWebMarkModel(){
                 };
                 const doc_body=JSON.stringify(doc_data);
                 
-                return
-                /*
+                
                 fetch ( url, {
                     method: "PUT",
                     headers: {
@@ -273,7 +272,7 @@ function addWebMarkModel(){
                     },
                     body: doc_body
                 }).
-*/
+
                 
                 fetch ( url+"/"+name, {
                     method: "PUT",
