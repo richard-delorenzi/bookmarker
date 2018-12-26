@@ -247,10 +247,16 @@ function addWebMarkModel(){
     };
 
     self.uploadImage = function(file, metadata){
-        if (self.is_Ready()){
-            const mime_type=metadata.mime;
-            const name=metadata.name;
-        }
+        return new Promise((resolve, reject) => {
+            if (self.is_Ready()){
+                const mime_type=metadata.mime;
+                const name=metadata.name;
+                if (false){
+                    const uuid=self.ko_uuid(); 
+                }
+            }
+            resolve( "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/330px-Mallard2.jpg");
+        });
     };
 }
 
