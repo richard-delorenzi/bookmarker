@@ -262,8 +262,7 @@ function addWebMarkModel(){
                     "author": author,
                     "created_at":  created_at
                 };
-                const doc_body=JSON.stringify(doc_data);
-                
+                const doc_body=JSON.stringify(doc_data);              
                 
                 fetch ( url, {
                     method: "PUT",
@@ -272,14 +271,20 @@ function addWebMarkModel(){
                     },
                     body: doc_body
                 }).
+                    
+                then(function(response) {
+                    return response.json();
+                }).
 
-                
-                fetch ( url+"/"+name, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": mime_type
-                    },
-                    body: file
+                then(function(data) {
+  
+                    return fetch ( url+"/"+name, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": mime_type
+                        },
+                        body: file
+                    });
                 }).
 
                 then(response => {
