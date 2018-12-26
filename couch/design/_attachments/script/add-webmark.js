@@ -277,8 +277,10 @@ function addWebMarkModel(){
                 }).
 
                 then(function(data) {
+
+                    const rev=data.rev;
   
-                    return fetch ( url+"/"+name, {
+                    return fetch ( url+"/"+name+"?rev="+rev, {
                         method: "PUT",
                         headers: {
                             "Content-Type": mime_type
