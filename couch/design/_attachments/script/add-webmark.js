@@ -245,9 +245,16 @@ function addWebMarkModel(){
             });
         }
     };
+
+    self.uploadImage = function(file, metadata){
+        if (self.is_Ready()){
+            const mime_type=metadata.mime;
+            const name=metadata.name;
+        }
+    };
 }
 
 //start
 ko.options.deferUpdates = true;
-var model1=new addWebMarkModel();
-ko.applyBindings(model1);
+var model=new addWebMarkModel();
+ko.applyBindings(model);
