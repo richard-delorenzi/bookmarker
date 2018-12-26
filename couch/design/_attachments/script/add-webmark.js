@@ -291,7 +291,7 @@ function addWebMarkModel(){
                 }).
 
                 then(response => {
-                    resolve( "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/330px-Mallard2.jpg");
+                    resolve( attr_url );
                 });
             }
         });
