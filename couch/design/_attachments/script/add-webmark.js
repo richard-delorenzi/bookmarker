@@ -250,12 +250,37 @@ function addWebMarkModel(){
         return new Promise((resolve, reject) => {
             if (self.is_Ready()){
                 const mime_type=metadata.mime;
-                const name=metadata.name;
-                if (false){
-                    const uuid=self.ko_uuid(); 
-                }
+                const name=metadata.name
+                      .match(/(.*)-[^-.]+[.][^.]+$/)[1];
+                const uuid=self.ko_uuid();
+                const url= "/db/image-"+uuid;
+                const data=self.data();
+                const author=data.author;
+                const created_at=data.created_at;
+                const doc_data={
+                    "type": "image",
+                    "author": author,
+                    "created_at":  created_at
+                };
+                const doc_body=JSON.stringify(doc_data);
+                
+                return
+                fetch ( url, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: doc_body
+                }).fetch ( url+"/"+name, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": mime_type
+                    },
+                    body: file
+                }).then(response => {
+                    resolve( "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/330px-Mallard2.jpg");
+                });
             }
-            resolve( "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/330px-Mallard2.jpg");
         });
     };
 }
