@@ -254,6 +254,7 @@ function addWebMarkModel(){
                       .match(/(.*)-[^-.]+[.][^.]+$/)[1];
                 const uuid=self.ko_uuid();
                 const url= "/db/image-"+uuid;
+                const attr_url=url+"/"+name;
                 const data=self.data();
                 const author=data.author;
                 const created_at=data.created_at;
@@ -280,7 +281,7 @@ function addWebMarkModel(){
 
                     const rev=data.rev;
   
-                    return fetch ( url+"/"+name+"?rev="+rev, {
+                    return fetch ( attr_url+"?rev="+rev, {
                         method: "PUT",
                         headers: {
                             "Content-Type": mime_type
