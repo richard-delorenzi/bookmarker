@@ -275,15 +275,15 @@ function addWebMarkModel(){
                 }).
 */
                 
-                    fetch ( url+"/"+name, {
+                fetch ( url+"/"+name, {
                     method: "PUT",
                     headers: {
                         "Content-Type": mime_type
                     },
                     body: file
-                    }).
+                }).
 
-                    then(response => {
+                then(response => {
                     resolve( "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/330px-Mallard2.jpg");
                 });
             }
