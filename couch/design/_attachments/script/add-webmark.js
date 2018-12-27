@@ -272,14 +272,17 @@ function addWebMarkModel(){
                     },
                     body: doc_body
                 }).
-                    
-                then(function(response) {
+
+                then(response => {
+                    if (!response.ok) {
+                        throw new Error("Could not upload");
+                    }
                     return response.json();
                 }).
+                
+                then(function(response) {
 
-                then(function(data) {
-
-                    const rev=data.rev;
+                    const rev=response.rev;
   
                     return fetch ( attr_url+"?rev="+rev, {
                         method: "PUT",
@@ -292,6 +295,10 @@ function addWebMarkModel(){
 
                 then(response => {
                     resolve( attr_url );
+                }).
+
+                catch(error => {
+                    reject(error);
                 });
             }
         });
