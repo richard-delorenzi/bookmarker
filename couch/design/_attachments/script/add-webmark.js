@@ -246,11 +246,11 @@ function addWebMarkModel(){
         }
     };
 
-    self.fetch_andcheck = function(url, data){
+    self.fetch_andcheck = function(url, data, message){
         return fetch(url,data).then(response => {
             if (!response.ok) {
                 throw new Error(
-                    'Could not upload:' +
+                    message +':'+
                         ' status="' +response.statusText+
                         '", code='  +response.status );
             }
@@ -260,69 +260,80 @@ function addWebMarkModel(){
 
     self.uploadImage = function(file, metadata){
         return new Promise((resolve, reject) => {
-            if (self.is_Ready()){
-                const mime_type=metadata.mime;
-                const name=metadata.name
-                      .match(/(.*)-[^-.]+[.][^.]+$/)[1];
-                //const uuid=self.guidMaker.nextGuid(); //fix me
-                //const url= "/db/image-"+uuid;
-                //const attr_url=url+"/"+name;
-                const data=self.data();
-                const author=data.author;
-                const created_at=data.created_at;
-                const doc_data={
-                    "type": "image",
-                    "author": author,
-                    "created_at":  created_at
-                };
-                const doc_body=JSON.stringify(doc_data);              
-
-                new Promise((resolve, reject) => {
-                    self.guidMaker.Guid( function(guid) {
-                        resolve(guid);
-                    });
-                }).
-
-                then(guid => {
-                    const uuid=guid;
-                    const url= "/db/image-"+uuid;
-                    return self.fetch_andcheck ( url, {
+            if (!self.is_Ready()){
+                throw new Error("please wait");
+            }
+            
+            const mime_type=metadata.mime;
+            const name=metadata.name
+                  .match(/(.*)-[^-.]+[.][^.]+$/)[1];
+            //const uuid=self.guidMaker.nextGuid(); //fix me
+            //const url= "/db/image-"+uuid;
+            //const attr_url=url+"/"+name;
+            const data=self.data();
+            const author=data.author;
+            const created_at=data.created_at;
+            const doc_data={
+                "type": "image",
+                "author": author,
+                "created_at":  created_at
+            };
+            const doc_body=JSON.stringify(doc_data);              
+            
+            new Promise((resolve, reject) => {
+                self.guidMaker.Guid( function(guid) {
+                    resolve(guid);
+                });
+            }).
+                
+            then(guid => {
+                const uuid=guid;
+                const url= "/db/image-"+uuid;
+                return self.fetch_andcheck (
+                    url,
+                    {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
                         },
-                        body: doc_body
-                    });
-                }).
-
-                then(response => {
-                    return response.json();
-                }).
+                            body: doc_body
+                    },
+                    "Could not upload"
+                );
+            }).
                 
-                then(function(response) {
-
-                    const rev=response.rev;
-                    const url= "/db/"+response.id;
-                    const attr_url=url+"/"+name;
-                    
-                    return self.fetch_andcheck ( attr_url+"?rev="+rev, {
+            then(response => {
+                return response.json();
+            }).
+                
+            then(function(response) {
+                
+                const rev=response.rev;
+                const url= "/db/"+response.id;
+                const attr_url=url+"/"+name;
+                
+                return self.fetch_andcheck (
+                    attr_url+"?rev="+rev,
+                    {
                         method: "PUT",
                         headers: {
                             "Content-Type": mime_type
                         },
                         body: file
-                    }).
-
-                    then(response => {
-                        resolve( attr_url );
-                    });
-                        
-                }).
-
-                catch(error => {
-                    reject(error);
+                    },
+                    "Could not upload"
+                ).
+                    
+                then(response => {
+                    resolve( attr_url );
                 });
-            }
+                
+            }).
+
+            catch(error => {
+                reject(error);
+            });
+            
         });
     };
 }
