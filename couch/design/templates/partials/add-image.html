@@ -1,20 +1,20 @@
-<div class="uploadImage">
-  <div action="?????"> 
+<div id="uploadImage">
+  <form> 
     <button
        type="button"
-       id="uploadButton"
+       class="upload"
        data-bind="enable: ko_is_Ready"
        >
       upload image
     </button>
-  </div>
+  </form>
   <img id="uploadedPic"/>
 </div>
 <script>
     const profilePicture = new Uppload({
         value: "",
         bind: ["#uploadedPic"],
-        call: ["div.uploadImage button#uploadButton"],
+        call: ["div#uploadImage button.upload"],
         //endpoint: "",
         uploadFunction: (file, metadata) => {
             return model.uploadImage(file,metadata);
