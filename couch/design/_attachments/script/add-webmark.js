@@ -267,9 +267,6 @@ function addWebMarkModel(){
             const mime_type=metadata.mime;
             const name=metadata.name
                   .match(/(.*)-[^-.]+[.][^.]+$/)[1];
-            //const uuid=self.guidMaker.nextGuid(); //fix me
-            //const url= "/db/image-"+uuid;
-            //const attr_url=url+"/"+name;
             const data=self.data();
             const author=data.author;
             const created_at=data.created_at;
