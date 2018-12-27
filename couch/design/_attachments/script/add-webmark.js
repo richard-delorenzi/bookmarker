@@ -264,9 +264,9 @@ function addWebMarkModel(){
                 const mime_type=metadata.mime;
                 const name=metadata.name
                       .match(/(.*)-[^-.]+[.][^.]+$/)[1];
-                const uuid=self.ko_uuid();
-                const url= "/db/image-"+uuid;
-                const attr_url=url+"/"+name;
+                //const uuid=self.guidMaker.nextGuid(); //fix me
+                //const url= "/db/image-"+uuid;
+                //const attr_url=url+"/"+name;
                 const data=self.data();
                 const author=data.author;
                 const created_at=data.created_at;
@@ -276,13 +276,23 @@ function addWebMarkModel(){
                     "created_at":  created_at
                 };
                 const doc_body=JSON.stringify(doc_data);              
-                
-                self.fetch_andcheck ( url, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: doc_body
+
+                new Promise((resolve, reject) => {
+                    self.guidMaker.Guid( function(guid) {
+                        resolve(guid);
+                    });
+                }).
+
+                then(guid => {
+                    const uuid=guid;
+                    const url= "/db/image-"+uuid;
+                    return self.fetch_andcheck ( url, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: doc_body
+                    });
                 }).
 
                 then(response => {
@@ -292,18 +302,21 @@ function addWebMarkModel(){
                 then(function(response) {
 
                     const rev=response.rev;
-  
+                    const url= "/db/"+response.id;
+                    const attr_url=url+"/"+name;
+                    
                     return self.fetch_andcheck ( attr_url+"?rev="+rev, {
                         method: "PUT",
                         headers: {
                             "Content-Type": mime_type
                         },
                         body: file
-                    });
-                }).
+                    }).
 
-                then(response => {
-                    resolve( attr_url );
+                    then(response => {
+                        resolve( attr_url );
+                    });
+                        
                 }).
 
                 catch(error => {
