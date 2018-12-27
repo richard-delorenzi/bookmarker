@@ -1,0 +1,29 @@
+<div class="uploadImage">
+  <div action="?????"> 
+    <button
+       type="button"
+       id="uploadButton"
+       data-bind="enable: ko_is_Ready"
+       >
+      upload image
+    </button>
+  </div>
+  <img id="uploadedPic"/>
+</div>
+<script>
+    const profilePicture = new Uppload({
+        value: "",
+        bind: ["#uploadedPic"],
+        call: ["div.uploadImage button#uploadButton"],
+        //endpoint: "",
+        uploadFunction: (file, metadata) => {
+            return model.uploadImage(file,metadata);
+           
+        },
+        allowedTypes: "image",
+        services: ["upload", "camera", "link"],
+        crop: {
+            startSize: [100,100, "%"]
+        }
+    });
+</script>
