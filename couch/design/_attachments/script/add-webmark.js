@@ -246,6 +246,18 @@ function addWebMarkModel(){
         }
     };
 
+    self.fetch_andcheck = function(url, data){
+        return fetch(url,data).then(response => {
+            if (!response.ok) {
+                throw new Error(
+                    'Could not upload:' +
+                        ' status="' +response.statusText+
+                        '", code='  +response.status );
+            }
+            return response;
+        });
+    }
+
     self.uploadImage = function(file, metadata){
         return new Promise((resolve, reject) => {
             if (self.is_Ready()){
@@ -265,7 +277,7 @@ function addWebMarkModel(){
                 };
                 const doc_body=JSON.stringify(doc_data);              
                 
-                fetch ( url, {
+                self.fetch_andcheck ( url, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json"
@@ -274,9 +286,6 @@ function addWebMarkModel(){
                 }).
 
                 then(response => {
-                    if (!response.ok) {
-                        throw new Error("Could not upload");
-                    }
                     return response.json();
                 }).
                 
@@ -284,7 +293,7 @@ function addWebMarkModel(){
 
                     const rev=response.rev;
   
-                    return fetch ( attr_url+"?rev="+rev, {
+                    return self.fetch_andcheck ( attr_url+"?rev="+rev, {
                         method: "PUT",
                         headers: {
                             "Content-Type": mime_type
