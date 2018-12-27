@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/uppload/dist/uppload.min.js"></script>
+  </head>
+  <body>
+    <div class="profile">
+      <button id="uploadButton">upload image</button>
+    </div>
+    <img id="profilePicImage"/>
+  </body>
+  <script>
+const profilePicture = new Uppload({
+    value: "https://randomuser.me/api/portraits/men/17.jpg",
+    bind: ["#profilePicImage"],
+    call: ["div.profile button#uploadButton"],
+    //endpoint: "https://example.com/upload_backend",
+    allowedTypes: "image",
+    services: ["upload", "camera", "link"],
+    crop: {
+        startSize: [100,100, "%"]
+    }
+});
+
+  </script>
+</html>
+

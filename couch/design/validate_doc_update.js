@@ -70,6 +70,8 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	    break;
 	case "blog":
 	    break;
+        case "image":
+            break
 	default:
 	    v.assert(false, "invalid type");
     }

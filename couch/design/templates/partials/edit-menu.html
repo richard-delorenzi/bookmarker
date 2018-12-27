@@ -1,0 +1,15 @@
+{{#if_edit}}
+  <li>
+    {{>add-image}}
+  </li>
+  <li>
+    <button data-bind="
+      enable: ko_is_Ready,
+      click: save
+      ">
+      save
+    </button>
+  </li>
+  <li> <a href=".">Cancel</a></li>
+{{/if_edit}}
+

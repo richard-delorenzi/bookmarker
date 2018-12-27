@@ -1,6 +1,7 @@
 <html>
   <head>
     {{>head}}
+    {{>scripts}}
   </head>
   <body class="wrapper">
     <header class="box">
@@ -124,13 +125,6 @@
         </input>
       </div>
 
-      <button data-bind="
-                         enable: ko_is_Ready,
-                         click: save
-                         ">
-        save
-      </button>
-
       <hr/>
       <div class="stretch">
         json data:
@@ -145,10 +139,7 @@
 
     </form>
     </main>
-    <nav class="box">
-      {{>menu}}
-    </nav>
+    {{>nav}}
   </body>
-  {{>scripts}}
   {{>add-webmark-js}}
 </html>
