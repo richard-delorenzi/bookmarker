@@ -254,13 +254,30 @@
         "to": "../../*"
     },
     {
-        "from": "pictures/all",
+        "from": "_pictures_base",
         "to": "_list/images/images",
         "query": {
             "template": "images",
-	    "subSite" : "image",
-            "title_part1": "images",
+	    "subSite" : "picture",
+            "title_part1": "pictures",
             "title_part2": ""
         }  
+    },
+    {
+        "from": "pictures/all",
+        "to": "_rewrite/_pictures_base"
+    },
+    {
+        "from": "pictures/latest",
+        "to": "_rewrite/_pictures_base",
+        "query": {
+            "title_part1": "Latest",
+            "title_part2": "pictures",
+            "limit": "10"
+        }       
+    },
+    {
+        "from": "pictures",
+        "to": "_rewrite/pictures/latest"
     }
 ]
