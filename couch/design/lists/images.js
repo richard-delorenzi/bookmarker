@@ -5,15 +5,12 @@ function (head, req) {
     const List = require("vendor/couchapp/lib/list");
     const path = require("vendor/couchapp/lib/path").init(req);
     const myLib = require("lib/myLib");
-    const myTagSizeLib = require("lib/myTagSizeLib");
-    const marked= require("lib/marked");
-
+  
 //-----------------------------------------------------------------------------------------
 
     const template = req.query["template"];
     const key = req.query["key"];
     const title = req.query["title_part1"]+ " " +req.query["title_part2"] ;
-    const is_tag_mode= (req.query["mode"]=="tags");
     const subSite = req.query["subSite"];
 
     function stash(){
@@ -32,19 +29,16 @@ function (head, req) {
         }
 	
         mainLoop();
-
 	
         return {
-	    title:"images",
+	    title:title,
 	    subSite: subSite,
             if_blogs: (subSite==="blog"),
             if_webmarks: (subSite==="webmark"),
             if_read: true,
 	    images: image_stash
-	};
-	
+	};	
     }
-
 
 
     //-- The provides function serves the format the client requests.
