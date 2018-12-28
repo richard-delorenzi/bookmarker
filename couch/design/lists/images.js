@@ -45,11 +45,9 @@ function (head, req) {
     //-- The first matching format is sent, so reordering functions changes 
     //-- thier priority. In this case HTML is the preferred format, so it comes first.
 
-    if (true) {
     provides("html", function() {
         return Mustache.to_html(ddoc.templates[template],  myLib.addIfdef(stash()), ddoc.templates.partials);
     });
-    }
 
     provides("json", function() {
         return JSON.stringify(stash());
