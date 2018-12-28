@@ -254,7 +254,7 @@
         "to": "../../*"
     },
     {
-        "from": "images",
+        "from": "pictures/all",
         "to": "_list/images/images",
         "query": {
             "template": "images",
