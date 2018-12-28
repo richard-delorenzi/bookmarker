@@ -258,7 +258,7 @@
         "to": "_list/images/images",
         "query": {
             "template": "images",
-	    "subSite" : "images",
+	    "subSite" : "image",
             "title_part1": "images",
             "title_part2": ""
         }  
