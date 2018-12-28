@@ -252,5 +252,15 @@
     {
         "from": "db/*",
         "to": "../../*"
+    },
+    {
+        "from": "images",
+        "to": "_list/images/images",
+        "query": {
+            "template": "images",
+	    "subSite" : "images",
+            "title_part1": "images",
+            "title_part2": ""
+        }  
     }
 ]
