@@ -15,7 +15,7 @@
     }
     
     function link() {
-	return 'http://bookmarkdb/webmarks/add'+
+	return 'http://{{hostname}}/webmarks/add'+
 	    '?url='   +encodeURIComponent(location.href)+
 	    '&title=' +encodeURIComponent(document.title)+
 	    '&description=' +encodeURIComponent(selectedText());

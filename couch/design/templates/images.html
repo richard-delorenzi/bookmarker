@@ -1,0 +1,25 @@
+<!DOCTYPE HTML >
+<html>
+  <head>
+    {{>head}}
+  </head>
+
+  <body class="wrapper">
+    {{>header}}
+    {{>nav}}
+    
+    <main class="box">
+      {{#ifdef_images}}
+      <ul>
+        {{#images}}
+        <li>
+          <span>{{name}}</span>
+          <img src="{{url}}"/>
+        </li>
+        {{/images}}
+      </ul>
+      {{/ifdef_images}}
+    </main>
+    {{>footer}}
+  </body> 
+</html>
