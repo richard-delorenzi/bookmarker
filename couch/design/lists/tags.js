@@ -35,8 +35,7 @@ function (head, req) {
 					{
 						count: count,
 						name: name,
-						//put fix next line
-						url: url_prefix+ "/" +name
+						url: url_prefix+ "/" +encodeURIComponent(name)
 					}
 				);
 			}

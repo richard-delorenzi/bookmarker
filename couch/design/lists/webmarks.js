@@ -23,7 +23,7 @@ function (head, req) {
         var maxTagCount = -1;
 
         function tagToUrl(tag){
-            return "tag/" + tag.toLowerCase();
+            return "tag/" + encodeURIComponent(tag.toLowerCase());
         }
         function linkedTagsFromNames(tags){
             var out=[];
